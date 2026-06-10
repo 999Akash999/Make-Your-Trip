@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row ">
+  <div class="col-8 offset-2">
+
+  <body>
+    <h3>Edit your Listing</h3>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data"
+      >
+      
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+      <input name="listing[title]" value="<%= listing.title %>" type="text"
+      class="form-control" />
+    </div>
+      
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="listing[description]"
+      class="form-control">
+      <%= listing.description %></textarea
+      ></div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <% if (listing.image && listing.image.url) { %>
+          <img
+            src="<%= listing.image.url %>"
+            class="edit-image-preview mb-2"
+            id="image-preview"
+            alt="listing image preview"
+          />
+        <% } else { %>
+          <img
+            class="edit-image-preview mb-2 d-none"
+            id="image-preview"
+            alt="listing image preview"
+          />
+        <% } %>
+      <input name="listing[image]" id="image" type="file" accept="image/*"
+       class="form-control"/>
+       
+    </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+      <input name="listing[price]" value="<%= listing.price %>" type="number" 
+      class="form-control"/>
+    </div>
+      
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <input
+        name="listing[country]"
+        value="<%= listing.country %>"
+        type="text"
+        class="form-control"
+      />
+    </div>
+      
+    <div class="mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input
+        name="listing[location]"
+        value="<%= listing.location %>"
+        type="text"
+        class="form-control"
+      />
+    </div>
+      
+      <button class="btn btn-dark edit-btn">Edit</button>
+    </form>
+  </body>
+</div>
+</div>

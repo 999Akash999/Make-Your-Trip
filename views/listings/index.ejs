@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  #filters{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .filetr{
+    text-align: center;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    opacity: 0.7;
+  }
+  .filetr:hover{
+    opacity: 1;
+    cursor: pointer;
+    color: red;
+  }
+</style>
+<!-- <h1>All Listings</h1> -->
+ <div id="filters">
+  <div class="filetr">
+<div><i class="fa-solid fa-fire"></i></div>
+<p>Trending</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-bed"></i></div>
+<p>Rooms</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-mountain-city"></i></div>
+<p>Iconic Cities</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-mountain"></i></div>
+<p>Mountains</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-brands fa-fort-awesome"></i></div>
+<p>Casties</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-person-swimming"></i></div>
+<p>Swimming</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-campground"></i></div>
+<p>Camping</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-plate-wheat"></i></div>
+<p>Farm</p>
+  </div>
+  <div class="filetr">
+<div><i class="fa-solid fa-igloo"></i></div>
+<p>Arctice</p>
+  </div>
+ </div>
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mt-3"><% for(let listing of allListings) { %>
+  <a href="/listings/<%=listing._id%>"class="listing-link">
+    <div class="card col">
+  <img src="<%= listing.image.url%>" class="card-img-top" alt="listing_image"style="height:20rem"/>
+  <div class="card-img-overlay"></div>
+  <div class="card-body">
+    <p class="card-text">
+      <b> <%= listing.title %></b><br/>
+        &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+    </p>
+  </div>
+</div>
+  </a>  
+<% } %></div>
+
+    
+  
