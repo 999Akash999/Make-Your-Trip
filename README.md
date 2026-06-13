@@ -152,7 +152,7 @@ Add screenshot here
 
 **Akash Gangwar**
 
-Full-Stack Web Developer | B.Sc. Biotechnology Student
+Full-Stack Web Developer | B.Tech computer science 
 
 ---
 
