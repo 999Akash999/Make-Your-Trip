@@ -100,3 +100,8 @@ justify-content: center;
 #map { 
     height: 400px;
 width: 100vh;}
+#heart{
+    margin:5%;
+    float:right;
+}
+    
