@@ -113,6 +113,10 @@ let registeredUser=await User.register(fakeUser,"helloworld");
 res.send(registeredUser);
 });
 // using routes
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
