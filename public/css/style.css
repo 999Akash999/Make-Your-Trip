@@ -78,7 +78,7 @@ justify-content: center;
     border: none !important;
 }
 .show-image{
-    height: 30vh;
+    height: 44vh;
 }.btns{
     display: flex;
 }
@@ -104,4 +104,19 @@ width: 100vh;}
     margin:5%;
     float:right;
 }
-    
+    .heart-icon{
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 10;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.heart-icon:active{
+  color: red;
+}
+.heart-icon:hover{
+  color: rgb(242, 56, 56);
+}

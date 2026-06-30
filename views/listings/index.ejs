@@ -57,8 +57,11 @@
  </div>
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mt-3"><% for(let listing of allListings) { %>
   <a href="/listings/<%=listing._id%>"class="listing-link">
-    <div class="card col">
-  <img src="<%= listing.image.url%>" class="card-img-top" alt="listing_image"style="height:20rem"/>
+    <div class="card col position-relative">
+   <div> <div class="heart-icon">
+      <i class="fa-solid fa-heart"></i>
+    </div>
+  <img src="<%= listing.image.url%>" class="card-img-top" alt="listing_image"style="height:20rem"/></div>  
   <div class="card-img-overlay"></div>
   <div class="card-body">
     <p class="card-text">
