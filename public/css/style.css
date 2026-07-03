@@ -7,9 +7,8 @@ body{
     height: 5rem;
     background-color: white;
 }
-.fa-compass{
-    color:red;
-    font-size: 2rem;
+.navbar-brand img{
+    max-height: 3rem;
 }
 .nav-link{
     color: black !important;
