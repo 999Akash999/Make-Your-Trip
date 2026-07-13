@@ -1,27 +1,28 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><img src="https://i.ibb.co/4ZnYPkV4/Chat-GPT-Image-Jun-3-2026-07-53-41-AM.png"></a>
+    <a class="navbar-brand" href="/listings"><img src="https://i.ibb.co/nMrC5vHS/Chat-GPT-Image-Jul-13-2026-08-02-31-PM-removebg-preview.png" alt="logo image"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         
-        <a class="nav-link" href="/listings">Explore</a>
+        <a class="nav-link" href="/listings"><b>Make Your Trip</b></a>
         
         
       </div>
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+        <form class="d-flex navbar-search" role="search">
+          <i class="fa-solid fa-magnifying-glass fa-sm navbar-search-icon" aria-hidden="true"></i>
+          <input class="form-control me-2 " type="search" placeholder="Search rooms,stays..." aria-label="Search "/>
+          <button class="btn btn-outline-success btnm" type="submit">Search</button>
+        </form>
       </div>
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <a class="nav-link todo" href="/listings/new"><i class="fa-solid fa-house"></i>&nbsp; <b>Airbnb your home</b></a>
         <% if(!currUser){ %>
-        <a class="nav-link " href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"> <b>Log in</b></a> <% } %>
+        <a class="nav-link todo" href="/signup"><b>Sign up</b></a>
+        <a class="nav-link" href="/login"> <button id="login-btn">Log in</button></a> <% } %>
         <% if(currUser){ %>
         <a class="nav-link" href="/logout"><b>Log out</b></a><% } %>
         

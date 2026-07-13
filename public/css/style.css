@@ -1,28 +1,38 @@
 body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
-  
+  background-color:#F5F3FF !important;
 }
 /*navbar*/
 .navbar{
     height: 5rem;
     background-color: white;
+    border: 2px solid #eae9f1;
+    margin: 0.5rem 1.5rem 0rem 1.5rem;
+    border-radius:1rem;
+    box-shadow: 0px 4px 4px #b9b2f6;
 }
 .navbar-brand img{
     max-height: 3rem;
 }
 .nav-link{
     color: black !important;
+    text-align: center !important;
+    padding-top: 1rem;
+   font-weight: bolder;
+    
 }
 /*footer*/
 .f-info-links a{
     text-decoration: none ;
     color: black;
+    white-space: nowrap;
+
 }
 .f-info-links, 
 .f-info-socials,
 .f-info-brand{
 width:100%;
-
+flex-wrap: nowrap;
 display:flex;
 align-items: center;
 justify-content: center;
@@ -33,12 +43,14 @@ justify-content: center;
 }
 .f-info{
     text-align: center;
-    height: 8rem;
-   
+    min-height: 11rem;
+    padding: 1.25rem 0 3rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items:space-evenly;
+    align-content: space-evenly;
+    position: relative;
+    z-index: 10;
 }
 /*Cards*/
 .card{
@@ -68,13 +80,15 @@ justify-content: center;
     
 }
 .add-btn{
-    background-color: red !important;
+    background-color: #6D5DFC !important;
     border: none !important;
     text-align: center !important;
 }
-.edit-btn{
-    background-color: red !important;
+.edit-btn,
+.del-btn{
+    background-color: #6D5DFC !important;
     border: none !important;
+    text-align: center !important;
 }
 .show-image{
     height: 44vh;
@@ -89,12 +103,9 @@ justify-content: center;
     border-radius: 0.5rem;
     display: block;
 }
-.del-btn{
-    background-color: red !important;
-    border: none !important;
-}
+
 .fa-brands{
-    color: red !important;
+    color: #6D5DFC !important;
 }
 #map { 
     height: 400px;
@@ -118,4 +129,94 @@ width: 100vh;}
 }
 .heart-icon:hover{
   color: rgb(242, 56, 56);
+}
+.footer{
+  position: relative;
+  overflow: hidden;
+  background-color:#F3F0FF !important;
+  float: bottom;
+}
+.footer-wave{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-wave svg{
+  display:block;
+  width:100%;
+  height:180px;
+  
+}
+.f-edit{ border: 1px solid #6D5DFC;
+    border-radius: 50%;
+    
+    display: inline-table;
+    margin:20px;
+    padding: 5px;
+}
+.btnm{
+    background-color: #6D5DFC !important;
+    color: white !important;
+}
+.navbar-search{
+    position: relative;
+}
+.navbar-search .form-control{
+    padding-left: 2.5rem !important;
+}
+.navbar-search-icon{
+    position: absolute;
+    top: 50%;
+    left: 0.9rem;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: #6c757d;
+    pointer-events: none;
+}
+#login-btn{
+     background-color: #6D5DFC !important;
+    border: none !important;
+    
+    border-radius: 0.5rem;
+    color: white !important; 
+    padding: 0.5rem 1rem;
+    
+    text-align: center !important;
+}
+.todo{
+    margin-top: 0.55rem;
+    margin-right: 1rem;
+    font-weight: bolder;
+}
+.f-info-links{
+    margin-top: 2rem;
+    color: #6D5DFC;
+    
+}
+.help{
+padding: 1rem; 
+
+margin:0.5rem;
+border:none;
+border-radius: 1rem;
+margin-bottom: 5rem;
+display:inline-block;
+flex-wrap: wrap;
+align-items: baseline;
+z-index: 1;
+position: fixed;
+padding:1.5rem;
+background-color: #cac2f6;
+box-shadow: 0px 4px 4px #6f63f6;
+}
+.help:hover{
+box-shadow: 0px 4px 4px #6f63f6;
+}
+.fa-headset{
+    color:#5B4DF5;
 }
