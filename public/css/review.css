@@ -1,0 +1,25 @@
+.review{
+    margin-top: 2rem;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgb(176, 167, 180);
+}
+.submit-btn{
+    background-color:  #6D5DFC;
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+.h{
+    font-weight: 1000;
+    font: bold;
+}
+.hm{
+    font-weight:bolder;
+}
+
+

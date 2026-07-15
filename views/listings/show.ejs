@@ -3,24 +3,18 @@
   const mapToken="<%=process.env.MAP_TOKEN %>";
   const coordinates="<%-JSON.stringify(listing.geometry.coordinates)%>";
 </script>
-<div class="row mt-3">
-  <div class="col-8 offset-3">
+<div class="listing">
   
-    <h3><%= listing.title %></h3>
-    
-
-</div>
-<div class="card col-6 offset-3">
+<div class="imag">
 
   
-<div>
-   <div class="heart-icon">
-      <i class="fa-regular fa-heart" style="color: rgb(177, 151, 252);"></i>
-    </div>
-  <img src="<%= listing.image.url%>" class="card-img-top show-image" alt="listing_image" /></div>
-  
+<div class="f">
+   
+      
+   
+  <img src="<%= listing.image.url%>" class="card-img-top show-image" alt="listing_image" /><i class="fa-regular fa-heart " style="color: rgb(177, 151, 252);"></i></div>
   <div class="card-body">
-  
+  <h3><%= listing.title %></h3>
     <p class="card-text">Owned by-<i><%= listing.owner.username %></i></p>
 
     <p class="card-text"><%= listing.description %></p>
@@ -32,28 +26,30 @@
     <p class="card-text"><%= listing.location %></p>
 
     <p class="card-text"><%= listing.country %></p>
+    <div class="btns">
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn"><i class="fa-solid fa-pen" style="color: rgb(255, 255, 255);"></i>Edit</a>
+    
+    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+      <button class="btn btn-dark  offset-5 del-btn">Delete</button>
+    </form>
+  </div>
 </div>
 </div>
      
     
     <br />
     
-    <div class="btns">
-    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
     
-    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-      <button class="btn btn-dark  offset-5 del-btn">Delete</button>
-    </form>
   </div>
   
-  <div class="col-8 offset-3 mb-3">
+  <div class="review">
     
-    <h4>Leave Review</h4>
-    <hr/>
+    <h5 class="h">Leave a Review</h5>
+    
     <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
-      <div class="mb-3 mt-3"> <label class="form-label">Rating</label></div>
+      <div class="hm"> <label class="form-label"> Your Rating</label></div>
       <fieldset class="starability-slot">
-  <legend>First rating:</legend>
+  
   <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
   <input type="radio" id="first-rate1" name="review[rating]" value="1" />
   <label for="first-rate1" title="Terrible">1 star</label>
@@ -66,18 +62,19 @@
   <input type="radio" id="first-rate5" name="review[rating]" value="5" />
   <label for="first-rate5" title="Amazing">5 stars</label>
 </fieldset>
-    <div class="mb-3 mt-3">
-      <label for="comment" class="form-label">Comments</label>
+    <div class="mb-3 mt-0">
+      <label for="comment" class="form-label">Your Review</label>
       <textarea 
       name="review[comment]"
       id="comment"
       cols="20"
-      rows="5"
+      rows="3"
       class="form-control"
+      placeholder="Share your experience about this place...."
       required></textarea>
       <div class="invalid-feedback">please add some comment for  review</div>
-    </div> <button class="btn btn-outline-dark">Submit</button></form> 
-    <hr/>
+    </div> <button class="submit-btn"><i class="fa-regular fa-paper-plane"></i><b>&nbsp;Submit Review</b></button></form> 
+    </div>
     
     <% if(listing.reviews.length>0) {%>
 <div class="row">
@@ -104,11 +101,5 @@
 
   <% } %>
 
-  </div>
-  <div class="col-8 offset-3 mb-3">
-  <h3>Where you'll be</h3>
-  <div id="map"></div>
-</div>
-</div>
-<script src="/js/map.js"></script>
+  
       
