@@ -52,7 +52,7 @@ padding: 1rem;
 <p>Mountains</p>
   </div>
   <div class="filetr">
-<div class="rr"><i class="fa-solid fa-plane fa-rotate-by" style="--fa-rotate-angle: 360deg;"></i></div>
+<div class="rr"><i class="fa-solid fa-plane fa-rotate-by fa-xl" style="--fa-rotate-angle: 360deg;"></i></div>
 <p>Flights</p>
   </div>
   <div class="filetr">
@@ -60,15 +60,15 @@ padding: 1rem;
 <p>Swimming</p>
   </div>
   <div class="filetr">
-<div class="rr"><i class="fa-solid fa-campground "></i></div>
+<div class="rr"><i class="fa-solid fa-campground  fa-xl"></i></div>
 <p>Camping</p>
   </div>
   <div class="filetr">
-<div class="rr"><i class="fa-solid fa-plate-wheat "></i></div>
+<div class="rr"><i class="fa-solid fa-plate-wheat fa-xl "></i></div>
 <p>Farm</p>
   </div>
   <div class="filetr">
-<div class="rr"><i class="fa-solid fa-igloo "></i></div>
+<div class="rr"><i class="fa-solid fa-igloo fa-xl"></i></div>
 <p>Arctice</p>
   </div>
  </div>
@@ -77,7 +77,7 @@ padding: 1rem;
   <a href="/listings/<%=listing._id%>"class="listing-link">
     <div class="card col position-relative">
    <div> <div class="heart-icon">
-      <i class="fa-regular fa-heart"></i>
+      <i class="fa-regular fa-heart" style="color: rgb(177, 151, 252);"></i>
     </div>
   <img src="<%= listing.image.url%>" class="card-img-top" alt="listing_image"style="height:20rem"/></div>  
   <div class="card-img-overlay"></div>
@@ -90,7 +90,23 @@ padding: 1rem;
 </div>
   </a>  
 <% } %></div>
-<div class="help"><i class="fa-solid fa-headset fa-beat-fade fa-2xl fa-canvas-roomy"></i></div>
+
+  <button type="button" class="help" id="helpButton" aria-label="Open help" aria-expanded="false">
+    <a href="mailto:gnagwarakash555@gamil.com"><i class="fa-solid fa-headset fa-beat-fade fa-2xl fa-canvas-roomy"></i>
+  </a></button>
+
+ 
+
+  <script>
+    const helpButton = document.querySelector("#helpButton");
+    
+
+    helpButton.addEventListener("click", () => {
+      helpModal.hidden = false;
+      helpButton.setAttribute("aria-expanded", "true");
+    });
+    
+  </script>
 
 
     

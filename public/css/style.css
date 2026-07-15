@@ -2,6 +2,7 @@ body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
   background-color:#F5F3FF !important;
 }
+
 /*navbar*/
 .navbar{
     height: 5rem;
@@ -115,6 +116,10 @@ width: 100vh;}
     float:right;
 }
     .heart-icon{
+        border: 2px solid white;
+        border-radius: 50%;
+        padding: 0.5% 1%;
+        background-color: white;
   position: absolute;
   top: 5%;
   right: 5%;
@@ -131,26 +136,32 @@ width: 100vh;}
   color: rgb(242, 56, 56);
 }
 .footer{
-  position: relative;
-  overflow: hidden;
-  background-color:#F3F0FF !important;
-  float: bottom;
+    position:relative;
+    background:#F3F0FF;
+    overflow:hidden;
+    margin-top:auto;
+    float:bottom;
 }
+
+.f-info{
+    position:relative;
+    z-index:2;
+    padding:2rem 0;
+}
+
 .footer-wave{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  
-  z-index: 0;
-  pointer-events: none;
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    z-index:1;
+    pointer-events:none;
 }
 
 .footer-wave svg{
-  display:block;
-  width:100%;
-  height:180px;
-  
+    display:block;
+    width:100%;
+    height:120px;
 }
 .f-edit{ border: 1px solid #6D5DFC;
     border-radius: 50%;
@@ -178,7 +189,7 @@ width: 100vh;}
     color: #6c757d;
     pointer-events: none;
 }
-#login-btn{
+.login-btn{
      background-color: #6D5DFC !important;
     border: none !important;
     
@@ -208,15 +219,43 @@ margin-bottom: 5rem;
 display:inline-block;
 flex-wrap: wrap;
 align-items: baseline;
-z-index: 1;
+z-index: 10;
 position: fixed;
 padding:1.5rem;
 background-color: #cac2f6;
 box-shadow: 0px 4px 4px #6f63f6;
+
 }
 .help:hover{
 box-shadow: 0px 4px 4px #6f63f6;
 }
 .fa-headset{
     color:#5B4DF5;
+}
+.logout-btn{
+    background-color: #6D5DFC !important;
+    border: none !important;
+    
+    border-radius: 0.5rem;
+    color: white !important; 
+    padding: 0.5rem 0.5rem;
+    
+    text-align: center !important;
+}
+.help-modal{
+    border: 1px solid black;
+    display: inline-flex;
+    z-index: 20;
+    
+}
+.help-close{
+    float:right;
+    margin: 0.5rem;
+    border-radius: 20%;
+    text-align: center;
+    
+    
+}
+.close{
+    text-decoration: none;
 }
