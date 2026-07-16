@@ -1,7 +1,48 @@
-.row.mt-3.signup-form {
+.signup {
+    margin-left: 30%;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    height: 75vh;
+    width: 40%;
+    background-color: white;
+    border: 2px solid rgb(255, 255, 255);
+    padding: 0rem;
+    box-shadow:0px 2px 4px  #8f85eb;
+}
+.google-btn,.signup-btn{
+    background-color: #6e5efc !important;
+    color:hsl(246, 96%, 68%);
+    border: none !important;
     margin-top: 2rem;
-height: 80vh;
-width: 100%;
-background-color: white;
-border: 2px solid rgb(30, 13, 13);
+    width: 94% !important;
+    margin-left: 1rem !important;
+    padding-right: 1rem;
+    box-shadow:0px 2px 4px #8f85eb;
+}
+.google-btn{
+    margin-top: 1rem !important;
+}
+.name{
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.create{
+    margin-top:2rem;
+    text-align: center;
+    font-weight: 900;
+}
+.or{
+    margin-top: 1rem;
+}
+.logo{
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 1.5rem;
+    margin-left: 44%;
+    display: inline-block;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border-radius: 50%;
+    box-shadow: 0px 2px 2px 2px #8f85eb;
 }
