@@ -4,15 +4,9 @@
   const coordinates="<%-JSON.stringify(listing.geometry.coordinates)%>";
 </script>
 <div class="listing">
-  
-<div class="imag">
-
-  
+  <div class="imag">
 <div class="f">
-   
-      
-   
-  <img src="<%= listing.image.url%>" class="card-img-top show-image" alt="listing_image" /><i class="fa-regular fa-heart " style="color: rgb(177, 151, 252);"></i></div>
+   <img src="<%= listing.image.url%>" class="card-img-top show-image" alt="listing_image" /><i class="fa-regular fa-heart " style="color: rgb(177, 151, 252);"></i></div>
   <div class="card-body">
   <h3><%= listing.title %></h3>
     <p class="card-text">Owned by-<i><%= listing.owner.username %></i></p>

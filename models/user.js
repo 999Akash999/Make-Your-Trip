@@ -11,6 +11,10 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique:true,
+    },googleId: {
+        type: String,
+        default: null,
     },
 });
 
