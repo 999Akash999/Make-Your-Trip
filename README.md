@@ -1,7 +1,7 @@
 
 # Make Your Trip ✈️🏡
 
-A full-stack travel accommodation platform that helps users discover, explore, and share unique stays across different destinations. Users can create listings, upload images, view property locations on interactive maps, and leave reviews to help fellow travelers make informed decisions.
+A full-stack travel accommodation platform that helps users discover, explore, and share unique stays across different destinations. Users can create listings, upload images, and leave reviews to help fellow travelers make informed decisions.
 
 ---
 
@@ -33,12 +33,6 @@ A full-stack travel accommodation platform that helps users discover, explore, a
 * Add Reviews and Ratings
 * Delete Reviews
 * Community Feedback System
-
-### 🗺️ Interactive Maps
-
-* Location Visualization with Mapbox
-* Geocoding Support
-* Interactive Property Locations
 
 ### 🛡️ Security & Validation
 
@@ -76,7 +70,6 @@ A full-stack travel accommodation platform that helps users discover, explore, a
 ### Cloud Services
 
 * Cloudinary
-* Mapbox
 
 ### Additional Packages
 
@@ -86,6 +79,10 @@ A full-stack travel accommodation platform that helps users discover, explore, a
 * Connect Mongo
 * Method Override
 * Multer
+
+### Environment setup
+
+Copy `.env.example` to `.env` and provide your service credentials.
 
 ---
 

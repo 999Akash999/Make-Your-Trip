@@ -9,6 +9,7 @@
     border: 2px solid rgb(255, 255, 255);
     padding: 0rem;
     box-shadow:0px 2px 4px  #8f85eb;
+    
 }
 .google-btn,.signup-btn{
     background-color: #6e5efc !important;
@@ -35,6 +36,7 @@
 }
 .or{
     margin-top: 1rem;
+    
 }
 .logo{
     border: 1px solid rgb(255, 255, 255);
@@ -45,4 +47,7 @@
     padding: 1rem 0.5rem;
     border-radius: 50%;
     box-shadow: 0px 2px 2px 2px #8f85eb;
+}
+.input-group{
+    border: none !important;
 }

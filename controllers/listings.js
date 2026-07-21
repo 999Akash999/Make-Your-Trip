@@ -1,9 +1,6 @@
 const Listing=require("../models/listing");
 const ExpressError = require("../utils/ExpressError.js");
 const cloudinary = require("../cloudConfig.js");
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const mapToken=process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({ accessToken: mapToken});
 const uploadToCloudinary = (file) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
@@ -46,15 +43,6 @@ module.exports.showRoute=async (req, res) => {
     res.render("listings/show.ejs", { listing });
 };
 module.exports.createRoute=async (req, res, next) => {
-  let response = await geocodingClient
-  .forwardGeocode({
-    query: req.body.listing.location,
-    limit: 1,
-  })
-  .send();
-
-
-
     const newListing = new Listing(req.body.listing);
     if (req.file) {
       const result = await uploadToCloudinary(req.file);
@@ -65,7 +53,6 @@ module.exports.createRoute=async (req, res, next) => {
      
     }
     newListing.owner=req.user._id;
-     newListing.geometry=response.body.features[0].geometry;
      let savedListing = await newListing.save();
      console.log(savedListing);
     req.flash("success","new listing is created");

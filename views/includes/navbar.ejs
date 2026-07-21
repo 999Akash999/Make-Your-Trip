@@ -20,10 +20,10 @@
       </div>
       <div class="navbar-nav ms-auto">
         <a class="nav-link todo" href="/listings/new"><i class="fa-solid fa-house"></i>&nbsp; <b>Airbnb your home</b></a>
-        <% if (!locals.currUser) { %>
+        <% if (!currUser) { %>
         <a class="nav-link todo" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"> <button class="login-btn">Log in</button></a> <% } %>
-        <% if (locals.currUser) { %>
+        <% if (currUser) { %>
         <a class="nav-link" href="/logout"><button class="logout-btn">Log out</button></a><% } %>
 
       </div>

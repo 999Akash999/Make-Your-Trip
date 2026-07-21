@@ -9,6 +9,10 @@
     <form action="/signup" method="POST" class="needs-validation" novalidation>
       <div class="name">
         <label for="username" class="form-label"></label>
+        <div class="input-group">
+    <span class="input-group-text">
+      <i class="fa-solid fa-user" style="color: rgb(110, 94, 252);"></i>
+    </span>
         <input
           name="username"
           id="username"
@@ -20,8 +24,13 @@
         />
         <div class="valid-feedback">Looks good!</div>
       </div>
+    </div>
       <div class="name">
         <label for="email" class="form-label"></label>
+        <div class="input-group">
+    <span class="input-group-text">
+      <i class="fa-regular fa-envelope" style="color: rgb(110, 94, 252);"></i>
+    </span>
         <input
           name="email"
           id="email"
@@ -30,10 +39,14 @@
           placeholder="Email"
           required
         />
-        
+        </div>
       </div>
       <div class="name">
         <label for="password" class="form-label"></label>
+        <div class="input-group">
+    <span class="input-group-text">
+      <i class="fa-solid fa-lock" style="color: rgb(110, 94, 252);"></i>
+    </span>
         <input
           name="password"
           id="password"
@@ -42,8 +55,9 @@
           placeholder="Password"
           required
         />
-        
+
       </div>
+    </div>
       <button class="btn btn-success signup-btn mt-10">Sign Up</button>
       <p class="text-center or">or signup with</p>
       <div class="mt-3">
