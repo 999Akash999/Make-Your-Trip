@@ -210,7 +210,7 @@ justify-content: center;
     color: #6c757d;
     pointer-events: none;
 }
-.login-btn{
+.login-btn-nav{
      background-color: #6D5DFC !important;
     border: none !important;
     
@@ -253,7 +253,7 @@ box-shadow: 0px 4px 4px #6f63f6;
 .fa-headset{
     color:#5B4DF5;
 }
-.logout-btn{
+.logout-btn-nav{
     background-color: #6D5DFC !important;
     border: none !important;
     

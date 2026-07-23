@@ -19,12 +19,12 @@
         </form>
       </div>
       <div class="navbar-nav ms-auto">
-        <a class="nav-link todo" href="/listings/new"><i class="fa-solid fa-house"></i>&nbsp; <b>Airbnb your home</b></a>
+        <a class="nav-link todo" href="/listings/new"><i class="fa-solid fa-house"></i>&nbsp; <b>Create new listing</b></a>
         <% if (!currUser) { %>
         <a class="nav-link todo" href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"> <button class="login-btn">Log in</button></a> <% } %>
+        <a class="nav-link" href="/login"> <button class="login-btn-nav">Log in</button></a> <% } %>
         <% if (currUser) { %>
-        <a class="nav-link" href="/logout"><button class="logout-btn">Log out</button></a><% } %>
+        <a class="nav-link" href="/logout"><button class="logout-btn-nav">Log out</button></a><% } %>
 
       </div>
     </div>

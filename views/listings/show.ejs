@@ -1,11 +1,15 @@
 <% layout("/layouts/boilerplate") %>
-<div class="listing">
+<div class="listing mt-5">
   <div class="imag">
 <div class="f">
    <img src="<%= listing.image.url%>" class="card-img-top show-image" alt="listing_image" /><i class="fa-regular fa-heart " style="color: rgb(177, 151, 252);"></i></div>
   <div class="card-body">
   <h3><%= listing.title %></h3>
     <p class="card-text">Owned by-<i><%= listing.owner.username %></i></p>
+    <% const ownerJoinedAt = listing.owner.joinedAt || listing.owner._id.getTimestamp(); %>
+    <% if (ownerJoinedAt) { %>
+      <p class="card-text text-muted small">Joined on <%= ownerJoinedAt.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) %></p>
+    <% } %>
 
     <p class="card-text"><%= listing.description %></p>
 
@@ -68,14 +72,26 @@
     
     <% if(listing.reviews.length>0) {%>
 <div class="row">
-  <p><b>All Reviews</b></p>
+  <p class="all mt-5">All Reviews(<%=listing.reviews.length%>)</p>
   <% for(review of listing.reviews) { %>
-    <div class="card col-5 ms-3 mb-3">
-      <div class="card-body">
-        <h5 class="card-title">@<%=review.author.username %></h5>
-        <p class="starability-result" data-rating="<%= review.rating %>"></p>
-        <p class="card-text"><%= review.comment %></p>
+    <div class="card col-12 ms-3 mb-3">
+      <div class="card-body-review row">
+        <div class="col-3">
+        <h5 class="card-title mt-3"><%=review.author.username %></h5>
+        <% if (review.author.joinedAt) { %>
+          <p class="text-muted small mb-1">
+            Member since <%= review.author.joinedAt.toLocaleDateString("en-IN", { month: "short", year: "numeric" }) %>
+          </p>
+        <% } %>
+        <p class="text-muted small">
+          Reviewed on <%= review.createdAt.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) %>
+        </p>
+      </div>
+        <div class="col-6">
         
+        <p class="starability-result mt-3" data-rating="<%= review.rating %>"></p>
+        <p class="card-text"><%= review.comment %></p>
+        </div>
          
         <form 
           class="mb-3" 

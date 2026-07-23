@@ -16,6 +16,10 @@ const userSchema = new Schema({
         type: String,
         default: null,
     },
+    joinedAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 userSchema.plugin(passportLocalMongoose);
