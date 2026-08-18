@@ -1,60 +1,34 @@
 <% layout("/layouts/boilerplate") %>
-  <div class="row">
-    <div class="col-8 offset-2">
+<h3 class="dream">Create Your Dream Stay<i class="fa-solid fa-burst" style="color: #6d5dfc;"></i></h3>
+  <div class="row-r">
+    <div class="">
       <br/><br/>
-    <h3>Create a New Listing</h3>
-    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-      
-      <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+    
+    <form method="POST" action="/listings" novalidate class="" enctype="multipart/form-data">
+      <div class="hey">
+        
+        <div class="icon-home-r"><i class="fa-regular fa-house fa-2xl" style="color: #6d5dfc;"></i></div>
+        <div class="baby"><h2 style="font-size:x-large;">Listing Details</span></h2>
+        <p >Provide all the details about your stay.</p></div>
+      </div>
+      <div class="mb-3 ">
+        <label for="title" class="form-label"><i class="fa-solid fa-pen" style="color: #6d5dfc;"></i>Title</label>
       <input name="listing[title]" placeholder="enter title" type="text"  class="form-control"
       required/>
       </div>
-      
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-        name="listing[description]"
-        placeholder="enter description"
-        class="form-control"
-        required
-      ></textarea>
-    </div>
-      
-      
-      <div class="mb-3">
-        <label for="image" class="form-label">Upload Image</label>
-        <input
-        name="listing[image]"
-        
-        type="file"
-        class="form-control"
-        required
-      />
-      
-      </div>
-      
-      <div class="mb-3"> 
-        <label for="price" class="form-label">Price</label>
+      <div class="mb-3 "> 
+        <label for="price" class="form-label"><i class="fa-solid fa-tag" style="color: #6d5dfc;"></i>Price</label>
         <input name="listing[price]" placeholder="enter price" type="number" class="form-control" required/>
         
       </div>
       
-      
       <div class="mb-3">
-        <label for="country" class="form-label">Country</label>
+        <label for="country" class="form-label"><i class="fa-solid fa-earth-americas" style="color: #6d5dfc;"></i>Country</label>
         <input name="listing[country]" placeholder="enter country" type="text"  class="form-control" required/>
-        
-        
-        
-        
-        
-        
-
-      </div>
+        </div>
       
       <div class="mb-3">
-        <label for="location" class="form-label">Location</label>
+        <label for="location" class="form-label"><i class="fa-solid fa-location-pin" style="color: #6d5dfc;"></i>Location</label>
         <input
         name="listing[location]"
         placeholder="enter location"
@@ -62,10 +36,29 @@
         class="form-control"
         required
       />
+       <div class="mb-3 mt-3">
+        <label for="image" class="form-label"><i class="fa-regular fa-image" style="color: #6d5dfc;"></i>Upload Image</label>
+        <input
+        name="listing[image]"
+        type="file"
+        class="form-control"
+        required
+      />
       
       </div>
+      
+      <div class="mb-3 ">
+        <label for="description" class="form-label"><i class="fa-regular fa-clipboard" style="color: #6d5dfc;"></i> Description</label>
+        <textarea
+        name="listing[description]"
+        placeholder="enter description"
+        class="form-control"
+        required
+      ></textarea>
+    </div>
+      </div>
       <br>
-      <button class="btn btn-dark add-btn">Add</button>
+      <button class="btn btn-dark add-btn" style="position: relative; left:40%; padding-left:2rem ; padding-right: 2rem;" ><i class="fa-solid fa-plus" style="color: #fcfcfd;"></i>Add Listing</button>
       <br/><br/>
       
     </form>
