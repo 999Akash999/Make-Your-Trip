@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
+const multer = require("multer");
 const ejsMate=require("ejs-mate");
 const ExpressError=require("./utils/ExpressError.js");
 const listings=require("./routes/listing.js");
@@ -26,6 +27,7 @@ const userRouter=require("./routes/user.js");
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl=process.env.ATLASDB_URL;
 const secret = process.env.SECRET;
+const DB_TIMEOUT_MS = 10_000;
 // main()
 //   .then(() => {
 //     console.log("connected to DB");
@@ -37,15 +39,20 @@ main()
   .then(() => {
     console.log("connected to DB");
 
-    app.listen(8080, () => {
-      console.log("server is listening to port 8080");
+    const port = process.env.PORT || 8080;
+    app.listen(port, () => {
+      console.log(`server is listening to port ${port}`);
     });
   })
   .catch((err) => {
     console.log(err);
   });
 async function main() {
-  await mongoose.connect(dbUrl);
+  mongoose.set("bufferCommands", false);
+  await mongoose.connect(dbUrl, {
+    serverSelectionTimeoutMS: DB_TIMEOUT_MS,
+    connectTimeoutMS: DB_TIMEOUT_MS,
+  });
 }
 
 app.set("view engine", "ejs");
@@ -63,8 +70,8 @@ const store=MongoStore.create({
   },
   touchAfter:24*3600,
 });
-store.on("error",()=>{
-  console.log("error in mongo session store",err);
+store.on("error", (err) => {
+  console.error("Mongo session store error:", err);
 });
 const sessionOptions={
   store,
@@ -161,7 +168,15 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+      err = new ExpressError(400, "Image must be 10 MB or smaller.");
+    }
+    console.error(`${req.method} ${req.originalUrl} failed:`, {
+      name: err.name,
+      message: err.message,
+      code: err.code,
+      httpCode: err.http_code,
+    });
     let { statusCode = 500, message = "Something went wrong" } = err;
     res.status(statusCode).render("error.ejs", { message });
 });
-
