@@ -21,7 +21,7 @@
 
     <p class="card-text"><%= listing.country %></p>
     <div class="btns">
-    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1  edit-btn"><span><i class="fa-solid fa-pen" style="color: rgb(255, 255, 255);"></i></span>Edit</a>
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1  edit-btn"><span>Edit</span></a>
     
     <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
       <button class="btn btn-dark  offset-5 del-btn">Delete</button>

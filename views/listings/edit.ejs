@@ -1,74 +1,36 @@
 <% layout("/layouts/boilerplate") %>
-<div class="row ">
-  <div class="col-8 offset-2">
 
-  <body>
-    <h3>Edit your Listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data"
-      >
-      
-      <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-      <input name="listing[title]" value="<%= listing.title %>" type="text"
-      class="form-control" />
-    </div>
-      
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea name="listing[description]"
-      class="form-control">
-      <%= listing.description %></textarea
-      ></div>
-
-      <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <% if (listing.image && listing.image.url) { %>
-          <img
-            src="<%= listing.image.url %>"
-            class="edit-image-preview mb-2"
-            id="image-preview"
-            alt="listing image preview"
-          />
-        <% } else { %>
-          <img
-            class="edit-image-preview mb-2 d-none"
-            id="image-preview"
-            alt="listing image preview"
-          />
-        <% } %>
-      <input name="listing[image]" id="image" type="file" accept="image/*"
-       class="form-control"/>
-       
-    </div>
-
-      <div class="mb-3">
-        <label for="price" class="form-label">Price</label>
-      <input name="listing[price]" value="<%= listing.price %>" type="number" 
-      class="form-control"/>
-    </div>
-      
-    <div class="mb-3">
-      <label for="country" class="form-label">Country</label>
-      <input
-        name="listing[country]"
-        value="<%= listing.country %>"
-        type="text"
-        class="form-control"
-      />
-    </div>
-      
-    <div class="mb-3">
-      <label for="location" class="form-label">Location</label>
-      <input
-        name="listing[location]"
-        value="<%= listing.location %>"
-        type="text"
-        class="form-control"
-      />
-    </div>
-      
-      <button class="btn btn-dark edit-btn">Edit</button>
+<main class="edit-listing-page">
+  <section class="edit-listing-card" aria-labelledby="edit-listing-title">
+    <header class="edit-listing-header">
+      <div class="dream-e">
+        <h1 id="edit-listing-title">Edit Your Listing</h1>
+        <p>Update your property details and keep your listing fresh.</p>
+      </div>
+      <a class="preview-listing-btn" href="/listings/<%= listing._id %>"><i class="fa-regular fa-eye" aria-hidden="true"></i> Preview Listing</a>
+    </header>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="edit-listing-form needs-validation" enctype="multipart/form-data" novalidate>
+      <section class="listing-image-editor" aria-label="Listing image">
+        <div class="edit-image-frame">
+          <% if (listing.image && listing.image.url) { %><img src="<%= listing.image.url %>" id="image-preview" alt="Current image for <%= listing.title %>" /><% } else { %><div class="edit-image-empty" id="image-preview-placeholder"><i class="fa-regular fa-image" aria-hidden="true"></i><span>No image added yet</span></div><img class="d-none" id="image-preview" alt="New listing image preview" /><% } %>
+          <label class="change-image-btn" for="image"><i class="fa-solid fa-camera" aria-hidden="true"></i> Change Image</label>
+        </div>
+        <div class="image-upload-panel">
+          <div class="image-upload-heading"><strong>Upload New Image</strong><span>JPG, PNG or WEBP (Max 10MB)</span></div>
+          <label class="image-dropzone" for="image" id="image-dropzone"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><span>Drag &amp; drop an image here</span><small>or</small><span class="choose-file-btn">Choose File</span><span class="selected-file-name" id="selected-file-name" aria-live="polite"></span></label>
+          <input name="listing[image]" id="image" type="file" accept="image/png,image/jpeg,image/webp" />
+        </div>
+      </section>
+      <section class="listing-details-editor" aria-label="Listing details">
+        <div class="edit-field"><label for="title"><i class="fa-regular fa-calendar" aria-hidden="true"></i> Title</label><input id="title" name="listing[title]" value="<%= listing.title %>" type="text" required /><div class="invalid-feedback">Please enter a title.</div></div>
+        <div class="edit-field"><label for="description"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Description</label><textarea id="description" name="listing[description]" required><%= listing.description %></textarea><div class="invalid-feedback">Please add a description.</div></div>
+        <div class="edit-fields-row">
+          <div class="edit-field"><label for="price"><i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i> Price per night (₹)</label><input id="price" name="listing[price]" value="<%= listing.price %>" type="number" min="0" required /><div class="invalid-feedback">Please enter a valid price.</div></div>
+          <div class="edit-field"><label for="country"><i class="fa-solid fa-earth-americas" aria-hidden="true"></i> Country</label><input id="country" name="listing[country]" value="<%= listing.country %>" type="text" required /><div class="invalid-feedback">Please enter a country.</div></div>
+        </div>
+        <div class="edit-field"><label for="location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Location</label><input id="location" name="listing[location]" value="<%= listing.location %>" type="text" required /><div class="invalid-feedback">Please enter a location.</div></div>
+      </section>
+      <footer class="edit-listing-actions"><a class="cancel-edit-btn" href="/listings/<%= listing._id %>">Cancel</a><button class="save-listing-btn" type="submit"><i class="fa-regular fa-floppy-disk" aria-hidden="true"></i> Save Changes</button></footer>
     </form>
-  </body>
-</div>
-</div>
+  </section>
+</main>

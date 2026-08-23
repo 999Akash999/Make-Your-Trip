@@ -240,11 +240,11 @@ justify-content: center;
     
 }
 .help{
-padding: 1rem; 
+ 
 
 margin:0.5rem;
 border:none;
-border-radius: 1rem;
+border-radius: 50%;
 margin-bottom: 5rem;
 display:inline-block;
 flex-wrap: wrap;
@@ -254,15 +254,14 @@ position:fixed;
 bottom:-10px;
 right:5px;
 padding:1.5rem;
-background-color: #cac2f6;
+background-color:#6D5DFC;
 box-shadow: 0px 4px 4px #6f63f6;
 
 }
-.help:hover{
-box-shadow: 0px 4px 4px #6f63f6;
-}
+
 .fa-headset{
-    color:#5B4DF5;
+padding:1rem 0rem;
+    color:#fdfdfd;
 }
 .logout-btn-nav{
     background-color: #6D5DFC !important;
