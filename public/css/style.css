@@ -25,6 +25,7 @@ body{
 }
 .navbar-brand img{
     max-height: 3rem;
+    color: #6D5DFC;
 }
 .nav-link{
     color: black !important;
@@ -294,10 +295,7 @@ padding:1rem 0rem;
 .close{
     text-decoration: none;
 }
-.imag{
-    display: flex;
-    margin-bottom: 5rem;
-}
+
 .text{
     font-size: larger;
     font-weight:bol!important;
@@ -320,4 +318,19 @@ padding:1rem 0rem;
     top:70px;
     
     z-index: 1;
+}
+.show-heart{
+    width:2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    padding: 1% 0px;
+   text-align: center;
+    background-color: white;
+    position: absolute;
+    top:3rem;
+    right:5rem;
+}
+.listing{
+    display:flex;
+    flex-wrap: wrap;
 }

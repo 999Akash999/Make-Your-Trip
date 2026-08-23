@@ -1,0 +1,331 @@
+/* =========================
+   SHOW PAGE
+========================= */
+
+.show-page{
+    width:95%;
+    max-width:1300px;
+    margin:7rem auto 3rem;
+}
+
+/* =========================
+   LISTING SECTION
+========================= */
+
+.show-listing{
+    display:flex;
+    gap:1.5rem;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* =========================
+   IMAGE SECTION
+========================= */
+
+.show-image-container{
+    flex:1.1;
+    position:relative;
+    object-fit: cover;
+}
+
+.show-image{
+    width:100%;
+    
+    min-height:500px;
+    object-fit:cover;
+    display:block;
+}
+
+.show-heart{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    transition:.3s ease;
+}
+
+.show-heart:hover{
+    transform:scale(1.08);
+}
+
+.show-heart i{
+    color:#6D5DFC;
+    font-size:1rem;
+}
+
+/* =========================
+   DETAILS
+========================= */
+
+.show-card-body{
+    flex:1;
+    padding:2rem;
+    display:flex;
+    flex-direction:column;
+}
+
+.listing-title{
+    font-size:1.8rem;
+    font-weight:700;
+    margin-bottom:.5rem;
+    color:#222;
+}
+
+.owner{
+    font-size:.95rem;
+    color:#0a0a0a;
+}
+
+.listing-description{
+    margin: 0;
+    line-height:1.7;
+    color:#555;
+    font-size:.95rem;
+}
+
+.price{
+    font-size:1.8rem;
+    font-weight:700;
+    color:#6D5DFC;
+    margin-bottom:.8rem;
+}
+
+.location{
+    font-size:.95rem;
+    color:#555;
+    margin-bottom:1.5rem;
+}
+
+.location i{
+    color:#6D5DFC;
+    margin-right:.4rem;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btns{
+    margin-top:auto;
+    display:flex;
+    gap:.8rem;
+}
+
+.edit-btn,
+.del-btn{
+    min-width:110px;
+    padding:.65rem 1.2rem !important;
+    border-radius:10px !important;
+    font-size:.9rem !important;
+    font-weight:600 !important;
+}
+
+.edit-btn{
+    background:#6D5DFC !important;
+    border:none !important;
+}
+
+.del-btn{
+    border:none !important;
+}
+
+/* =========================
+   REVIEW FORM
+========================= */
+
+.review{
+    margin-top:1.8rem;
+    background:#fff;
+    padding:1.5rem;
+    border-radius:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    max-height: 10%;
+}
+
+.h{
+    font-size:1.3rem;
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+.form-label{
+    font-weight:600;
+    font-size:.95rem;
+}
+
+#comment{
+    border-radius:10px;
+    resize:none;
+    font-size:.95rem;
+}
+
+.submit-btn{
+    border:none;
+    background:#6D5DFC;
+    color:white;
+    text-align: center;
+    padding:.75rem 1.3rem;
+    border-radius:10px;
+    font-size:.9rem;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.submit-btn:hover{
+    transform:translateY(-2px);
+}
+
+.submit-btn i{
+    font-size:.85rem;
+}
+
+/* =========================
+   REVIEWS SECTION
+========================= */
+
+.reviews-section{
+    margin-top:1.8rem;
+}
+
+.all{
+    font-size:1.3rem;
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+.review-card{
+    background:#fff;
+    border-radius:14px;
+    max-height: 10rem;
+    padding:1rem 1.2rem;
+    margin-bottom:.9rem;
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.review-left{
+    width:180px;
+}
+
+.review-left h5{
+    font-size:1rem;
+    font-weight:600;
+    margin-bottom:.25rem;
+}
+
+.review-left .small,
+.review-left p{
+    font-size:.8rem;
+}
+
+.review-center{
+    flex:1;
+}
+
+.review-center p{
+    font-size:.9rem;
+    line-height:1.6;
+    margin-bottom:0;
+}
+
+.starability-result{
+    transform:scale(.85);
+    transform-origin:left center;
+    margin-bottom:.3rem;
+}
+
+.review-right{
+    display:flex;
+    align-items:center;
+}
+
+.review-right .btn{
+    padding:.35rem .8rem;
+    font-size:.8rem;
+    border-radius:8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .show-listing{
+        flex-direction:column;
+    }
+
+    .show-image{
+        min-height:380px;
+    }
+
+    .show-card-body{
+        padding:1.5rem;
+    }
+}
+
+@media(max-width:768px){
+
+    .show-page{
+        width:95%;
+    }
+
+    .show-image{
+        min-height:280px;
+    }
+
+    .listing-title{
+        font-size:1.5rem;
+    }
+
+    .price{
+        font-size:1.5rem;
+    }
+
+    .btns{
+        flex-direction:column;
+    }
+
+    .edit-btn,
+    .del-btn{
+        width:100%;
+    }
+
+    .review-card{
+        flex-direction:column;
+    }
+
+    .review-left{
+        width:100%;
+    }
+
+    .review-right{
+        width:100%;
+    }
+
+    .review-right .btn{
+        width:100%;
+    }
+}
+
+/* =========================
+   BODY FONT
+========================= */
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f7f7fb;
+}
