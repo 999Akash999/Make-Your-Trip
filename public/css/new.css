@@ -18,9 +18,19 @@ z-index:1;
     margin-top: 2rem;
     font-size:3em;
     font-weight: 900;
-    color: #6D5DFC;
-      text-shadow: 0 6px 20px rgba(108,99,255,0.25);
+    
+    background: linear-gradient(270deg, #c43ab8,#6d5dfc);
+  
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+      
     position:relative;
+
     left: 5%;
     color-interpolation-filters:sRGB;
 }.hey{

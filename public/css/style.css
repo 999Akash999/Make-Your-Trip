@@ -3,6 +3,10 @@ body{
   background-color:#F5F3FF !important;
   
 }
+*{
+    padding:0;
+    margin:0;
+}
 
 /*navbar*/
 .navbar{
@@ -12,7 +16,8 @@ body{
     margin: 0.2rem 1.5rem 0rem 1.5rem;
     border-radius:1rem;
     box-shadow: 0px 4px 4px #b9b2f6;
-    
+    /* Keep the header in the document flow so it cannot cover listing cards. */
+    position: static !important;
 }
 .navbar-brand img{
     max-height: 3rem;
@@ -59,30 +64,29 @@ justify-content: center;
 .card{
     border: none !important;
     margin-bottom: 2rem;
-    box-shadow:0px 0px 2px #8f85eb;
+    box-shadow:1px 1px 5px  #868386;
+    overflow: hidden;
+    height: 100%;
 }
 
 .card-img-top{
     margin: 1rem;
-    border-radius: 1rem !important;
+    border-radius: 10px !important;
     width: 90% !important;
     object-fit: cover !important;
     display: inline-block;
 }
 .card-img-top-li{
-    
-    margin-right: 2rem;
-    
-    border-radius:0.5rem  !important;
-    height: 50%;
+    border-radius:5px 5px 0px 0px !important;
+    aspect-ratio: 16 / 10;
+    height: auto;
     width: 100% !important;
     object-fit: cover !important;
-    display: inline-block;
+    display: block;
 }
 .card-body-li{
-    padding: 0 !important;
-   height: 10vh;
-   width: 60%;
+    padding: 3% !important;
+    min-height: 5rem;
 }
 .card-body{
     padding: 0 !important;
@@ -94,6 +98,8 @@ justify-content: center;
 }
 .listing-link{
     text-decoration: none;
+    display: block;
+    height: 100%;
 }
 .card-img-overlay{
     opacity: 0;
@@ -136,15 +142,17 @@ justify-content: center;
 #heart{
     margin:5%;
     float:right;
+    opacity:0.5;
 }
     .heart-icon{
         border: 2px solid white;
         border-radius: 50%;
         padding: 0.5% 1%;
         background-color: white;
+        
   position: absolute;
-  top: 5%;
-  right: 5%;
+  top: 3%;
+  right: 3%;
   z-index: 10;
   font-size: 1.5rem;
   color: white;
@@ -240,9 +248,11 @@ border-radius: 1rem;
 margin-bottom: 5rem;
 display:inline-block;
 flex-wrap: wrap;
-align-items: baseline;
-z-index: 10;
-position: fixed;
+
+z-index:10;
+position:fixed;
+bottom:-10px;
+right:5px;
 padding:1.5rem;
 background-color: #cac2f6;
 box-shadow: 0px 4px 4px #6f63f6;
@@ -284,4 +294,22 @@ box-shadow: 0px 4px 4px #6f63f6;
 .imag{
     display: flex;
     margin-bottom: 5rem;
+}
+.text{
+    font-size: larger;
+    font-weight:bol!important;
+}
+.listing-price{
+    color: #4f3eed;
+    font-size: larger;
+    font-weight: 900 !important;
+}
+.listing-price strong{
+    font-weight: 900 !important;
+}
+.listing-price span{
+    color: rgb(65, 64, 64);
+    font-size: small;
+    font-weight: 400;
+    opacity: 0.8;
 }

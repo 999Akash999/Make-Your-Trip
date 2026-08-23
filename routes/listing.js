@@ -6,7 +6,10 @@ const wrapAsync=require("../utils/wrapAsync.js");
 const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
 const listingcontroller=require("../controllers/listings.js");
 const multer=require("multer");
-const upload=multer({storage: multer.memoryStorage()});
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 },
+});
 //Index Route
 router.get("/",wrapAsync(listingcontroller.index));
 
