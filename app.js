@@ -22,7 +22,10 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User=require("./models/user.js");
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");
-const userRouter=require("./routes/user.js");
+const userRouter=require("./routes/user.js");const flightRouter =
+require("./routes/flights");
+const Flight = require("./models/flight");
+
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl=process.env.ATLASDB_URL;
@@ -158,9 +161,50 @@ app.get("/", (req, res) => {
 });
 
 
+app.get("/seed", async (req, res) => {
+  await Flight.deleteMany({});
+
+  await Flight.insertMany([
+    {
+      flightNumber: "AI101",
+      airline: "Air India",
+      source: "Delhi",
+      destination: "Mumbai",
+      departureTime: new Date("2026-09-20T09:00:00"),
+      arrivalTime: new Date("2026-09-20T11:15:00"),
+      price: 5500,
+      seatsAvailable: 45
+    },
+    {
+      flightNumber: "6E202",
+      airline: "IndiGo",
+      source: "Delhi",
+      destination: "Bangalore",
+      departureTime: new Date("2026-09-20T12:00:00"),
+      arrivalTime: new Date("2026-09-20T14:30:00"),
+      price: 4800,
+      seatsAvailable: 70
+    },
+    {
+      flightNumber: "UK303",
+      airline: "Vistara",
+      source: "Mumbai",
+      destination: "Goa",
+      departureTime: new Date("2026-09-21T08:00:00"),
+      arrivalTime: new Date("2026-09-21T09:10:00"),
+      price: 3200,
+      seatsAvailable: 30
+    }
+  ]);
+
+  res.send("Flights Seeded Successfully");
+});
+
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
 app.use("/",userRouter);
+app.use("/flights", flightRouter);
+
 
 // 404 handler MUST BE LAST
 app.use((req, res, next) => {

@@ -1,32 +1,117 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top " style="margin-bottom:5rem ;">
-  <div class="container-fluid ">
-    <a class="navbar-brand" href="/listings"><img src="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png" alt="logo image"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" style="margin-bottom:5rem;">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/listings">
+      <img src="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png" alt="logo image">
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <!-- Left -->
       <div class="navbar-nav">
-        
-        <a class="nav-link" href="/listings"><b>Make Your Trip</b></a>
-        
-        
+        <a class="nav-link" href="/listings">
+          <b>Make Your Trip</b>
+        </a>
       </div>
+
+      <!-- Center Search -->
       <div class="navbar-nav ms-auto">
         <form class="d-flex navbar-search" role="search">
-          <i class="fa-solid fa-magnifying-glass fa-sm navbar-search-icon" aria-hidden="true"></i>
-          <input class="form-control me-2 " type="search" placeholder="Search rooms,stays..." aria-label="Search "/>
-          <button class="btn btn-outline-success btnm" type="submit">Search</button>
+          <i
+            class="fa-solid fa-magnifying-glass fa-sm navbar-search-icon"
+            aria-hidden="true"
+          ></i>
+
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search rooms, stays..."
+            aria-label="Search"
+          >
+
+          <button
+            class="btn btn-outline-success btnm"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
       </div>
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link todo" href="/listings/new"><i class="fa-solid fa-house " style="color:#6D5DFC;"></i>&nbsp; <b>Create new listing</b></a>
+
+      <!-- Right -->
+      <div class="navbar-nav ms-auto align-items-center">
+
+        <a
+          class="nav-link todo"
+          href="/listings/new"
+        >
+          <i
+            class="fa-solid fa-house"
+            style="color:#6D5DFC;"
+          ></i>
+          &nbsp;
+          <b>Create new listing</b>
+        </a>
+
         <% if (!currUser) { %>
-        <a class="nav-link todo" href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"> <button class="login-btn-nav">Log in</button></a> <% } %>
+
+          <a
+            class="nav-link todo"
+            href="/signup"
+          >
+            <b>Sign up</b>
+          </a>
+
+          <a
+            class="nav-link"
+            href="/login"
+          >
+            <button class="login-btn-nav">
+              Log in
+            </button>
+          </a>
+
+        <% } %>
+
         <% if (currUser) { %>
-        <a class="nav-link" href="/logout"><button class="logout-btn-nav">Log out</button></a><% } %>
+
+          <a
+            href="/profile"
+            class="nav-link profile-nav"
+            title="Profile Dashboard"
+          >
+            <img
+              src="<%= currUser.image.url %>"
+              alt="Profile"
+              class="navbar-profile-image"
+            >
+          </a>
+
+          <a
+            class="nav-link"
+            href="/logout"
+          >
+            <button class="logout-btn-nav">
+              Log out
+            </button>
+          </a>
+
+        <% } %>
 
       </div>
+
     </div>
   </div>
 </nav>

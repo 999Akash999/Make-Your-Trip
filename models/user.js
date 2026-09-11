@@ -1,27 +1,57 @@
 
 
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-// IMPORTANT FIX
 const passportLocalMongoose =
-    require("passport-local-mongoose").default || require("passport-local-mongoose");
+require("passport-local-mongoose").default;
 
-const userSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique:true,
-    },googleId: {
-        type: String,
-        default: null,
+const userSchema =
+new mongoose.Schema({
+
+    email:{
+        type:String,
+        required:true,
+        unique:true
     },
-    joinedAt: {
-        type: Date,
-        default: Date.now,
+
+    image:{
+        url:{
+            type:String,
+            default:
+            "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png"
+        },
+
+        filename:String
     },
+
+    bio:{
+        type:String,
+        default:""
+    },
+
+    phone:String,
+
+    city:String,
+
+    bookings:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"FlightBooking"
+    }],
+
+    listings:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Listing"
+    }]
+
+},{
+    timestamps:true
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(
+    passportLocalMongoose
+);
 
-module.exports = mongoose.model("User", userSchema);
+module.exports =
+mongoose.model(
+    "User",
+    userSchema
+);

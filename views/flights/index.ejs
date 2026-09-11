@@ -1,0 +1,168 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="flight-page"><form action="/flights/search" method="GET" class="flight-search-container">
+
+  <!-- Top Inputs Row -->
+  <div class="search-inputs-grid">
+
+    <!-- From Field -->
+    <div class="input-card">
+      <span class="card-floating-label">From</span>
+      <input type="text" name="source" class="card-main-input" placeholder="Enter" required>
+      <span class="card-sub-label"></span>
+    </div>
+
+    <!-- Swap Button -->
+    
+
+    <!-- To Field -->
+    <div class="input-card">
+      <span class="card-floating-label">To</span>
+      <input type="text" name="destination" class="card-main-input" placeholder="Enter location" required>
+      <span class="card-sub-label"></span>
+    </div>
+
+    <!-- Departure Field -->
+    <div class="input-card">
+      <span class="card-floating-label">Departure</span>
+      <input type="text" name="departureDate" class="card-main-input" placeholder="Enter date" onfocus="(this.type='date')" onblur="(this.type='text')">
+      
+    </div>
+
+    <!-- Return Field -->
+    
+
+    <!-- Travellers & Class -->
+    <div class="input-card">
+      <span class="card-floating-label">Traveler(s) & Class</span>
+      <select
+          name="travellers"
+          class="form-select"
+        >
+          <option>1 Adult</option>
+          <option>2 Adults</option>
+          <option>3 Adults</option>
+          <option>4 Adults</option>
+        </select>
+      
+    </div>
+
+    <!-- Search Button -->
+    <button type="submit" class="btn-main-search">
+      SEARCH
+    </button>
+
+  </div>
+
+  <!-- Bottom Special Fares Row -->
+  <div class="fare-options-bar">
+    <div class="special-fares-header">
+      <span class="benefits-badge">More Benefits</span>
+      <strong class="special-fares-title">Special Fares</strong>
+    </div>
+
+    <div class="fare-card-group">
+      <!-- Regular -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="regular" checked>
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">👨‍💼</span>
+          <div class="fare-details">
+            <span class="fare-name">Regular</span>
+            <span class="fare-desc">Lowest Fares</span>
+          </div>
+        </div>
+      </label>
+
+      <!-- Student -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="student">
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">🎓</span>
+          <div class="fare-details">
+            <span class="fare-name">Student</span>
+            <span class="fare-desc">Extra Baggage</span>
+          </div>
+        </div>
+      </label>
+
+      <!-- Senior Citizen -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="senior">
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">👴</span>
+          <div class="fare-details">
+            <span class="fare-name">Senior Citizen</span>
+            <span class="fare-desc">Exclusive Discount</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+</form>
+
+    <h1 class="flight-heading mb-4">
+        ✈ Flights
+    </h1>
+<h2>Total Flights: <%= flights.length %></h2>
+    <% if(flights.length === 0){ %>
+
+        <div class="alert alert-info">
+            No Flights Found
+        </div>
+
+    <% } %>
+
+    <div class="row">
+
+        <% flights.forEach(flight => { %>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card flight-card">
+
+                    <div class="flight-card-body">
+
+                        <h4 class="airline-name">
+                            <%= flight.airline %>
+                        </h4>
+
+                        <p class="route">
+                            <%= flight.source %>
+                            ✈
+                            <%= flight.destination %>
+                        </p>
+
+                        <p class="flight-number">
+                            Flight No:
+                            <%= flight.flightNumber %>
+                        </p>
+
+                        <h4 class="flight-price">
+                            ₹<%= flight.price %>
+                        </h4>
+
+                        <a
+                            href="/flights/<%= flight._id %>"
+                            class="btn flight-btn"
+                        >
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+

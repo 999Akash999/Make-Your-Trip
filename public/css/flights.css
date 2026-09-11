@@ -1,0 +1,453 @@
+/* Flights Page */
+
+.flight-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2d3436;
+}.flight-page{
+    padding-top:40px;
+}.flight-search-box{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+.flight-search-box label{
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+.flight-search-btn{
+    background:#6D5DFC;
+    color:white;
+    border:none;
+    height:48px;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.flight-search-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.flight-search-box input {
+  border-radius: 12px;
+  height: 50px;
+}
+
+.flight-search-btn {
+  background: #6D5DFC;
+  border: none;
+  height: 50px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.flight-search-btn:hover {
+  background: #5848e8;
+}
+
+.flight-card {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.flight-card:hover {
+  transform: translateY(-5px);
+}
+
+.flight-card-body {
+  padding: 1.5rem;
+}
+
+.airline-name {
+  color: #6D5DFC;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.route {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.flight-price {
+  color: #27ae60;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.flight-number {
+  color: #636e72;
+}
+
+.flight-btn {
+  width: 100%;
+  background: #111827;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.flight-btn:hover {
+  background: #000;
+}
+
+/* Show Page */
+
+.flight-detail-card {
+  border-radius: 24px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.flight-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 1.05rem;
+}
+
+.book-btn {
+  background: #6D5DFC;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.book-btn:hover {
+  background: #5848e8;
+}/* Flight Details Page */
+
+.flight-detail-card{
+    border:none;
+    border-radius:24px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.flight-header{
+    background:#6D5DFC;
+    color:white;
+    padding:25px;
+}
+
+.flight-airline{
+    font-size:2rem;
+    font-weight:700;
+}
+
+.flight-route{
+    font-size:1.3rem;
+    font-weight:600;
+}
+
+.flight-info{
+    padding:25px;
+}
+
+.flight-info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.flight-label{
+    font-weight:600;
+    color:#555;
+}
+
+.flight-value{
+    font-weight:700;
+}
+
+.price-box{
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    background:#f5f3ff;
+}
+
+.price{
+    color:#27ae60;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.book-btn{
+    width:100%;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    background:#6D5DFC;
+    color:white;
+    font-weight:700;
+}
+
+.book-btn:hover{
+    background:#5848e8;
+}:root {
+  --primary-color: #6D5DFC;
+  --primary-light: #f1effe;
+  --border-color: #d1d5db;
+  --text-dark: #111827;
+  --text-muted: #6b7280;
+}
+
+/* Card Wrapper */
+.flight-search-container {
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1250px;
+  margin: 20px auto;
+}
+
+/* Top Inputs Grid */
+.search-inputs-grid {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 12px;
+}
+
+/* Individual Field Card */
+.input-card {
+  position: relative;
+  flex: 1;
+  min-height: 72px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-card:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.12);
+}
+
+/* Floating Label on Top Border Notch */
+.card-floating-label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #ffffff;
+  padding: 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.card-main-input {
+  border: none;
+  outline: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  padding: 0;
+  width: 100%;
+  background: transparent;
+}
+
+.card-main-input.placeholder-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.card-sub-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Middle Swap Button */
+.swap-locations-btn {
+  position: absolute;
+  left: calc(34% - 16px);
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color);
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(109, 93, 252, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.swap-locations-btn:hover {
+  transform: rotate(180deg) scale(1.05);
+}
+
+/* Main Search Button */
+.btn-main-search {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 0 32px;
+  height: 72px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.btn-main-search:hover {
+  filter: brightness(0.92);
+}
+
+/* Special Fares Section */
+.fare-options-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 18px;
+  padding-top: 14px;
+}
+
+.special-fares-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.benefits-badge {
+  background: var(--primary-color);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.special-fares-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.fare-card-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Fare Card Selectors */
+.fare-select-box {
+  cursor: pointer;
+  position: relative;
+}
+
+.fare-select-box input[type="radio"] {
+  display: none;
+}
+
+.fare-select-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+/* Checkbox indicator */
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content {
+  border-color: var(--primary-color);
+  background: #ffffff;
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content .custom-checkbox {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content .custom-checkbox::after {
+  content: "✓";
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.fare-avatar {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.fare-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.fare-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.fare-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 900px) {
+  .search-inputs-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .swap-locations-btn {
+    display: none;
+  }
+  .btn-main-search {
+    height: 48px;
+  }
+}

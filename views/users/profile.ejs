@@ -1,0 +1,248 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- FontAwesome Icons for sidebar & cards -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<div class="dash-page-wrapper">
+
+  <!-- Top Landscape Banner -->
+  <div class="dash-cover-banner"></div>
+
+  <!-- Main Container -->
+  <div class="dash-container">
+    
+    <!-- Profile Info Card (Overlaps Banner) -->
+    <div class="dash-user-header-card">
+      <div class="user-avatar-wrap">
+        <img src="<%= user.image && user.image.url ? user.image.url : '/images/default-avatar.png' %>" alt="<%= user.username %>" class="user-avatar-img">
+        <button class="avatar-camera-btn" title="Change Photo">
+          <i class="fa-solid fa-camera"></i>
+        </button>
+      </div>
+
+      <div class="user-main-info">
+        <div class="user-title-row">
+          <h2 class="user-name"><%= user.username %></h2>
+          <i class="fa-solid fa-circle-check verified-badge"></i>
+        </div>
+
+        <div class="user-meta-list">
+          <span><i class="fa-regular fa-envelope"></i> <%= user.email %></span>
+          <span><i class="fa-solid fa-location-dot"></i> <%= user.city || "Bareilly, Uttar Pradesh, India" %></span>
+          <span><i class="fa-regular fa-calendar"></i> <%= user.phone ? "Phone: " + user.phone : "Joined 2026" %></span>
+        </div>
+
+        <p class="user-bio-text">
+          <%= user.bio || "Travel enthusiast | Love to explore new places and capture beautiful moments." %>
+        </p>
+      </div>
+
+      <!-- Action Box (Edit profile & upload) -->
+      <div class="user-header-actions">
+        <a href="/profile/edit" class="btn-theme-solid">
+          <i class="fa-solid fa-pen"></i> Edit Profile
+        </a>
+
+        <div class="upload-widget-box">
+          <div>
+            <div class="upload-title">Profile Image</div>
+            <div class="upload-subtitle">Upload a new profile picture</div>
+          </div>
+          <input
+type="file"
+name="image"
+class="form-control"
+accept="image/*"
+>
+            
+          <div class="upload-file-limit">JPG, PNG or WEBP. Max size 2MB</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body Layout: Sidebar + Main Content -->
+    <div class="dash-grid-layout">
+
+      <!-- Left Sidebar Navigation -->
+      <aside class="dash-sidebar">
+        <nav class="sidebar-nav">
+          <a href="/profile" class="nav-item active">
+            <i class="fa-solid fa-house"></i> Overview
+          </a>
+          <a href="/flights/my-bookings" class="nav-item">
+            <i class="fa-solid fa-suitcase-rolling"></i> My Bookings
+          </a>
+          <a href="/wishlist" class="nav-item">
+            <i class="fa-regular fa-heart"></i> Wishlist
+          </a>
+          <a href="/reviews" class="nav-item">
+            <i class="fa-regular fa-star"></i> My Reviews
+          </a>
+          <a href="/saved" class="nav-item">
+            <i class="fa-regular fa-bookmark"></i> Saved Places
+          </a>
+          <a href="/settings" class="nav-item">
+            <i class="fa-solid fa-gear"></i> Account Settings
+          </a>
+          <a href="/password/change" class="nav-item">
+            <i class="fa-solid fa-lock"></i> Change Password
+          </a>
+          <a href="/logout" class="nav-item text-danger mt-3">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Right Main Content Area -->
+      <main class="dash-main-panel">
+
+        <!-- Top Metrics / Stat Cards -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-icon-wrapper bg-purple-tint">
+              <i class="fa-solid fa-suitcase"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-title">Total Bookings</span>
+              <strong class="stat-value"><%= bookingsCount %></strong>
+              <span class="stat-subtitle">Trips Completed</span>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper bg-pink-tint">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-title">Listings</span>
+              <strong class="stat-value"><%= listingsCount %></strong>
+              <span class="stat-subtitle">Created Places</span>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper bg-blue-tint">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-title">Cancelled</span>
+              <strong class="stat-value"><%= cancelledBookings %></strong>
+              <span class="stat-subtitle">Refunds Handled</span>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper bg-green-tint">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-title">Countries Visited</span>
+              <strong class="stat-value">5</strong>
+              <span class="stat-subtitle">Keep Exploring!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Section: Bookings & Reviews -->
+        <div class="content-dual-row">
+
+          <!-- Left Card: Recent Flight Bookings -->
+          <div class="panel-card">
+            <div class="panel-card-head">
+              <h4>Recent Bookings</h4>
+              <a href="/bookings" class="panel-link">View All</a>
+            </div>
+
+            <div class="panel-list">
+              <% if (!bookings || bookings.length === 0) { %>
+                <p class="empty-hint">No flight bookings found.</p>
+              <% } else { %>
+                <% bookings.slice(0, 3).forEach(booking => { %>
+                  <div class="booking-row-item">
+                    <div class="item-visual-block">
+                      <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <div class="item-primary-meta">
+                      <h5><%= booking.flight.airline %></h5>
+                      <span class="sub-date">
+                        <%= booking.flight.source %> → <%= booking.flight.destination %>
+                      </span>
+                    </div>
+                    <div class="item-side-meta">
+                      <span class="badge-status <%= booking.status === 'Cancelled' ? 'is-cancelled' : 'is-success' %>">
+                        <%= booking.status || 'Confirmed' %>
+                      </span>
+                      <span class="item-price">₹<%= booking.totalAmount %></span>
+                    </div>
+                  </div>
+                <% }) %>
+              <% } %>
+            </div>
+
+            <div class="panel-card-foot">
+              <a href="/bookings" class="theme-footer-link">
+                View All Bookings <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Card: Recent Reviews -->
+          <div class="panel-card">
+            <div class="panel-card-head">
+              <h4>Recent Reviews</h4>
+              <a href="/reviews" class="panel-link">View All</a>
+            </div>
+
+            <div class="panel-list">
+              <div class="review-row-item">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=120&q=80" alt="Resort" class="item-thumb">
+                <div class="item-primary-meta">
+                  <h5>The Oberoi Udaivilas, Udaipur</h5>
+                  <span class="review-rating"><i class="fa-solid fa-star"></i> 4.8 (126 reviews)</span>
+                </div>
+                <span class="review-date">10 May 2024</span>
+              </div>
+
+              <div class="review-row-item">
+                <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=120&q=80" alt="Hotel" class="item-thumb">
+                <div class="item-primary-meta">
+                  <h5>Marina Bay Sands, Singapore</h5>
+                  <span class="review-rating"><i class="fa-solid fa-star"></i> 4.7 (98 reviews)</span>
+                </div>
+                <span class="review-date">28 April 2024</span>
+              </div>
+
+              <div class="review-row-item">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=120&q=80" alt="Dubai" class="item-thumb">
+                <div class="item-primary-meta">
+                  <h5>Burj Al Arab, Dubai</h5>
+                  <span class="review-rating"><i class="fa-solid fa-star"></i> 4.9 (210 reviews)</span>
+                </div>
+                <span class="review-date">12 March 2024</span>
+              </div>
+            </div>
+
+            <div class="panel-card-foot">
+              <a href="/reviews" class="theme-footer-link">
+                View All Reviews <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Quick Actions Bar -->
+        <div class="quick-actions-bar">
+          <span class="quick-actions-label">Quick Actions</span>
+          <div class="action-buttons-group">
+            <a href="/profile/edit" class="action-btn-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+            <a href="/password/change" class="action-btn-link"><i class="fa-solid fa-lock"></i> Change Password</a>
+            <a href="/payments" class="action-btn-link"><i class="fa-regular fa-credit-card"></i> Payment Methods</a>
+            <a href="/notifications" class="action-btn-link"><i class="fa-regular fa-bell"></i> Notification Settings</a>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>

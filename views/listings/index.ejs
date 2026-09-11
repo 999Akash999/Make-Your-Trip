@@ -15,6 +15,8 @@
     opacity: 1; justify-content:space-evenly;
 
     
+  } .a{
+    text-decoration: none;
   }
   
   .rr{
@@ -52,8 +54,8 @@ padding: 1rem;
 <p>Mountains</p>
   </div>
   <div class="filetr">
-<div class="rr"><i class="fa-solid fa-plane fa-rotate-by fa-xl" style="--fa-rotate-angle: 360deg;"></i></div>
-<p>Flights</p>
+<a href="/flights" style="text-decoration: none; color:black ;"><div class="rr"><i class="fa-solid fa-plane fa-rotate-by fa-xl" style="--fa-rotate-angle: 360deg;"></i></div>
+<p>Flights</p></a>
   </div>
   <div class="filetr">
 <div class="rr"><i class="fa-solid fa-person-swimming fa-xl "></i></div>
@@ -86,7 +88,110 @@ padding: 1rem;
   
   
  </div>
- 
+ <form action="/flights/search" method="GET" class="flight-search-container">
+
+  <!-- Top Inputs Row -->
+  <div class="search-inputs-grid">
+
+    <!-- From Field -->
+    <div class="input-card">
+      <span class="card-floating-label">From</span>
+      <input type="text" name="source" class="card-main-input" placeholder="Enter" required>
+      <span class="card-sub-label"></span>
+    </div>
+
+    <!-- Swap Button -->
+    
+
+    <!-- To Field -->
+    <div class="input-card">
+      <span class="card-floating-label">To</span>
+      <input type="text" name="destination" class="card-main-input" placeholder="Enter location" required>
+      <span class="card-sub-label"></span>
+    </div>
+
+    <!-- Departure Field -->
+    <div class="input-card">
+      <span class="card-floating-label">Departure</span>
+      <input type="text" name="departureDate" class="card-main-input" placeholder="Enter date" onfocus="(this.type='date')" onblur="(this.type='text')">
+      
+    </div>
+
+    <!-- Return Field -->
+    
+
+    <!-- Travellers & Class -->
+    <div class="input-card">
+      <span class="card-floating-label">Traveler(s) & Class</span>
+      <select
+          name="travellers"
+          class="form-select"
+        >
+          <option>1 Adult</option>
+          <option>2 Adults</option>
+          <option>3 Adults</option>
+          <option>4 Adults</option>
+        </select>
+      
+    </div>
+
+    <!-- Search Button -->
+    <button type="submit" class="btn-main-search">
+      SEARCH
+    </button>
+
+  </div>
+
+  <!-- Bottom Special Fares Row -->
+  <div class="fare-options-bar">
+    <div class="special-fares-header">
+      <span class="benefits-badge">More Benefits</span>
+      <strong class="special-fares-title">Special Fares</strong>
+    </div>
+
+    <div class="fare-card-group">
+      <!-- Regular -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="regular" checked>
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">👨‍💼</span>
+          <div class="fare-details">
+            <span class="fare-name">Regular</span>
+            <span class="fare-desc">Lowest Fares</span>
+          </div>
+        </div>
+      </label>
+
+      <!-- Student -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="student">
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">🎓</span>
+          <div class="fare-details">
+            <span class="fare-name">Student</span>
+            <span class="fare-desc">Extra Baggage</span>
+          </div>
+        </div>
+      </label>
+
+      <!-- Senior Citizen -->
+      <label class="fare-select-box">
+        <input type="radio" name="fareType" value="senior">
+        <div class="fare-select-content">
+          <span class="custom-checkbox"></span>
+          <span class="fare-avatar">👴</span>
+          <div class="fare-details">
+            <span class="fare-name">Senior Citizen</span>
+            <span class="fare-desc">Exclusive Discount</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+</form>
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1  mt-3"><% for(let listing of allListings) { %>
   <a href="/listings/<%=listing._id%>"class="listing-link">
     <div class="card col position-relative">

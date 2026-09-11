@@ -4,7 +4,12 @@ const User=require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport=require("passport");
  const {saveRedirectUrl}=require ("../middleware.js");
- const usercontroller=require("../controllers/users.js");
+ const usercontroller=require("../controllers/users.js");const multer = require("multer");
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }
+});
  router.get("/", (req, res) => {
     res.redirect("/listings");
 });
@@ -26,7 +31,20 @@ router.post("/login",saveRedirectUrl, (req, res, next) => {
   failureFlash: true,
 }), usercontroller.Login);
 router.get("/logout", usercontroller.Logout);
+router.get(
+    "/profile",
+    saveRedirectUrl,
+    usercontroller.profile
+);router.get(
+  "/profile/edit",
+  usercontroller.renderEditProfile
+);
 
+router.put(
+  "/profile",
+  upload.single("image"),
+  wrapAsync(usercontroller.updateProfile)
+);
 router.get(
   "/auth/google",
   passport.authenticate("google", {
