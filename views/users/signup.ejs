@@ -1,66 +1,68 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png"
-     rel="icon">
-  <title>Make Your Trip</title>
   <link rel="stylesheet" href="/css/signup.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-  <div class="myt-auth-screen">
+  
 
-  <!-- Left Side: Hero Graphic & Value Props -->
-  <div class="myt-hero-pane">
+
+
+
+<div class="auth-split-screen">
+
+  <!-- Left Side: Taj Mahal Hero Graphics & Trust Badges -->
+  <div class="auth-hero-pane">
     
-    <!-- Brand Logo Top Left -->
-    <div class="myt-brand-header">
-      <div class="brand-paper-plane">
+    <!-- Top Brand Logo -->
+    <div class="hero-brand-top">
+      <div class="paper-plane-box">
         <i class="fa-solid fa-paper-plane"></i>
       </div>
-      <span class="brand-brandname">Make Your Trip</span>
+      <span class="brand-title">Make Your Trip</span>
     </div>
 
     <!-- Center Hero Copy -->
-    <div class="myt-hero-middle">
-      <h1 class="myt-main-headline">
-        Start Your Journey with <span>Make Your Trip</span>
+    <div class="hero-middle-copy">
+      <h1 class="hero-main-title">
+        Start Your Journey <br>
+        with <span>Make Your Trip</span>
       </h1>
-      <p class="myt-headline-sub">
+      <p class="hero-subtitle">
         Create your account and unlock exclusive travel experiences.
       </p>
     </div>
 
-    <!-- Bottom Highlights / Trust Badges -->
-    <div class="myt-trust-strip">
-      <div class="trust-badge-item">
+    <!-- Bottom Highlights / Badges -->
+    <div class="hero-trust-strip">
+      <div class="trust-badge-node">
         <div class="trust-icon-bubble">
           <i class="fa-solid fa-shield-halved"></i>
         </div>
-        <div class="trust-text">
+        <div class="trust-text-block">
           <strong>Secure Booking</strong>
           <span>Your data is safe with us.</span>
         </div>
       </div>
 
-      <div class="trust-badge-item">
+      <div class="trust-badge-node">
         <div class="trust-icon-bubble">
           <i class="fa-solid fa-ticket"></i>
         </div>
-        <div class="trust-text">
+        <div class="trust-text-block">
           <strong>Best Prices</strong>
           <span>Get the best deals and offers.</span>
         </div>
       </div>
 
-      <div class="trust-badge-item">
+      <div class="trust-badge-node">
         <div class="trust-icon-bubble">
           <i class="fa-solid fa-headset"></i>
         </div>
-        <div class="trust-text">
+        <div class="trust-text-block">
           <strong>24/7 Support</strong>
           <span>We are here to help you anytime.</span>
         </div>
@@ -69,85 +71,87 @@
 
   </div>
 
-  <!-- Right Side: White Floating Signup Card -->
-  <div class="myt-form-pane">
-    <div class="myt-signup-modal-card">
+  <!-- Right Side: Exact Original Form Wrapped in Target Card Design -->
+  <div class="auth-form-pane">
+    <div class="auth-white-card">
 
-      <!-- Top Mini Navigation -->
-      <div class="modal-top-switch">
+      <!-- Top Mini Switcher -->
+      <div class="card-top-switch">
         <span>Already have an account?</span>
-        <a href="/login" class="login-redirect-link">Log in</a>
+        <a href="/login" class="link-switch">Log in</a>
       </div>
 
-      <!-- Avatar Bubble -->
-      <div class="signup-avatar-ring">
+      <!-- Icon Bubble -->
+      <div class="avatar-icon-bubble">
         <i class="fa-solid fa-user-plus"></i>
       </div>
 
-      <!-- Title & Caption -->
-      <h2 class="signup-form-title">Create your account</h2>
-      <p class="signup-form-desc">Let's get you started on your next adventure!</p>
+      <!-- Header Titles -->
+      <h2 class="card-title">Create your account</h2>
+      <p class="card-subtitle">Let's get you started on your next adventure!</p>
 
-      <!-- Signup Form -->
-      <form action="/signup" method="POST" class="myt-inputs-form needs-validation" novalidate>
+      <!-- YOUR UNCHANGED FORM (Keeps action, method, and input names intact) -->
+      <form action="/signup" method="POST" class="needs-validation auth-form-stack" novalidate>
         
-        <!-- First & Last Name Split Row -->
-        
-          <div class="input-shell-field">
-            <i class="fa-regular fa-user field-icon"></i>
-            <input type="text" name="firstName" placeholder="First name" required />
-          </div>
-
-          <div class="input-shell-field">
-            <i class="fa-regular fa-user field-icon"></i>
-            <input type="text" name="lastName" placeholder="Last name" required />
-          </div>
-        
-
-        <!-- Username / Email Field -->
-        <div class="input-shell-field">
-          <i class="fa-regular fa-envelope field-icon"></i>
-          <input type="email" name="email" placeholder="Email address" required />
+        <!-- Username Field -->
+        <div class="input-pill-field">
+          <i class="fa-regular fa-user field-leading-icon"></i>
+          <input
+            name="username"
+            id="username"
+            type="text"
+            placeholder="Username"
+            required
+          />
         </div>
 
-        <!-- Password Field -->
-        <div class="input-shell-field">
-          <i class="fa-solid fa-lock field-icon"></i>
-          <input type="password" name="password" id="signupPass" placeholder="Password" required />
-          <button type="button" class="eye-toggle-btn" onclick="togglePass('signupPass')">
-            <i class="fa-regular fa-eye"></i>
+        <!-- Email Field -->
+        <div class="input-pill-field">
+          <i class="fa-regular fa-envelope field-leading-icon"></i>
+          <input
+            name="email"
+            id="email"
+            type="email"
+            placeholder="Email address"
+            required
+          />
+        </div>
+
+        <!-- Password Field with Toggle -->
+        <div class="input-pill-field">
+          <i class="fa-solid fa-lock field-leading-icon"></i>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <button type="button" class="btn-eye-toggle" onclick="togglePass('password', 'passEye')">
+            <i class="fa-regular fa-eye" id="passEye"></i>
           </button>
         </div>
 
-        <!-- Confirm Password Field -->
-        <div class="input-shell-field">
-          <i class="fa-solid fa-lock field-icon"></i>
-          <input type="password" name="confirmPassword" id="confirmPass" placeholder="Confirm password" required />
-          <button type="button" class="eye-toggle-btn" onclick="togglePass('confirmPass')">
-            <i class="fa-regular fa-eye"></i>
-          </button>
+        <!-- Password Rules Hints -->
+        <div class="password-rule-box">
+          <div class="rule-item"><i class="fa-solid fa-check"></i> At least 8 characters</div>
+          <div class="rule-item"><i class="fa-solid fa-check"></i> Contains a number</div>
+          <div class="rule-item"><i class="fa-solid fa-check"></i> Contains an uppercase letter</div>
         </div>
 
-        <!-- Password Rules Hints Box -->
-        <div class="rules-hint-box">
-          <div class="rule-hint-item"><i class="fa-solid fa-check"></i> At least 8 characters</div>
-          <div class="rule-hint-item"><i class="fa-solid fa-check"></i> Contains a number</div>
-          <div class="rule-hint-item"><i class="fa-solid fa-check"></i> Contains an uppercase letter</div>
-        </div>
-
-        <!-- Sign Up Submit CTA -->
-        <button type="submit" class="btn-theme-full-submit">
+        <!-- Submit Button -->
+        <button type="submit" class="btn-theme-submit">
           Sign Up
         </button>
 
         <!-- Or Divider -->
-        <div class="modal-line-divider">
+        <div class="auth-line-divider">
           <span>or sign up with</span>
         </div>
 
-        <!-- Social Buttons Trio -->
-        <div class="social-login-trio">
-          <a href="/auth/google" class="social-pill-btn">
+        <!-- Social Buttons Row (Including your Google button) -->
+        <div class="social-actions-grid">
+          <a href="/auth/google" class="social-badge-btn">
             <svg width="18" height="18" viewBox="0 0 48 48">
               <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
               <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -157,19 +161,19 @@
             Google
           </a>
 
-          <a href="/auth/facebook" class="social-pill-btn">
-            <i class="fa-brands fa-facebook" style="color:#1877F2; font-size:1.15rem;"></i>
+          <a href="/auth/facebook" class="social-badge-btn">
+            <i class="fa-brands fa-facebook" style="color: #1877f2; font-size: 1.15rem;"></i>
             Facebook
           </a>
 
-          <a href="/auth/apple" class="social-pill-btn">
-            <i class="fa-brands fa-apple" style="color:#000; font-size:1.2rem;"></i>
+          <a href="/auth/apple" class="social-badge-btn">
+            <i class="fa-brands fa-apple" style="color: #000000; font-size: 1.25rem;"></i>
             Apple
           </a>
         </div>
 
-        <!-- Legal Disclaimer -->
-        <p class="legal-terms-text">
+        <!-- Footer Terms -->
+        <p class="terms-caption">
           By signing up, you agree to our <a href="/terms">Terms & Conditions</a> and <a href="/privacy">Privacy Policy.</a>
         </p>
 
@@ -181,14 +185,18 @@
 </div>
 
 <script>
-  function togglePass(id) {
-    const input = document.getElementById(id);
+  function togglePass(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
     if (input.type === "password") {
       input.type = "text";
+      icon.classList.remove("fa-eye");
+      icon.classList.add("fa-eye-slash");
     } else {
       input.type = "password";
+      icon.classList.remove("fa-eye-slash");
+      icon.classList.add("fa-eye");
     }
   }
-</script>
-</body>
+</script></body>
 </html>
