@@ -1,101 +1,140 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="flight-page">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-    <div class="flight-detail-card">
+<div class="flight-detail-page-wrapper">
 
-        <div class="flight-header">
+  <!-- Back Button Navigation -->
+  <div class="detail-nav-bar">
+    <a href="/flights" class="btn-back-nav">
+      <i class="fa-solid fa-arrow-left"></i> Back to Flights
+    </a>
+  </div>
 
-            <div class="flight-airline">
-                ✈ <%= flight.airline %>
-            </div>
+  <div class="boarding-pass-card">
+    
+    <!-- Left / Main Flight Overview Section -->
+    <div class="pass-main-section">
+      
+      <!-- Card Top Ribbon -->
+      <div class="pass-header">
+        <div class="airline-brand-badge">
+          <div class="airline-logo-icon">
+            <i class="fa-solid fa-plane"></i>
+          </div>
+          <div>
+            <h2 class="airline-name-text"><%= flight.airline %></h2>
+            <span class="flight-no-badge">Flight <%= flight.flightNumber %></span>
+          </div>
+        </div>
+        <span class="flight-type-pill">Economy • Non-stop</span>
+      </div>
 
-            <div class="flight-route">
-                <%= flight.source %> → <%= flight.destination %>
-            </div>
-
+      <!-- Route Visualizer -->
+      <div class="route-timeline-container">
+        
+        <!-- Source -->
+        <div class="station-node">
+          <span class="airport-code"><%= flight.source.slice(0, 3).toUpperCase() %></span>
+          <span class="airport-city"><%= flight.source %></span>
+          <span class="flight-time-tag">
+            <i class="fa-regular fa-clock"></i> <%= new Date(flight.departureTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+          </span>
+          <span class="flight-date-tag"><%= new Date(flight.departureTime).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) %></span>
         </div>
 
-        <div class="flight-info">
-
-            <div class="flight-info-row">
-                <span class="flight-label">
-                    Flight Number
-                </span>
-
-                <span class="flight-value">
-                    <%= flight.flightNumber %>
-                </span>
+        <!-- Airplane Path -->
+        <div class="flight-path-middle">
+          <span class="direct-label">Direct Flight</span>
+          <div class="flight-line-track">
+            <span class="dot-start"></span>
+            <div class="plane-flight-symbol">
+              <i class="fa-solid fa-plane"></i>
             </div>
-
-            <div class="flight-info-row">
-                <span class="flight-label">
-                    Departure
-                </span>
-
-                <span class="flight-value">
-                    <%= flight.departureTime.toLocaleString() %>
-                </span>
-            </div>
-
-            <div class="flight-info-row">
-                <span class="flight-label">
-                    Arrival
-                </span>
-
-                <span class="flight-value">
-                    <%= flight.arrivalTime.toLocaleString() %>
-                </span>
-            </div>
-
-            <div class="flight-info-row">
-                <span class="flight-label">
-                    Seats Available
-                </span>
-
-                <span class="flight-value">
-                    <%= flight.seatsAvailable %>
-                </span>
-            </div>
-
-            <div class="price-box">
-
-                <div class="flight-label">
-                    Ticket Price
-                </div>
-
-                <div class="price">
-                    ₹<%= flight.price %>
-                </div>
-
-            </div>
-
-            <% if(currUser){ %>
-
-                <form
-                    action="/flights/book/<%= flight._id %>"
-                    method="POST"
-                >
-
-                    <button class="book-btn">
-                        Book Flight
-                    </button>
-
-                </form>
-
-            <% } else { %>
-
-                <a
-                    href="/login"
-                    class="btn book-btn"
-                >
-                    Login To Book
-                </a>
-
-            <% } %>
-
+            <span class="dot-end"></span>
+          </div>
         </div>
+
+        <!-- Destination -->
+        <div class="station-node text-end">
+          <span class="airport-code"><%= flight.destination.slice(0, 3).toUpperCase() %></span>
+          <span class="airport-city"><%= flight.destination %></span>
+          <span class="flight-time-tag">
+            <i class="fa-regular fa-clock"></i> <%= new Date(flight.arrivalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+          </span>
+          <span class="flight-date-tag"><%= new Date(flight.arrivalTime).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) %></span>
+        </div>
+
+      </div>
+
+      <!-- Quick Info Badges -->
+      <div class="flight-perks-strip">
+        <div class="perk-item">
+          <i class="fa-solid fa-chair"></i>
+          <span><strong><%= flight.seatsAvailable %></strong> Seats Left</span>
+        </div>
+        <div class="perk-item">
+          <i class="fa-solid fa-suitcase"></i>
+          <span>Baggage: <strong>15 Kg Check-in</strong></span>
+        </div>
+        <div class="perk-item">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Complimentary Meal</span>
+        </div>
+      </div>
 
     </div>
 
-</div></div>
+    <!-- Boarding Pass Perforation Notch Line -->
+    <div class="pass-perforation">
+      <span class="notch notch-top"></span>
+      <div class="perforated-dashed-line"></div>
+      <span class="notch notch-bottom"></span>
+    </div>
+
+    <!-- Right Ticket Stub / Price & Booking Action -->
+    <div class="pass-stub-section">
+      
+      <div class="stub-meta">
+        <span class="stub-label">Fare Summary</span>
+        <div class="stub-price-row">
+          <span class="currency">₹</span>
+          <h2 class="amount"><%= Number(flight.price).toLocaleString("en-IN") %></h2>
+        </div>
+        <span class="tax-hint">Inclusive of all taxes & fees</span>
+      </div>
+
+      <div class="stub-details-list">
+        <div class="stub-detail-item">
+          <span>Flight:</span>
+          <strong><%= flight.flightNumber %></strong>
+        </div>
+        <div class="stub-detail-item">
+          <span>Seats:</span>
+          <strong class="<%= flight.seatsAvailable <= 5 ? 'text-danger' : 'text-success' %>">
+            <%= flight.seatsAvailable %> Available
+          </strong>
+        </div>
+      </div>
+
+      <!-- Booking CTA -->
+      <div class="action-btn-container">
+        <% if (currUser) { %>
+          <form action="/flights/book/<%= flight._id %>" method="POST" class="w-100">
+            <button type="submit" class="btn-pass-book">
+              <i class="fa-solid fa-bolt"></i> Book Flight
+            </button>
+          </form>
+        <% } else { %>
+          <a href="/login" class="btn-pass-login">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Login To Book
+          </a>
+        <% } %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,168 +1,186 @@
 
 <% layout("/layouts/boilerplate") %>
 
-<div class="flight-page"><form action="/flights/search" method="GET" class="flight-search-container">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- Top Inputs Row -->
-  <div class="search-inputs-grid">
+<div class="flight-page-container">
 
-    <!-- From Field -->
-    <div class="input-card">
-      <span class="card-floating-label">From</span>
-      <input type="text" name="source" class="card-main-input" placeholder="Enter" required>
-      <span class="card-sub-label"></span>
-    </div>
+  <!-- Top Flight Search Bar -->
+  <form action="/flights/search" method="GET" class="flight-search-container">
+    <div class="search-inputs-grid">
 
-    <!-- Swap Button -->
-    
+      <!-- From Field -->
+      <div class="input-card">
+        <span class="card-floating-label">From</span>
+        <input type="text" name="source" class="card-main-input" placeholder="e.g. Delhi" required>
+        <span class="card-sub-label">Departure City</span>
+      </div>
 
-    <!-- To Field -->
-    <div class="input-card">
-      <span class="card-floating-label">To</span>
-      <input type="text" name="destination" class="card-main-input" placeholder="Enter location" required>
-      <span class="card-sub-label"></span>
-    </div>
+      <!-- To Field -->
+      <div class="input-card">
+        <span class="card-floating-label">To</span>
+        <input type="text" name="destination" class="card-main-input" placeholder="e.g. Mumbai" required>
+        <span class="card-sub-label">Arrival City</span>
+      </div>
 
-    <!-- Departure Field -->
-    <div class="input-card">
-      <span class="card-floating-label">Departure</span>
-      <input type="text" name="departureDate" class="card-main-input" placeholder="Enter date" onfocus="(this.type='date')" onblur="(this.type='text')">
-      
-    </div>
+      <!-- Departure Field -->
+      <div class="input-card">
+        <span class="card-floating-label">Departure</span>
+        <input type="text" name="departureDate" class="card-main-input" placeholder="Select Date" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+        <span class="card-sub-label">Journey Date</span>
+      </div>
 
-    <!-- Return Field -->
-    
-
-    <!-- Travellers & Class -->
-    <div class="input-card">
-      <span class="card-floating-label">Traveler(s) & Class</span>
-      <select
-          name="travellers"
-          class="form-select"
-        >
-          <option>1 Adult</option>
-          <option>2 Adults</option>
-          <option>3 Adults</option>
-          <option>4 Adults</option>
+      <!-- Travellers & Class -->
+      <div class="input-card">
+        <span class="card-floating-label">Traveler(s) & Class</span>
+        <select name="travellers" class="card-select-input">
+          <option value="1">1 Adult, Economy</option>
+          <option value="2">2 Adults, Economy</option>
+          <option value="3">3 Adults, Economy</option>
+          <option value="4">4+ Adults, Economy</option>
         </select>
-      
+        <span class="card-sub-label">Cabin Selection</span>
+      </div>
+
+      <!-- Search Button -->
+      <button type="submit" class="btn-main-search">
+        SEARCH
+      </button>
+
     </div>
 
-    <!-- Search Button -->
-    <button type="submit" class="btn-main-search">
-      SEARCH
-    </button>
+    <!-- Special Fares Row -->
+    <div class="fare-options-bar">
+      <div class="special-fares-header">
+        <span class="benefits-badge">More Benefits</span>
+        <strong class="special-fares-title">Special Fares</strong>
+      </div>
 
+      <div class="fare-card-group">
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="regular" checked>
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">👨‍💼</span>
+            <div class="fare-details">
+              <span class="fare-name">Regular</span>
+              <span class="fare-desc">Lowest Fares</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="student">
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">🎓</span>
+            <div class="fare-details">
+              <span class="fare-name">Student</span>
+              <span class="fare-desc">Extra Baggage</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="senior">
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">👴</span>
+            <div class="fare-details">
+              <span class="fare-name">Senior Citizen</span>
+              <span class="fare-desc">Exclusive Discount</span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </form>
+
+  <!-- Flight Results Header Bar -->
+  <div class="results-header-bar">
+    <div class="results-title-group">
+      <h1 class="results-heading">
+        <i class="fa-solid fa-plane-departure" style="color: #6D5DFC;"></i> Available Flights
+      </h1>
+      <p class="results-subheading">Select your preferred flight and secure the best fare</p>
+    </div>
+    <div class="total-flights-chip">
+      <span>Total Flights:</span>
+      <strong><%= flights.length %></strong>
+    </div>
   </div>
 
-  <!-- Bottom Special Fares Row -->
-  <div class="fare-options-bar">
-    <div class="special-fares-header">
-      <span class="benefits-badge">More Benefits</span>
-      <strong class="special-fares-title">Special Fares</strong>
+  <!-- Empty Results State -->
+  <% if (flights.length === 0) { %>
+    <div class="empty-flights-card">
+      <div class="empty-icon-wrap">
+        <i class="fa-solid fa-plane-slash"></i>
+      </div>
+      <h3>No Flights Available</h3>
+      <p>We couldn't find any scheduled flights matching your criteria. Try adjusting your dates or destinations.</p>
+      <a href="/flights" class="btn-reset-search">View All Flights</a>
     </div>
+  <% } else { %>
 
-    <div class="fare-card-group">
-      <!-- Regular -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="regular" checked>
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">👨‍💼</span>
-          <div class="fare-details">
-            <span class="fare-name">Regular</span>
-            <span class="fare-desc">Lowest Fares</span>
+    <!-- Flights Grid -->
+    <div class="flights-results-grid">
+      <% flights.forEach(flight => { %>
+        <div class="flight-ticket-item">
+          
+          <!-- Ticket Header: Airline & Flight Number -->
+          <div class="ticket-header-strip">
+            <div class="airline-brand">
+              <div class="airline-icon-wrap">
+                <i class="fa-solid fa-plane"></i>
+              </div>
+              <div>
+                <h4 class="airline-title"><%= flight.airline %></h4>
+                <span class="flight-number-tag">Flight No: <strong><%= flight.flightNumber %></strong></span>
+              </div>
+            </div>
+            <span class="trip-tag">Direct</span>
           </div>
-        </div>
-      </label>
 
-      <!-- Student -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="student">
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">🎓</span>
-          <div class="fare-details">
-            <span class="fare-name">Student</span>
-            <span class="fare-desc">Extra Baggage</span>
-          </div>
-        </div>
-      </label>
-
-      <!-- Senior Citizen -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="senior">
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">👴</span>
-          <div class="fare-details">
-            <span class="fare-name">Senior Citizen</span>
-            <span class="fare-desc">Exclusive Discount</span>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-
-</form>
-
-    <h1 class="flight-heading mb-4">
-        ✈ Flights
-    </h1>
-<h2>Total Flights: <%= flights.length %></h2>
-    <% if(flights.length === 0){ %>
-
-        <div class="alert alert-info">
-            No Flights Found
-        </div>
-
-    <% } %>
-
-    <div class="row">
-
-        <% flights.forEach(flight => { %>
-
-            <div class="col-md-4 mb-4">
-
-                <div class="card flight-card">
-
-                    <div class="flight-card-body">
-
-                        <h4 class="airline-name">
-                            <%= flight.airline %>
-                        </h4>
-
-                        <p class="route">
-                            <%= flight.source %>
-                            ✈
-                            <%= flight.destination %>
-                        </p>
-
-                        <p class="flight-number">
-                            Flight No:
-                            <%= flight.flightNumber %>
-                        </p>
-
-                        <h4 class="flight-price">
-                            ₹<%= flight.price %>
-                        </h4>
-
-                        <a
-                            href="/flights/<%= flight._id %>"
-                            class="btn flight-btn"
-                        >
-                            View Details
-                        </a>
-
-                    </div>
-
-                </div>
-
+          <!-- Ticket Body: Route Visualizer -->
+          <div class="route-visual-container">
+            <div class="origin-station">
+              <span class="code"><%= flight.source.slice(0, 3).toUpperCase() %></span>
+              <span class="city"><%= flight.source %></span>
             </div>
 
-        <% }) %>
+            <div class="flight-mid-path">
+              <div class="dash-trail"></div>
+              <div class="plane-marker">
+                <i class="fa-solid fa-plane"></i>
+              </div>
+            </div>
 
+            <div class="dest-station">
+              <span class="code"><%= flight.destination.slice(0, 3).toUpperCase() %></span>
+              <span class="city"><%= flight.destination %></span>
+            </div>
+          </div>
+
+          <!-- Perforated Tear Line -->
+          <div class="ticket-cut-line"></div>
+
+          <!-- Ticket Footer: Pricing & Action CTA -->
+          <div class="ticket-footer-strip">
+            <div class="price-breakdown">
+              <span class="price-caption">Starting from</span>
+              <h4 class="fare-total">₹<%= Number(flight.price).toLocaleString("en-IN") %></h4>
+            </div>
+
+            <a href="/flights/<%= flight._id %>" class="btn-ticket-action">
+              View Details <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+      <% }) %>
     </div>
 
-</div>
+  <% } %>
 
+</div>

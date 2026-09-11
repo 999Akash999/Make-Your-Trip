@@ -1,57 +1,190 @@
-<% layout("/layouts/boilerplate") %>
-<div class="login">
-<div class="">
-  <div class="logo">
-    <i class="fa-solid fa-user fa-2xl" style="color:#6e5efc ;"></i>
-  </div>
-  <h1 class="create">Login</h1>
-  <div class="name">
-    <form action="/login" method="POST" class="needs-validation" novalidation>
-      <div class="name">
-        <label for="username" class="form-label"></label>
-        <div class="input-group">
-    <span class="input-group-text">
-      <i class="fa-solid fa-user" style="color: rgb(110, 94, 252);"></i>
-    </span>
-        <input
-          name="username"
-          id="username"
-          type="text"
-          class="form-control"
-          placeholder= "Enter  your  username"
-          required
-          
-        />
-        <div class="valid-feedback">Looks good!</div>
-      </div>
-    </div>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png"
+     rel="icon">
+  <title>Make Your Trip</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+
+  <div class="myt-auth-screen">
+
+    <!-- Left Side: Hero Graphic & Value Props -->
+    <div class="myt-hero-pane">
       
-      <div class="name">
-        <label for="password" class="form-label"></label>
-        <div class="input-group">
-    <span class="input-group-text">
-      <i class="fa-solid fa-lock" style="color: rgb(110, 94, 252);"></i>
-    </span>
-        <input
-          name="password"
-          id="password"
-          type="password"
-          class="form-control"
-          placeholder="Password"
-          required
-        />
+      <!-- Brand Logo Top Left -->
+      <div class="myt-brand-header">
+        <div class="brand-paper-plane">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <span class="brand-brandname">Make Your Trip</span>
+      </div>
+
+      <!-- Center Hero Copy -->
+      <div class="myt-hero-middle">
+        <h1 class="myt-main-headline">
+          Welcome Back to <span>Make Your Trip</span>
+        </h1>
+        <p class="myt-headline-sub">
+          Log in to manage your flight bookings, explore stays, and plan your trips.
+        </p>
+      </div>
+
+      <!-- Bottom Highlights / Trust Badges -->
+      <div class="myt-trust-strip">
+        <div class="trust-badge-item">
+          <div class="trust-icon-bubble">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="trust-text">
+            <strong>Secure Booking</strong>
+            <span>Your data is safe with us.</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon-bubble">
+            <i class="fa-solid fa-ticket"></i>
+          </div>
+          <div class="trust-text">
+            <strong>Best Prices</strong>
+            <span>Get the best deals and offers.</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon-bubble">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <div class="trust-text">
+            <strong>24/7 Support</strong>
+            <span>We are here to help you anytime.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Side: White Login Card -->
+    <div class="myt-form-pane">
+      <div class="myt-login-modal-card">
+
+        <!-- Top Mini Navigation -->
+        <div class="modal-top-switch">
+          <span>Don't have an account?</span>
+          <a href="/signup" class="signup-redirect-link">Sign Up</a>
+        </div>
+
+        <!-- Avatar Bubble -->
+        <div class="login-avatar-ring">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <!-- Title & Subtitle -->
+        <h2 class="login-form-title">Welcome Back</h2>
+        <p class="login-form-desc">Please enter your details to sign in</p>
+
+        <!-- Login Form -->
+        <form action="/login" method="POST" class="myt-inputs-form needs-validation" novalidate>
+          
+          <!-- Username Field -->
+          <div class="input-shell-field">
+            <i class="fa-regular fa-user field-icon"></i>
+            <input
+              name="username"
+              id="username"
+              type="text"
+              placeholder="Username"
+              required
+            />
+          </div>
+
+          <!-- Password Field with Reveal Toggle -->
+          <div class="input-shell-field">
+            <i class="fa-solid fa-lock field-icon"></i>
+            <input
+              name="password"
+              id="loginPassword"
+              type="password"
+              placeholder="Password"
+              required
+            />
+            <button type="button" class="eye-toggle-btn" onclick="togglePass('loginPassword')" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye" id="eyeIcon"></i>
+            </button>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="forgot-pass-row">
+            <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-theme-full-submit">
+            Sign In
+          </button>
+
+          <!-- Divider -->
+          <div class="modal-line-divider">
+            <span>or sign in with</span>
+          </div>
+
+          <!-- Social Buttons Trio -->
+          <div class="social-login-trio">
+            <a href="/auth/google" class="social-pill-btn">
+              <svg width="18" height="18" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              Google
+            </a>
+
+            <a href="/auth/facebook" class="social-pill-btn">
+              <i class="fa-brands fa-facebook" style="color:#1877F2; font-size:1.15rem;"></i>
+              Facebook
+            </a>
+
+            <a href="/auth/apple" class="social-pill-btn">
+              <i class="fa-brands fa-apple" style="color:#000; font-size:1.2rem;"></i>
+              Apple
+            </a>
+          </div>
+
+          <!-- Legal Disclaimer -->
+          <p class="legal-terms-text">
+            By signing in, you agree to our <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy Policy.</a>
+          </p>
+
+        </form>
 
       </div>
     </div>
-      <button class="btn btn-success login-btn">Login</button>
-      <p class="text-center or">or sign in with</p>
-     
-  <a href="/auth/google" class="btn ">
-    <button type="button" class="login-with-google-btn" >
-  Sign in with Google
-</button>
-  </a>
-<h6 style=" text-align:center; padding-top: 1rem;">Don't have an account ? <a style="color:#6e5efc;text-decoration: none;" href="/signup">Sign Up</a></h6>
-    </form>
+
   </div>
-</div></div>
+
+  <script>
+    function togglePass(id) {
+      const input = document.getElementById(id);
+      const icon = document.getElementById('eyeIcon');
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+  </script>
+</body>
+</html>

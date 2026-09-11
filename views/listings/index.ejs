@@ -1,233 +1,188 @@
 <% layout("/layouts/boilerplate") %>
-<style>
-  #filters{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
-    margin-top: 4rem;
-    
-  }
-  .filetr{
-    text-align: center;
-    margin-top: 2rem;
-    margin-right: 2.01rem;
-   
-    opacity: 1; justify-content:space-evenly;
 
-    
-  } .a{
-    text-decoration: none;
-  }
-  
-  .rr{
-border: 1px solid white;
-padding: 1rem;
-    border-radius:1rem;
-    background-color: white;
-    color:#6D5DFC;
-    
-    text-align: center;
-    margin-left:0.5rem ;
-  }
-  .rr:hover{ 
-    border: none;
-    background-color: #cac2f6;
-  box-shadow: 0px 2px 2px #6f63f6;}
-</style>
-<!-- <h1>All Listings</h1> -->
- 
- <div id="filters">
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-fire fa-xl"style="color: #6D5DFC;"></i></div>
-<p>Trending</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-bed fa-xl"></i></div>
-<p>Rooms</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-mountain-city fa-xl"></i></div>
-<p>Iconic Cities</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-mountain fa-xl"></i></div>
-<p>Mountains</p>
-  </div>
-  <div class="filetr">
-<a href="/flights" style="text-decoration: none; color:black ;"><div class="rr"><i class="fa-solid fa-plane fa-rotate-by fa-xl" style="--fa-rotate-angle: 360deg;"></i></div>
-<p>Flights</p></a>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-person-swimming fa-xl "></i></div>
-<p>Swimming</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-campground  fa-xl"></i></div>
-<p>Camping</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-plate-wheat fa-xl "></i></div>
-<p>Farm</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-motorcycle fa-xl"></i></div>
-<p>Arctice</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-bus fa-xl"></i></div>
-<p>Bus</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-taxi fa-xl"></i></i></div>
-<p>Taxi</p>
-  </div>
-  <div class="filetr">
-<div class="rr"><i class="fa-solid fa-train-tram fa-xl"></i></div>
-<p>Train</p>
-  </div>
-  
-  
- </div>
- <form action="/flights/search" method="GET" class="flight-search-container">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- Top Inputs Row -->
-  <div class="search-inputs-grid">
+<div class="homepage-container">
 
-    <!-- From Field -->
-    <div class="input-card">
-      <span class="card-floating-label">From</span>
-      <input type="text" name="source" class="card-main-input" placeholder="Enter" required>
-      <span class="card-sub-label"></span>
+  <!-- Horizontal Scroll Filter Bar -->
+  <div class="filter-scroll-wrapper">
+    <div class="filter-track">
+      <a href="/listings?category=trending" class="filter-item active">
+        <div class="filter-icon-box"><i class="fa-solid fa-fire"></i></div>
+        <span>Trending</span>
+      </a>
+      <a href="/listings?category=rooms" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-bed"></i></div>
+        <span>Rooms</span>
+      </a>
+      <a href="/listings?category=cities" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-mountain-city"></i></div>
+        <span>Cities</span>
+      </a>
+      <a href="/listings?category=mountains" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-mountain"></i></div>
+        <span>Mountains</span>
+      </a>
+      <a href="/flights" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-plane"></i></div>
+        <span>Flights</span>
+      </a>
+      <a href="/listings?category=pools" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-person-swimming"></i></div>
+        <span>Swimming</span>
+      </a>
+      <a href="/listings?category=camping" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-campground"></i></div>
+        <span>Camping</span>
+      </a>
+      <a href="/listings?category=farms" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-plate-wheat"></i></div>
+        <span>Farms</span>
+      </a>
+      <a href="/listings?category=arctic" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-snowflake"></i></div>
+        <span>Arctic</span>
+      </a>
+      <a href="/listings?category=bus" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-bus"></i></div>
+        <span>Bus</span>
+      </a>
+      <a href="/listings?category=taxi" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-taxi"></i></div>
+        <span>Taxi</span>
+      </a>
+      <a href="/listings?category=train" class="filter-item">
+        <div class="filter-icon-box"><i class="fa-solid fa-train-tram"></i></div>
+        <span>Train</span>
+      </a>
     </div>
+  </div>
 
-    <!-- Swap Button -->
-    
+  <!-- Flight Search Box Component -->
+  <form action="/flights/search" method="GET" class="flight-search-container">
+    <div class="search-inputs-grid">
+      <!-- From Field -->
+      <div class="input-card">
+        <span class="card-floating-label">From</span>
+        <input type="text" name="source" class="card-main-input" placeholder="e.g. Delhi" required>
+        <span class="card-sub-label">Departure Airport</span>
+      </div>
 
-    <!-- To Field -->
-    <div class="input-card">
-      <span class="card-floating-label">To</span>
-      <input type="text" name="destination" class="card-main-input" placeholder="Enter location" required>
-      <span class="card-sub-label"></span>
-    </div>
+      <!-- To Field -->
+      <div class="input-card">
+        <span class="card-floating-label">To</span>
+        <input type="text" name="destination" class="card-main-input" placeholder="e.g. Mumbai" required>
+        <span class="card-sub-label">Arrival Airport</span>
+      </div>
 
-    <!-- Departure Field -->
-    <div class="input-card">
-      <span class="card-floating-label">Departure</span>
-      <input type="text" name="departureDate" class="card-main-input" placeholder="Enter date" onfocus="(this.type='date')" onblur="(this.type='text')">
-      
-    </div>
+      <!-- Departure Field -->
+      <div class="input-card">
+        <span class="card-floating-label">Departure</span>
+        <input type="text" name="departureDate" class="card-main-input" placeholder="Select Date" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+        <span class="card-sub-label">Travel Day</span>
+      </div>
 
-    <!-- Return Field -->
-    
-
-    <!-- Travellers & Class -->
-    <div class="input-card">
-      <span class="card-floating-label">Traveler(s) & Class</span>
-      <select
-          name="travellers"
-          class="form-select"
-        >
-          <option>1 Adult</option>
-          <option>2 Adults</option>
-          <option>3 Adults</option>
-          <option>4 Adults</option>
+      <!-- Travellers & Class -->
+      <div class="input-card">
+        <span class="card-floating-label">Traveler(s) & Class</span>
+        <select name="travellers" class="card-select-input">
+          <option value="1">1 Adult, Economy</option>
+          <option value="2">2 Adults, Economy</option>
+          <option value="3">3 Adults, Economy</option>
+          <option value="4">4+ Adults, Economy</option>
         </select>
-      
+        <span class="card-sub-label">Cabin selection</span>
+      </div>
+
+      <!-- Search Submit Button -->
+      <button type="submit" class="btn-main-search">
+        SEARCH
+      </button>
     </div>
 
-    <!-- Search Button -->
-    <button type="submit" class="btn-main-search">
-      SEARCH
-    </button>
+    <!-- Special Fares Row -->
+    <div class="fare-options-bar">
+      <div class="special-fares-header">
+        <span class="benefits-badge">More Benefits</span>
+        <strong class="special-fares-title">Special Fares</strong>
+      </div>
 
+      <div class="fare-card-group">
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="regular" checked>
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">👨‍💼</span>
+            <div class="fare-details">
+              <span class="fare-name">Regular</span>
+              <span class="fare-desc">Lowest Fares</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="student">
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">🎓</span>
+            <div class="fare-details">
+              <span class="fare-name">Student</span>
+              <span class="fare-desc">Extra Baggage</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="fare-select-box">
+          <input type="radio" name="fareType" value="senior">
+          <div class="fare-select-content">
+            <span class="custom-checkbox"></span>
+            <span class="fare-avatar">👴</span>
+            <div class="fare-details">
+              <span class="fare-name">Senior Citizen</span>
+              <span class="fare-desc">Exclusive Discount</span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </form>
+
+  <!-- Listings Grid Section -->
+  <div class="listings-grid">
+    <% for(let listing of allListings) { %>
+      <a href="/listings/<%= listing._id %>" class="listing-item-anchor">
+        <div class="listing-card">
+          <!-- Thumbnail Container -->
+          <div class="listing-media-wrap">
+            <img src="<%= listing.image.url %>" class="listing-thumbnail" alt="<%= listing.title %>" loading="lazy"/>
+            <button class="listing-like-btn" type="button" aria-label="Favorite">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+          </div>
+
+          <!-- Card Body -->
+          <div class="listing-meta-wrap">
+            <h5 class="listing-name"><%= listing.title %></h5>
+            
+            <p class="listing-location">
+              <i class="fa-solid fa-location-dot"></i>
+              <span><%= listing.location %>, <%= listing.country %></span>
+            </p>
+            
+            <div class="listing-rate-row">
+              <span class="listing-rate-amount">₹<%= Number(listing.price).toLocaleString("en-IN") %></span>
+              <span class="listing-rate-period">/ night</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    <% } %>
   </div>
 
-  <!-- Bottom Special Fares Row -->
-  <div class="fare-options-bar">
-    <div class="special-fares-header">
-      <span class="benefits-badge">More Benefits</span>
-      <strong class="special-fares-title">Special Fares</strong>
-    </div>
+  <!-- Floating Customer Support Action Button -->
+  <a href="mailto:gnagwarakash555@gamil.com" class="support-floating-btn" id="helpButton" aria-label="Customer Support">
+    <i class="fa-solid fa-headset"></i>
+  </a>
 
-    <div class="fare-card-group">
-      <!-- Regular -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="regular" checked>
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">👨‍💼</span>
-          <div class="fare-details">
-            <span class="fare-name">Regular</span>
-            <span class="fare-desc">Lowest Fares</span>
-          </div>
-        </div>
-      </label>
-
-      <!-- Student -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="student">
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">🎓</span>
-          <div class="fare-details">
-            <span class="fare-name">Student</span>
-            <span class="fare-desc">Extra Baggage</span>
-          </div>
-        </div>
-      </label>
-
-      <!-- Senior Citizen -->
-      <label class="fare-select-box">
-        <input type="radio" name="fareType" value="senior">
-        <div class="fare-select-content">
-          <span class="custom-checkbox"></span>
-          <span class="fare-avatar">👴</span>
-          <div class="fare-details">
-            <span class="fare-name">Senior Citizen</span>
-            <span class="fare-desc">Exclusive Discount</span>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-
-</form>
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1  mt-3"><% for(let listing of allListings) { %>
-  <a href="/listings/<%=listing._id%>"class="listing-link">
-    <div class="card col position-relative">
-   <div class="main"> <div class="heart-icon">
-      <i class="fa-regular fa-heart" style="color: #6D5DFC;"></i>
-    </div>
-  <img src="<%= listing.image.url%>" class="card-img-top-li" alt="listing_image"/></div>  
-  <div class="card-img-overlay"></div>
-    <div class="card-body-li">
-    
-      <p class="text mb-1"> <%= listing.title %></p>
-       <p style="font-size:small; margin-bottom:2px;"><i class="fa-solid fa-location-dot" style=" opacity:1;color: #6d5dfc;"></i> <span style="opacity:0.8; color:rgb(65, 64, 64);"><%= listing.location %>,<%= listing.country %></span></p>
-     <h6 class="listing-price"><strong>&#8377; <%= listing.price.toLocaleString("en-IN") %></strong><span>&nbsp;/ night</span></h6>
-  
-    </div>
 </div>
-  </a>  
-<% } %></div>
-
-  <button type="button" class="help" id="helpButton" aria-label="Open help" aria-expanded="false">
-    <a href="mailto:gnagwarakash555@gamil.com"><i class="fa-solid fa-headset fa-beat-fade fa-2xl fa-canvas-roomy"></i>
-  </a></button>
-
- 
-
-  <script>
-    const helpButton = document.querySelector("#helpButton");
-    
-
-    helpButton.addEventListener("click", () => {
-      helpModal.hidden = false;
-      helpButton.setAttribute("aria-expanded", "true");
-    });
-    
-  </script>
-
-
-    
-  

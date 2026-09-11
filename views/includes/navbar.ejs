@@ -1,12 +1,15 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" style="margin-bottom:5rem;">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg theme-navbar sticky-top">
+  <div class="container-fluid navbar-inner">
 
-    <a class="navbar-brand" href="/listings">
-      <img src="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png" alt="logo image">
+    <!-- Brand Logo -->
+    <a class="navbar-brand brand-wrap" href="/listings">
+      <img src="https://i.ibb.co/xKVfsfPx/Gemini-Generated-Image-fgihffgihffgihff.png" alt="Make Your Trip Logo" class="brand-logo-img">
+      <span class="brand-title">Make Your Trip</span>
     </a>
 
+    <!-- Mobile Hamburger Toggle -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler custom-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
@@ -17,97 +20,57 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Collapsible Menu -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-      <!-- Left -->
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">
-          <b>Make Your Trip</b>
-        </a>
-      </div>
-
-      <!-- Center Search -->
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex navbar-search" role="search">
-          <i
-            class="fa-solid fa-magnifying-glass fa-sm navbar-search-icon"
-            aria-hidden="true"
-          ></i>
-
+      <!-- Center Search Bar -->
+      <div class="mx-auto search-container-wrap">
+        <form class="nav-search-bar" role="search" action="/listings/search" method="GET">
+          <i class="fa-solid fa-magnifying-glass search-leading-icon" aria-hidden="true"></i>
           <input
-            class="form-control me-2"
+            class="nav-search-input"
             type="search"
-            placeholder="Search rooms, stays..."
+            name="q"
+            placeholder="Search stays, cities, destinations..."
             aria-label="Search"
           >
-
-          <button
-            class="btn btn-outline-success btnm"
-            type="submit"
-          >
+          <button class="nav-search-submit-btn" type="submit">
             Search
           </button>
         </form>
       </div>
 
-      <!-- Right -->
-      <div class="navbar-nav ms-auto align-items-center">
+      <!-- Right Navigation Actions -->
+      <div class="navbar-nav ms-auto align-items-lg-center nav-actions-group">
 
-        <a
-          class="nav-link todo"
-          href="/listings/new"
-        >
-          <i
-            class="fa-solid fa-house"
-            style="color:#6D5DFC;"
-          ></i>
-          &nbsp;
-          <b>Create new listing</b>
-        </a>
+        
 
         <% if (!currUser) { %>
-
-          <a
-            class="nav-link todo"
-            href="/signup"
-          >
-            <b>Sign up</b>
+          <a class="nav-link nav-link-text" href="/signup">
+            Sign up
           </a>
 
-          <a
-            class="nav-link"
-            href="/login"
-          >
-            <button class="login-btn-nav">
+          <a class="nav-link p-0 ms-lg-2" href="/login">
+            <button type="button" class="btn-nav-login">
               Log in
             </button>
           </a>
-
         <% } %>
 
         <% if (currUser) { %>
-
-          <a
-            href="/profile"
-            class="nav-link profile-nav"
-            title="Profile Dashboard"
-          >
+          <a href="/profile" class="nav-link profile-link-wrap" title="My Profile">
             <img
-              src="<%= currUser.image.url %>"
-              alt="Profile"
-              class="navbar-profile-image"
+              src="<%= currUser.image && currUser.image.url ? currUser.image.url : '/images/default-avatar.png' %>"
+              alt="<%= currUser.username %>"
+              class="nav-avatar-img"
             >
           </a>
 
-          <a
-            class="nav-link"
-            href="/logout"
-          >
-            <button class="logout-btn-nav">
+          <a class="nav-link p-0 ms-lg-2" href="/logout">
+            <button type="button" class="btn-nav-logout">
               Log out
             </button>
           </a>
-
         <% } %>
 
       </div>

@@ -2,6 +2,8 @@ body{
     font-family: "Plus Jakarta Sans", sans-serif !important;
   background-color:#F5F3FF !important;
   
+}body {
+  padding-top:1rem !important;
 }
 *{
     padding:0;
@@ -351,4 +353,437 @@ padding:1rem 0rem;
 .listing{
     display:flex;
     flex-wrap: wrap;
+}:root {
+  --primary-color: #6D5DFC;
+  --primary-light: #f1effe;
+  --primary-hover: #5b4be0;
+  --bg-color: #f7f9fc;
+  --card-bg: #ffffff;
+  --border-subtle: #e5e7eb;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: var(--font-family);
+  margin: 0;
+  color: var(--text-main);
+}
+
+.homepage-container {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+/* 1. Filter Scroll Bar */
+.filter-scroll-wrapper {
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.filter-scroll-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.filter-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* Container holding all the icons */
+.filter-track {
+  display: flex;
+  gap: 35px; /* Increased spacing between each icon (adjust from 24px to 36px as you like) */
+  align-items:center;
+  width: max-content;
+  padding: 10px 4px; /* Prevents focus/hover shadows from getting clipped */
+}
+
+/* Individual icon item */
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Space between the square icon and the text label below it */
+  min-width: 60px; /* Gives each item a consistent width */
+  text-decoration: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.filter-item:hover {
+  transform: translateY(-2px);
+}
+
+.filter-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.filter-item span {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.filter-item:hover .filter-icon-box,
+.filter-item.active .filter-icon-box {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(109, 93, 252, 0.25);
+}
+
+.filter-item.active span {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* 2. Flight Search Widget */
+.flight-search-container {
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 36px;
+}
+
+.search-inputs-grid {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.input-card {
+  position: relative;
+  flex: 1;
+  min-height: 72px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-card:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.12);
+}
+
+.card-floating-label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #ffffff;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.card-main-input,
+.card-select-input {
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding: 0;
+  width: 100%;
+  background: transparent;
+}
+
+.card-sub-label {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.btn-main-search {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 0 32px;
+  height: 72px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-main-search:hover {
+  background: var(--primary-hover);
+}
+
+/* Fares Row */
+.fare-options-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.special-fares-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.benefits-badge {
+  background: var(--primary-color);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.special-fares-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.fare-card-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fare-select-box {
+  cursor: pointer;
+}
+
+.fare-select-box input[type="radio"] {
+  display: none;
+}
+
+.fare-select-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 10px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content {
+  border-color: var(--primary-color);
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content .custom-checkbox {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.fare-select-box input[type="radio"]:checked + .fare-select-content .custom-checkbox::after {
+  content: "✓";
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.fare-avatar {
+  font-size: 1.25rem;
+}
+
+.fare-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.fare-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.fare-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* 3. Listings Grid */
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 26px;
+}
+
+.listing-item-anchor {
+  text-decoration: none;
+  color: inherit;
+}
+
+.listing-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.listing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(109, 93, 252, 0.1);
+}
+
+.listing-media-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+
+.listing-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.listing-card:hover .listing-thumbnail {
+  transform: scale(1.04);
+}
+
+.listing-like-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.listing-like-btn:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+}
+
+.listing-meta-wrap {
+  padding: 16px;
+}
+
+.listing-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listing-location {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.listing-location i {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+
+.listing-rate-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.listing-rate-amount {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.listing-rate-period {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* 4. Floating Help Action Button */
+.support-floating-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(109, 93, 252, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 99;
+}
+
+.support-floating-btn:hover {
+  transform: scale(1.08);
+  background: var(--primary-hover);
+  color: #ffffff;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .search-inputs-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-main-search {
+    height: 50px;
+  }
 }
