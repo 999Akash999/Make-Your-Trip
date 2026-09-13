@@ -25,9 +25,8 @@ body {
 
 /* Banner */
 .dash-cover-banner {
-  height: 230px;
-  background: linear-gradient(135deg, #2b1055 0%, #7597de 100%),
-              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  height: 100px;
+  
   width: 100%;
 }
 

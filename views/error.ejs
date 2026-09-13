@@ -1,13 +1,49 @@
-<!-- <% layout("/layouts/boilerplate") %>
-<div class="row"> 
-    <div class="alert alert-danger col-6 offset-3" role="alert">
-  A simple danger alert—check it out!
-</div>3
-</div> -->
-<% layout("/layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/error.css">
+  <title>Error <%= statusCode %></title>
+</head>
+<body>
 
-<div class="row mt-5">
-  <div class="alert alert-danger col-6 offset-3" role="alert">
-    <%= message %>
-  </div>
-</div>
+  <% if (statusCode === 404) { %>
+    <!-- 404 Full Screen Labubu -->
+    <div class="labubu-error-wrapper">
+      <img 
+        src="/images/labubu-404.png" 
+        alt="404 Not Found" 
+        class="labubu-img"
+      >
+      <div class="labubu-btn-box">
+        <a href="/" class="btn-labubu">Back to Home Page</a>
+      </div>
+    </div>
+
+  <% } else if (statusCode === 500) { %>
+    <!-- 500 Full Screen Labubu -->
+    <div class="labubu-error-wrapper">
+      <img 
+        src="/images/labubu-500.png" 
+        alt="500 Internal Server Error" 
+        class="labubu-img"
+      >
+      <div class="labubu-btn-box">
+        <a href="/" class="btn-labubu">Back to Home Page</a>
+      </div>
+    </div>
+
+  <% } else { %>
+    <!-- Generic Fallback Error -->
+    <div class="error-fallback">
+      <div class="alert-box">
+        <h2>Error <%= statusCode %></h2>
+        <p><%= message %></p>
+        <a href="/" class="btn-labubu">Back to Home Page</a>
+      </div>
+    </div>
+  <% } %>
+
+</body>
+</html>

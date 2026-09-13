@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 404 Full-Height Container */
+.labubu-error-wrapper {
+  min-height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: #fcfaff;
+  position: relative; /* Subtle warm purple tint */
+}
+
+/* Image: Badi aur crisp bina kate */
+.labubu-img {
+  width: 100%;
+  
+  height: auto;
+  max-height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Button Container (Image ke neeche) */
+.labubu-btn-box {
+  position: absolute;
+  bottom: 3rem;
+  
+}
+
+/* Pill Button Style */
+.btn-labubu {
+  display: inline-block;
+  background-color: #8b5cf6;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 36px;
+  border-radius: 9999px;
+  border: 2px solid #8b5cf6;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.35);
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-labubu:hover {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.45);
+}
+
+/* Fallback style for other errors */
+.error-fallback {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-box {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 24px 36px;
+  border-radius: 12px;
+  border: 1px solid #f5c2c7;
+  text-align: center;
+}

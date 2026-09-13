@@ -1,0 +1,245 @@
+/* Container & Base Styles */
+.cab-details-container {
+  max-width: 1180px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1e1b4b;
+}
+
+/* Left Main Vehicle Card */
+.cab-main-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #ede9fe;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(93, 91, 246, 0.05);
+}
+
+.cab-detail-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-bottom: 1px solid #ede9fe;
+}
+
+/* Vehicle Badge & Title */
+.badge-type {
+  display: inline-block;
+  background-color: #f0f0ff;
+  color: #5d5bf6;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+}
+
+.cab-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: -0.02em;
+}
+
+/* City Indicator Pill */
+.city-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fbfbfe;
+  border: 1px solid #ede9fe;
+  color: #4b5563;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.city-pill i {
+  color: #5d5bf6;
+}
+
+/* Divider Lines & Subheadings */
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #f1f0fa;
+  margin: 1.5rem 0;
+}
+
+.section-subheading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  letter-spacing: -0.01em;
+}
+
+/* Vehicle Highlights Box Grid */
+.spec-box {
+  background: #fafaff;
+  border: 1px solid #ede9fe;
+  border-radius: 14px;
+  padding: 0.85rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.spec-box:hover {
+  transform: translateY(-2px);
+}
+
+.spec-icon {
+  font-size: 1.25rem;
+  color: #5d5bf6;
+  margin-bottom: 0.25rem;
+}
+
+.spec-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.15rem;
+}
+
+.spec-value {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+/* Driver Profile Info Box */
+.driver-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fbfbfe;
+  border: 1px solid #ede9fe;
+  padding: 1.1rem 1.25rem;
+  border-radius: 16px;
+}
+
+.driver-avatar i {
+  font-size: 2.5rem;
+  color: #5d5bf6;
+}
+
+.rating-badge {
+  background-color: #ecfdf5;
+  color: #059669;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Inclusions List */
+.inclusion-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.inclusion-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 0.65rem;
+  line-height: 1.45;
+}
+
+.inclusion-list li i {
+  font-size: 1rem;
+  margin-top: 0.1rem;
+}
+
+/* Right Sticky Booking Action Card */
+.booking-action-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #ede9fe;
+  box-shadow: 0 10px 30px rgba(93, 91, 246, 0.08);
+}
+
+.fare-large {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: -0.02em;
+}
+
+.fare-breakdown-box {
+  background-color: #fafaff;
+  border: 1px dashed #dedbfd;
+  border-radius: 14px;
+}
+
+/* Primary Purple Button */
+.btn-book-action {
+  background-color: #5d5bf6;
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 14px;
+  border: none;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(93, 91, 246, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-book-action:hover {
+  background-color: #4b48ec;
+  box-shadow: 0 6px 20px rgba(93, 91, 246, 0.45);
+  color: #ffffff;
+}
+
+/* Secondary Outline Button */
+.btn-outline-custom {
+  background-color: transparent;
+  color: #5d5bf6;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 14px;
+  border: 1.5px solid #dedbfd;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-custom:hover {
+  background-color: #f0f0ff;
+  color: #5d5bf6;
+  border-color: #5d5bf6;
+}
+
+.trip-safety-notice i {
+  color: #5d5bf6 !important;
+}
+
+/* Mobile & Tablet Adjustments */
+@media (max-width: 991px) {
+  .cab-detail-img {
+    height: 280px;
+  }
+  
+  .booking-action-card.sticky-top {
+    position: static !important;
+    margin-top: 1rem;
+  }
+}

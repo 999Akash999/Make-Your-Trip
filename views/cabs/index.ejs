@@ -1,0 +1,92 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="cabs-page-wrapper">
+  <!-- Top Bar: Title & Action -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h3 class="page-heading mb-1">Available Cabs & Taxis</h3>
+      <p class="text-muted small mb-0">Book clean, verified outstation and city cabs</p>
+    </div>
+    <a href="/cabs/new" class="btn btn-add-cab">+ List New Cab</a>
+  </div>
+
+  <!-- Segmented Search Bar (Matches Homepage Design) -->
+  <div class="cab-search-card mb-4">
+    <form action="/cabs" method="GET" class="cab-search-form">
+      <div class="search-input-group">
+        <label>CITY / LOCATION</label>
+        <input 
+          type="text" 
+          name="city" 
+          placeholder="e.g. Delhi, Mumbai" 
+          value="<%= searchCity %>"
+        >
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-input-group">
+        <label>VEHICLE CATEGORY</label>
+        <select name="vehicleType">
+          <option value="">All Types (Sedan, SUV...)</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Luxury">Luxury</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-search-cab">SEARCH</button>
+    </form>
+  </div>
+
+  <!-- Cards Grid (Exact Homepage Proportions) -->
+  <div class="cab-grid">
+    <% if (cabs.length === 0) { %>
+      <div class="empty-state">
+        <p>No cabs available in this city right now.</p>
+      </div>
+    <% } %>
+
+    <% for (let cab of cabs) { %>
+      <div class="cab-listing-card">
+        <!-- Image Container with Heart / Favorite badge -->
+        <div class="cab-image-container">
+          <a href="/cabs/<%= cab._id %>">
+            <img 
+              src="<%= cab.image.url %>" 
+              alt="<%= cab.vehicleName %>"
+              class="cab-card-thumb"
+            >
+          </a>
+          <button type="button" class="cab-fav-btn" aria-label="Save to favorites">
+            <i class="bi bi-heart-fill"></i>
+          </button>
+          <span class="cab-type-chip"><%= cab.vehicleType %></span>
+        </div>
+
+        <!-- Card Meta Info -->
+        <div class="cab-meta">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="cab-name">
+              <a href="/cabs/<%= cab._id %>"><%= cab.vehicleName %></a>
+            </h5>
+          </div>
+
+          <p class="cab-subtext">
+            <i class="bi bi-geo-alt-fill text-muted"></i> <%= cab.operatingCity %> &bull; <%= cab.capacity.passengers %> Seats
+          </p>
+
+          <!-- Price & Action Row -->
+          <div class="cab-price-row">
+            <div class="price-box">
+              <span class="price-val">₹<%= cab.pricing.pricePerKm %></span>
+              <span class="price-unit">/ km</span>
+            </div>
+            <a href="/cabs/<%= cab._id %>" class="btn btn-book-pill">Book Now</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

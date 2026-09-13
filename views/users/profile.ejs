@@ -3,7 +3,7 @@
 <!-- FontAwesome Icons for sidebar & cards -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-<div class="dash-page-wrapper">
+<div class="dash-page-wrapper mt-5">
 
   <!-- Top Landscape Banner -->
   <div class="dash-cover-banner"></div>
@@ -15,9 +15,9 @@
     <div class="dash-user-header-card">
       <div class="user-avatar-wrap">
         <img src="<%= user.image && user.image.url ? user.image.url : '/images/default-avatar.png' %>" alt="<%= user.username %>" class="user-avatar-img">
-        <button class="avatar-camera-btn" title="Change Photo">
+        <a><button class="avatar-camera-btn" title="Change Photo">
           <i class="fa-solid fa-camera"></i>
-        </button>
+        </button></a>
       </div>
 
       <div class="user-main-info">
@@ -47,13 +47,21 @@
           <div>
             <div class="upload-title">Profile Image</div>
             <div class="upload-subtitle">Upload a new profile picture</div>
-          </div>
+          </div><form
+action="/profile?_method=PUT"
+method="POST"
+enctype="multipart/form-data"
+>
           <input
 type="file"
 name="image"
 class="form-control"
 accept="image/*"
+><button
+class="btn "
 >
+Save Changes
+</button></form>
             
           <div class="upload-file-limit">JPG, PNG or WEBP. Max size 2MB</div>
         </div>
@@ -150,7 +158,7 @@ accept="image/*"
           <div class="panel-card">
             <div class="panel-card-head">
               <h4>Recent Bookings</h4>
-              <a href="/bookings" class="panel-link">View All</a>
+              <a href="/flights/my-bookings" class="panel-link">View All</a>
             </div>
 
             <div class="panel-list">
@@ -180,7 +188,7 @@ accept="image/*"
             </div>
 
             <div class="panel-card-foot">
-              <a href="/bookings" class="theme-footer-link">
+              <a href="/flights/my-bookings" class="theme-footer-link">
                 View All Bookings <i class="fa-solid fa-arrow-right"></i>
               </a>
             </div>
