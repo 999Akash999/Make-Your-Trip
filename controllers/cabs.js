@@ -1,4 +1,4 @@
-const Cab = require("../models/Cab");
+const Cab = require("../models/cab");
 
 // 1. Index & Search Cabs
 module.exports.index = async (req, res, next) => {

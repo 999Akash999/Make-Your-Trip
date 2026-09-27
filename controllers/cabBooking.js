@@ -1,4 +1,4 @@
-const Cab = require("../models/Cab");
+const Cab = require("../models/cab");
 const CabBooking = require("../models/CabBooking");
 
 // 1. Render Booking Screen

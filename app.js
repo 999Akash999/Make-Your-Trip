@@ -20,7 +20,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const ExpressError = require("./utils/ExpressError.js");
 const User = require("./models/user.js");
 const Flight = require("./models/flight.js");
-const Cab = require("./models/Cab.js");
+const Cab = require("./models/cab.js");
 
 // Routes
 const listings = require("./routes/listing.js");
@@ -29,7 +29,7 @@ const userRouter = require("./routes/user.js");
 const flightRouter = require("./routes/flights.js");
 const cabRoutes = require("./routes/cabs.js");
 const cabBookingRoutes = require("./routes/cabBooking.js");
-
+//heyS
 // Database configuration
 const dbUrl = process.env.ATLASDB_URL;
 const secret = process.env.SECRET;
