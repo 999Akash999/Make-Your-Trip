@@ -1,31 +1,13 @@
 const Flight = require("../models/flight");
 const FlightBooking = require("../models/flightBooking");
 
-// All Flights
+
 module.exports.index = async (req, res) => {
     const flights = await Flight.find({});
     res.render("flights/index", { flights });
 };
 
-// Search Flights
-// module.exports.search = async (req, res) => {
 
-//     const { source, destination } = req.query;
-
-//     const flights = await Flight.find({
-//         source: {
-//             $regex: source,
-//             $options: "i"
-//         },
-//         destination: {
-//             $regex: destination,
-//             $options: "i"
-//         }
-//     });
-//  console.log("Found:", flights.length);
-
-//     res.render("flights/index", { flights });
-// }; 
  module.exports.search = async (req,res)=>{
 
     console.log("Query:", req.query);

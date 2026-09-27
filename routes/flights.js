@@ -24,10 +24,11 @@ router.post(
  wrapAsync(flightController.bookFlight)
 );
 
-module.exports = router;
+
 router.delete(
     "/booking/:bookingId",
     wrapAsync(
         flightController.cancelBooking
     )
 );
+module.exports = router;

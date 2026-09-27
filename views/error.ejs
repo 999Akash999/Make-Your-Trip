@@ -34,7 +34,21 @@
       </div>
     </div>
 
-  <% } else { %>
+  <% }else if (statusCode === 500) { %>
+    <!-- 500 Full Screen Labubu -->
+    <div class="labubu-error-wrapper">
+      <img 
+        src="/images/labubu-500.png" 
+        alt="500 Internal Server Error" 
+        class="labubu-img"
+      >
+      <div class="labubu-btn-box">
+        <a href="/" class="btn-labubu">Back to Home Page</a>
+      </div>
+    </div>
+
+  <% }
+   else { %>
     <!-- Generic Fallback Error -->
     <div class="error-fallback">
       <div class="alert-box">
