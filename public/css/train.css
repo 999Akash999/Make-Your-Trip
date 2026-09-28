@@ -1,0 +1,287 @@
+/* =========================================================
+   1. GLOBAL CONTAINER & OFFSETS
+   ========================================================= */
+.trains-wrapper {
+  max-width: 1240px;
+  margin: 0 auto 5rem auto;
+  padding: 5.5rem 1.5rem 0 1.5rem; /* Navbar overlap fix */
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+}
+
+/* =========================================================
+   2. HEADER ROW
+   ========================================================= */
+.train-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.train-title-main {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+/* =========================================================
+   3. SEGMENTED SEARCH BAR
+   ========================================================= */
+.train-search-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+  padding: 1rem 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.train-search-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 190px auto;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.t-input-group label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.t-input-group input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.btn-search-train {
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.75rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-search-train:hover {
+  background: #4338ca;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   4. TRAIN RESULT CARDS
+   ========================================================= */
+.train-result-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.train-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
+  border-color: #cbd5e1;
+}
+
+.train-name-tag {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.train-number-pill {
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-family: monospace;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* Schedule Indicator */
+.schedule-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.25rem 0;
+  padding: 1.15rem 1.5rem;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+}
+
+.time-lg {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.station-sub {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+.duration-indicator {
+  text-align: center;
+  position: relative;
+  min-width: 160px;
+}
+
+.duration-line {
+  height: 2px;
+  background: #cbd5e1;
+  position: relative;
+  margin: 0.45rem 0;
+}
+
+.duration-line::after {
+  content: "➔";
+  position: absolute;
+  right: -6px;
+  top: -9px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.duration-indicator span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* =========================================================
+   5. CLASS SELECTION CARDS (IRCTC STYLE)
+   ========================================================= */
+.class-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.85rem;
+}
+
+.class-box {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.85rem;
+  background: #ffffff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.class-box:hover {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  transform: translateY(-2px);
+}
+
+.class-name {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.class-fare {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #4f46e5;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.seat-status-green {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   6. PRINTABLE TICKET / PNR VIEW
+   ========================================================= */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .card.border.rounded-4,
+  .card.border.rounded-4 * {
+    visibility: visible;
+  }
+  .card.border.rounded-4 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .btn,
+  a {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   7. RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 992px) {
+  .train-search-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .btn-search-train {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .train-search-form {
+    grid-template-columns: 1fr;
+  }
+  .btn-search-train {
+    grid-column: span 1;
+    width: 100%;
+  }
+  .schedule-flex {
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: center;
+  }
+  .duration-line::after {
+    display: none;
+  }
+  .trains-wrapper {
+    padding-top: 5rem;
+  }
+}

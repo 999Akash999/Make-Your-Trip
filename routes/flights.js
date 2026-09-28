@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const wrapAsync = require("../utils/wrapAsync");
+const { isLoggedIn } = require("../middleware");
 const flightController =
 require("../controllers/flights");
 
@@ -9,25 +10,26 @@ router.get("/", wrapAsync(flightController.index));
 
 router.get("/search",
  wrapAsync(flightController.search));
- router.get(
+router.get(
     "/my-bookings",
-    wrapAsync(
+    isLoggedIn, wrapAsync(
         flightController.myBookings
     )
 );
+router.get("/bookings/:bookingId/ticket", isLoggedIn, wrapAsync(flightController.showTicket));
 
 router.get("/:id",
  wrapAsync(flightController.show));
 
 router.post(
  "/book/:id",
- wrapAsync(flightController.bookFlight)
+ isLoggedIn, wrapAsync(flightController.bookFlight)
 );
 
 
 router.delete(
     "/booking/:bookingId",
-    wrapAsync(
+    isLoggedIn, wrapAsync(
         flightController.cancelBooking
     )
 );

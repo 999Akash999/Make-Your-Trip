@@ -1,0 +1,82 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .cab-confirm-container {
+    max-width: 780px;
+    margin: 5.5rem auto 4rem;
+    padding: 0 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .confirm-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  }
+  .success-header {
+    background: #059669;
+    color: #ffffff;
+    padding: 1.75rem 2rem;
+    text-align: center;
+  }
+</style>
+
+<div class="cab-confirm-container">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <a href="/cabs" class="text-muted text-decoration-none small">&larr; Back to Cabs</a>
+    <button onclick="window.print()" class="btn btn-sm btn-outline-dark fw-bold rounded-pill">Print Receipt</button>
+  </div>
+
+  <div class="confirm-card">
+    <div class="success-header">
+      <div style="font-size: 2.5rem; line-height: 1;">✓</div>
+      <h3 class="fw-bold mt-2 mb-1">Ride Confirmed!</h3>
+      <p class="small opacity-90 mb-0">Your chauffeur details and ride confirmation are ready.</p>
+    </div>
+
+    <div class="p-4 p-md-5">
+      <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+        <div>
+          <h4 class="fw-bold text-dark mb-1"><%= booking.cab ? booking.cab.vehicleName : "Reserved Vehicle" %></h4>
+          <span class="badge bg-light text-dark border">City: <%= booking.cab ? booking.cab.operatingCity : "City Ride" %></span>
+        </div>
+        <div class="text-end">
+          <span class="small text-muted text-uppercase d-block">Booking Reference</span>
+          <span class="fw-bold font-monospace text-primary">#<%= booking._id.toString().substring(0, 8).toUpperCase() %></span>
+        </div>
+      </div>
+
+      <% if (booking.cab && booking.cab.driver) { %>
+        <h6 class="fw-bold text-muted small text-uppercase mb-2">Driver Information</h6>
+        <div class="p-3 bg-light rounded-3 border mb-4 d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="fw-bold text-dark mb-0"><%= booking.cab.driver.name %></h5>
+            <span class="small text-muted">Contact: <%= booking.cab.driver.phone %> &bull; Rating: ★ <%= booking.cab.driver.rating %></span>
+          </div>
+          <span class="badge bg-success text-white px-3 py-2">Verified Chauffeur</span>
+        </div>
+      <% } %>
+
+      <h6 class="fw-bold text-muted small text-uppercase mb-2">Pricing Snapshot</h6>
+      <div class="p-3 bg-light rounded-3 border mb-4 small">
+        <div class="d-flex justify-content-between py-1">
+          <span class="text-muted">Vehicle Rate</span>
+          <span class="fw-semibold">₹<%= booking.cab && booking.cab.pricing ? booking.cab.pricing.pricePerKm : 15 %>/km</span>
+        </div>
+        <div class="d-flex justify-content-between py-1">
+          <span class="text-muted">Base Fare Minimum</span>
+          <span class="fw-semibold">₹<%= booking.cab && booking.cab.pricing ? booking.cab.pricing.baseFare : 500 %></span>
+        </div>
+        <div class="d-flex justify-content-between py-1">
+          <span class="text-muted">Taxes & GST</span>
+          <span class="fw-semibold">5% Extra</span>
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <a href="/cabs" class="btn btn-primary px-4 py-2 fw-bold rounded-pill">Book Another Cab</a>
+      </div>
+    </div>
+  </div>
+</div>

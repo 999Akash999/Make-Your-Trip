@@ -1,0 +1,11 @@
+<% layout("/layouts/boilerplate") %>
+<main class="container py-4" style="max-width: 760px"><h1 class="mb-4">List a bike</h1>
+  <form action="/bikes" method="POST" class="card card-body gap-3">
+    <input class="form-control" name="bike[bikeName]" placeholder="Bike name" required>
+    <div class="row g-3"><div class="col"><input class="form-control" name="bike[registrationNumber]" placeholder="Registration number" required></div><div class="col"><input class="form-control" name="bike[bikeModelYear]" type="number" placeholder="Model year"></div></div>
+    <div class="row g-3"><div class="col"><select class="form-select" name="bike[bikeType]" required><% ["Scooter","Cruiser","Sports","Commuter","Adventure","Electric"].forEach(type => { %><option><%= type %></option><% }) %></select></div><div class="col"><input class="form-control" name="bike[engineCC]" type="number" placeholder="Engine CC" required></div><div class="col"><input class="form-control" name="bike[operatingCity]" placeholder="City" required></div></div>
+    <h5>Pickup location</h5><input class="form-control" name="bike[pickupLocations][0][hubName]" placeholder="Pickup hub" required><input class="form-control" name="bike[pickupLocations][0][address]" placeholder="Pickup address" required>
+    <div class="row g-3"><div class="col"><input class="form-control" name="bike[pricing][dailyRent]" type="number" placeholder="Daily rent" required></div><div class="col"><input class="form-control" name="bike[pricing][hourlyRent]" type="number" placeholder="Hourly rent" required></div><div class="col"><input class="form-control" name="bike[pricing][securityDeposit]" type="number" placeholder="Deposit" value="1000"></div></div>
+    <button class="btn btn-primary">Create bike listing</button>
+  </form>
+</main>

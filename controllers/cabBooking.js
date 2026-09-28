@@ -79,7 +79,7 @@ module.exports.showBooking = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("cabs/bookingConfirmation", { booking });
+    res.render("cabs/confirmation", { booking });
   } catch (err) {
     next(err);
   }
@@ -88,11 +88,7 @@ module.exports.showBooking = async (req, res, next) => {
 // 4. View Logged-in User's Bookings
 module.exports.myBookings = async (req, res, next) => {
   try {
-    const bookings = await CabBooking.find({ user: req.user._id })
-      .populate("cab")
-      .sort({ createdAt: -1 });
-
-    res.render("cabs/myBookings", { bookings });
+    res.redirect("/bookings");
   } catch (err) {
     next(err);
   }

@@ -1,45 +1,69 @@
-/* Page Layout Fix (Clears fixed navbar overlap) */
+/* Layout & Navbar Offset */
 .cabs-page-wrapper {
-  max-width: 1200px;
-  margin: 2rem auto 4rem auto;
-  padding: 0 1.25rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1240px;
+  /* Top padding navbar ke overlap ko fix karegi */
+  margin: 0 auto 1rem auto;
+  padding: 2.5rem 1.5rem 0 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+}
+
+/* Header Area */
+.cab-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
 .page-heading {
-  font-size: 1.6rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  color: #1e1b4b;
-  letter-spacing: -0.02em;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
 }
 
-/* Add Cab Action Button */
+.page-subheading {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
 .btn-add-cab {
-  background-color: #5d5bf6;
-  color: #ffffff;
+  background: #ffffff;
+  color: #4f46e5;
+  border: 1px solid #e2e8f0;
   font-weight: 600;
   font-size: 0.85rem;
-  padding: 0.55rem 1.2rem;
-  border-radius: 9999px;
-  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
   text-decoration: none;
-  box-shadow: 0 3px 10px rgba(93, 91, 246, 0.25);
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-add-cab:hover {
-  background-color: #4b48ec;
-  color: #ffffff;
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #4338ca;
   transform: translateY(-1px);
 }
 
-/* Homepage Style Segmented Search Box */
+/* Search Bar (Segmented & elevated) */
 .cab-search-card {
   background: #ffffff;
-  border: 1px solid #ede9fe;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(93, 91, 246, 0.06);
-  padding: 0.75rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 2.25rem;
 }
 
 .cab-search-form {
@@ -55,93 +79,133 @@
 }
 
 .search-input-group label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  color: #6b7280;
-  letter-spacing: 0.05em;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin-bottom: 0.2rem;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .search-input-group input,
 .search-input-group select {
+  width: 100%;
   border: none;
   outline: none;
   background: transparent;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #1e1b4b;
+  color: #0f172a;
   padding: 0.2rem 0;
+  font-family: inherit;
 }
 
 .search-divider {
   width: 1px;
-  height: 38px;
-  background-color: #e5e7eb;
+  height: 36px;
+  background-color: #e2e8f0;
 }
 
 .btn-search-cab {
-  background-color: #5d5bf6;
+  background: #4f46e5;
   color: #ffffff;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.6rem;
   border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  box-shadow: 0 4px 12px rgba(93, 91, 246, 0.35);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-search-cab:hover {
-  background-color: #4b48ec;
+  background: #4338ca;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+  transform: translateY(-1px);
 }
 
-/* Clean 4-Column Grid (Exactly matches the hotel cards below on your home screen) */
+/* 4-Column Responsive Grid */
 .cab-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
-/* Individual Listing Card */
+@media (max-width: 1100px) {
+  .cab-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .cab-grid { grid-template-columns: repeat(2, 1fr); }
+  .cab-search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .search-divider { display: none; }
+  .btn-search-cab { justify-content: center; }
+  .cabs-page-wrapper { padding-top: 5rem; }
+}
+
+@media (max-width: 500px) {
+  .cab-grid { grid-template-columns: 1fr; }
+}
+
+/* Individual Card */
 .cab-listing-card {
   background: #ffffff;
-  border: 1px solid #ede9fe;
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(93, 91, 246, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 
 .cab-listing-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(93, 91, 246, 0.12);
+  box-shadow: 0 16px 30px -6px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
 }
 
-/* Image + Overlay Elements */
+/* Image Pane */
 .cab-image-container {
   position: relative;
   width: 100%;
-  height: 190px;
-  background-color: #f3f4f6;
+  height: 180px;
+  background-color: #f1f5f9;
   overflow: hidden;
+}
+
+.image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .cab-card-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
 .cab-listing-card:hover .cab-card-thumb {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-/* Heart Favorite Button (Matches Home Card Style) */
 .cab-fav-btn {
   position: absolute;
   top: 10px;
@@ -149,111 +213,165 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: transform 0.15s ease;
-}
-
-.cab-fav-btn i {
-  color: #5d5bf6;
-  font-size: 0.85rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, background 0.15s;
 }
 
 .cab-fav-btn:hover {
   transform: scale(1.1);
+  background: #ffffff;
 }
 
-/* Type Pill Chip */
 .cab-type-chip {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: rgba(30, 27, 75, 0.75);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
   color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  backdrop-filter: blur(4px);
 }
 
-/* Card Metadata */
+/* Metadata */
 .cab-meta {
-  padding: 1rem;
+  padding: 1rem 1.15rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
+.cab-city-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cab-seats-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+  background: #f1f5f9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
 .cab-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.3;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0.35rem 0 0.2rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .cab-name a {
-  color: #1e1b4b;
+  color: #0f172a;
   text-decoration: none;
 }
 
-.cab-subtext {
-  font-size: 0.8rem;
-  color: #6b7280;
-  margin-top: 0.25rem;
-  margin-bottom: 0.85rem;
+.cab-features-mini {
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
 }
 
-/* Bottom Price & Button */
+.cab-features-mini .dot {
+  font-size: 0.5rem;
+  color: #cbd5e1;
+}
+
+/* Price & Button */
 .cab-price-row {
   margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.65rem;
-  border-top: 1px solid #f1f3f9;
+  padding-top: 0.85rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
 }
 
 .price-val {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #1e1b4b;
+  color: #0f172a;
+  letter-spacing: -0.02em;
 }
 
 .price-unit {
-  font-size: 0.75rem;
-  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748b;
 }
 
 .btn-book-pill {
-  background-color: #5d5bf6;
+  background-color: #4f46e5;
   color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.45rem 1rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
   border-radius: 10px;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
 }
 
 .btn-book-pill:hover {
-  background-color: #4b48ec;
+  background-color: #4338ca;
   color: #ffffff;
+  transform: translateX(1px);
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .cab-search-form {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
-  .search-divider {
-    display: none;
-  }
+/* Empty State */
+.empty-state-box {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+}
+
+.empty-state-box h4 {
+  margin-top: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.empty-state-box p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.btn-reset {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4f46e5;
+  text-decoration: none;
 }

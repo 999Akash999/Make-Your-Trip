@@ -1,0 +1,184 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .bus-show-container {
+    max-width: 1180px;
+    margin: 5.5rem auto 4rem;
+    padding: 0 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .bus-hero {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  }
+  .bus-hero-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+  }
+  .info-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.25rem;
+  }
+  .amenity-chip {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #334155;
+  }
+  .sticky-booking-widget {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    position: sticky;
+    top: 2rem;
+  }
+  .btn-book-flow {
+    background: #4f46e5;
+    color: #ffffff;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    transition: background 0.2s ease;
+  }
+  .btn-book-flow:hover { background: #4338ca; color: #ffffff; }
+</style>
+
+<div class="bus-show-container">
+  
+  <div class="mb-3">
+    <a href="/buses" class="text-muted text-decoration-none small">&larr; Back to all bus routes</a>
+  </div>
+
+  <div class="row g-4">
+    <!-- Left Column: Details -->
+    <div class="col-lg-8">
+      <div class="bus-hero mb-4">
+        <img src="<%= bus.image.url %>" class="bus-hero-img" alt="<%= bus.busName %>">
+        <div class="p-4">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="badge bg-primary-subtle text-primary fw-bold text-uppercase mb-1"><%= bus.busType %></span>
+              <h2 class="fw-bold text-dark mb-1"><%= bus.busName %></h2>
+              <p class="text-muted small">Managed by <%= bus.operatorName %> &bull; Reg: <%= bus.busNumber %></p>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-success-subtle text-success fs-6 fw-bold px-3 py-2 rounded-pill">★ <%= bus.operatorRating %> / 5</span>
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <h5 class="fw-bold mb-3">Trip Timings</h5>
+          <div class="row g-3 text-center mb-4">
+            <div class="col-4">
+              <div class="info-box">
+                <span class="text-muted small text-uppercase">Departure</span>
+                <h4 class="fw-bold text-dark mt-1"><%= bus.departureTime ? bus.departureTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "20:00" %></h4>
+                <span class="text-capitalize fw-semibold text-primary"><%= bus.sourceCity %></span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="info-box">
+                <span class="text-muted small text-uppercase">Duration</span>
+                <h4 class="fw-bold text-dark mt-1"><%= bus.durationHours %> Hrs</h4>
+                <span class="text-muted small">Direct Highway</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="info-box">
+                <span class="text-muted small text-uppercase">Arrival</span>
+                <h4 class="fw-bold text-dark mt-1"><%= bus.arrivalTime ? bus.arrivalTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "08:00" %></h4>
+                <span class="text-capitalize fw-semibold text-primary"><%= bus.destinationCity %></span>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-3">Amenities on Board</h5>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <% if (bus.amenities.wifi) { %><span class="amenity-chip">📶 Free High-speed WiFi</span><% } %>
+            <% if (bus.amenities.chargingPoint) { %><span class="amenity-chip">🔌 USB Charging Points</span><% } %>
+            <% if (bus.amenities.blanket) { %><span class="amenity-chip">🛏️ Fresh Blankets & Pillows</span><% } %>
+            <% if (bus.amenities.waterBottle) { %><span class="amenity-chip">💧 Mineral Water Bottle</span><% } %>
+            <% if (bus.amenities.liveTracking) { %><span class="amenity-chip">📍 Live GPS Tracking</span><% } %>
+            <% if (bus.amenities.readingLight) { %><span class="amenity-chip">💡 Personal Reading Light</span><% } %>
+          </div>
+
+          <h5 class="fw-bold mb-2">Stops & Landmarks</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="text-muted small fw-bold text-uppercase mt-2">Boarding Points</h6>
+              <ul class="list-unstyled small">
+                <% for (let point of bus.boardingPoints) { %>
+                  <li class="py-1"><strong><%= point.time %></strong> - <%= point.locationName %> <span class="text-muted">(<%= point.landmark %>)</span></li>
+                <% } %>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6 class="text-muted small fw-bold text-uppercase mt-2">Dropping Points</h6>
+              <ul class="list-unstyled small">
+                <% for (let point of bus.droppingPoints) { %>
+                  <li class="py-1"><strong><%= point.time %></strong> - <%= point.locationName %> <span class="text-muted">(<%= point.landmark %>)</span></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Booking Widget -->
+    <div class="col-lg-4">
+      <div class="sticky-booking-widget">
+        <span class="text-muted small fw-bold text-uppercase">Seat Fares</span>
+        <div class="d-flex align-items-baseline gap-1 mt-1 mb-3">
+          <span class="fs-1 fw-bold text-dark">₹<%= bus.pricing.seaterPrice %></span>
+          <span class="text-muted small">/ passenger</span>
+        </div>
+
+        <div class="p-3 bg-light rounded-3 mb-3 small">
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Available Seats</span>
+            <span class="fw-bold text-success"><%= bus.availableSeats %> Seats Left</span>
+          </div>
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Total Bus Capacity</span>
+            <span class="fw-semibold"><%= bus.totalSeats %> Seats</span>
+          </div>
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Applicable Taxes</span>
+            <span class="fw-semibold">5% GST included</span>
+          </div>
+        </div>
+
+        <a href="/buses/<%= bus._id %>/book" class="btn-book-flow">
+          Select Seats & Book &rarr;
+        </a>
+        <div class="text-center mt-3 text-muted small">
+          🔒 Secure Instant PNR Confirmation
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,163 @@
+:root {
+  --transport-ink: #172554;
+  --transport-muted: #64748b;
+  --transport-line: #dbe4f0;
+  --transport-primary: #4f46e5;
+  --transport-soft: #f5f7ff;
+}
+
+.bikes-wrapper,
+.trains-wrapper,
+.book-layout-wrapper,
+.ticket-wrapper {
+  color: var(--transport-ink);
+}
+
+.book-layout-wrapper,
+.ticket-wrapper {
+  max-width: 1120px;
+  margin: 0 auto 4rem;
+  padding: 5rem 1.25rem 1rem;
+}
+
+.book-layout-wrapper h2,
+.trains-wrapper > h2 {
+  color: var(--transport-ink);
+  letter-spacing: -0.035em;
+}
+
+.book-layout-wrapper .card,
+.book-layout-wrapper .seat-deck-card,
+.trains-wrapper .card,
+.bikes-wrapper > .card,
+.ticket-wrapper .e-ticket {
+  border: 1px solid var(--transport-line) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 18px 50px rgba(30, 41, 89, 0.09) !important;
+}
+
+.book-layout-wrapper .card,
+.book-layout-wrapper .seat-deck-card {
+  background: linear-gradient(145deg, #fff 65%, #f7f8ff);
+}
+
+.book-layout-wrapper .form-control,
+.book-layout-wrapper .form-select,
+.trains-wrapper .form-control,
+.trains-wrapper .form-select {
+  min-height: 44px;
+  border-color: #d9e1ee;
+  border-radius: 11px;
+}
+
+.book-layout-wrapper .form-control:focus,
+.book-layout-wrapper .form-select:focus,
+.trains-wrapper .form-control:focus,
+.trains-wrapper .form-select:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.13);
+}
+
+.seat-grid {
+  grid-template-columns: repeat(4, minmax(48px, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.seat-btn {
+  min-height: 48px;
+  border-radius: 13px !important;
+}
+
+.ticket-wrapper .ticket-header,
+.ticket-wrapper .pass-header,
+.bikes-wrapper > .card > .bg-dark,
+.trains-wrapper > .card > .p-4:first-child {
+  background: linear-gradient(120deg, #312e81, #4f46e5 58%, #7c3aed) !important;
+}
+
+.ticket-wrapper .ticket-body,
+.ticket-wrapper .info-pill,
+.bikes-wrapper > .card .bg-light,
+.trains-wrapper > .card .bg-light,
+.ticket-wrapper .flight-time-box {
+  border-color: var(--transport-line) !important;
+}
+
+.ticket-wrapper .barcode-strip,
+.trains-wrapper .font-monospace {
+  letter-spacing: 0.22em;
+}
+
+.ticket-wrapper .table,
+.trains-wrapper .table {
+  vertical-align: middle;
+}
+
+.ticket-wrapper .btn,
+.book-layout-wrapper .btn,
+.trains-wrapper .btn {
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 767.98px) {
+  .book-layout-wrapper,
+  .ticket-wrapper {
+    padding: 4.5rem 0.75rem 0.5rem;
+  }
+
+  .book-layout-wrapper .card,
+  .book-layout-wrapper .seat-deck-card,
+  .trains-wrapper .card,
+  .bikes-wrapper > .card,
+  .ticket-wrapper .e-ticket {
+    border-radius: 16px !important;
+  }
+
+  .ticket-wrapper .ticket-header,
+  .ticket-wrapper .pass-header {
+    padding: 1.25rem !important;
+    gap: 1rem;
+    align-items: flex-start !important;
+  }
+
+  .book-layout-wrapper .seat-legend {
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+}
+
+@media print {
+  .navbar,
+  footer,
+  .ticket-wrapper > .d-flex a,
+  .ticket-wrapper > .d-flex > button,
+  .book-layout-wrapper,
+  .trains-wrapper > .mb-3 a,
+  .trains-wrapper > .mb-3 > button,
+  .ticket-wrapper form {
+    display: none !important;
+  }
+
+  body,
+  .container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .ticket-wrapper,
+  .trains-wrapper,
+  .bikes-wrapper {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ticket-wrapper .e-ticket,
+  .bikes-wrapper > .card,
+  .trains-wrapper > .card {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,12 @@
+<% layout("/layouts/boilerplate") %>
+<main class="container py-4" style="max-width: 820px"><h1 class="mb-4">Add a bus route</h1>
+  <form action="/buses" method="POST" class="card card-body gap-3">
+    <div class="row g-3"><div class="col"><input class="form-control" name="bus[busName]" placeholder="Service name" required></div><div class="col"><input class="form-control" name="bus[busNumber]" placeholder="Bus number" required></div></div>
+    <div class="row g-3"><div class="col"><input class="form-control" name="bus[operatorName]" placeholder="Operator" required></div><div class="col"><select class="form-select" name="bus[busType]"><% ["Sleeper","Semi-Sleeper","Seater","Volvo Multi-Axle","AC","Non-AC"].forEach(type => { %><option><%= type %></option><% }) %></select></div></div>
+    <div class="row g-3"><div class="col"><input class="form-control" name="bus[sourceCity]" placeholder="From city" required></div><div class="col"><input class="form-control" name="bus[destinationCity]" placeholder="To city" required></div></div>
+    <div class="row g-3"><div class="col"><label class="form-label">Departure</label><input class="form-control" name="bus[departureTime]" type="datetime-local" required></div><div class="col"><label class="form-label">Arrival</label><input class="form-control" name="bus[arrivalTime]" type="datetime-local" required></div></div>
+    <div class="row g-3"><div class="col"><input class="form-control" name="bus[durationHours]" type="number" min="1" step="0.5" placeholder="Duration in hours" required></div><div class="col"><input class="form-control" name="bus[totalSeats]" type="number" min="10" max="60" value="40" required></div><div class="col"><input class="form-control" name="bus[pricing][seaterPrice]" type="number" placeholder="Seat fare" required></div></div>
+    <h5>Boarding and drop off points</h5><div class="row g-3"><div class="col"><input class="form-control" name="bus[boardingPoints][0][locationName]" placeholder="Boarding location" required><input class="form-control mt-2" name="bus[boardingPoints][0][time]" placeholder="Boarding time" required></div><div class="col"><input class="form-control" name="bus[droppingPoints][0][locationName]" placeholder="Drop off location" required><input class="form-control mt-2" name="bus[droppingPoints][0][time]" placeholder="Drop off time" required></div></div>
+    <button class="btn btn-primary">Create bus route</button>
+  </form>
+</main>

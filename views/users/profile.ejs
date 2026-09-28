@@ -14,8 +14,8 @@
     <!-- Profile Info Card (Overlaps Banner) -->
     <div class="dash-user-header-card">
       <div class="user-avatar-wrap">
-        <img src="<%= user.image && user.image.url ? user.image.url : '/images/default-avatar.png' %>" alt="<%= user.username %>" class="user-avatar-img">
-        <a><button class="avatar-camera-btn" title="Change Photo">
+        <img src="<%= user.image && user.image.url ? user.image.url : '/images/labubu-404.png' %>" alt="<%= user.username %>" class="user-avatar-img">
+        <a href="/profile/edit"><button class="avatar-camera-btn" title="Change Photo">
           <i class="fa-solid fa-camera"></i>
         </button></a>
       </div>
@@ -77,23 +77,14 @@ Save Changes
           <a href="/profile" class="nav-item active">
             <i class="fa-solid fa-house"></i> Overview
           </a>
-          <a href="/flights/my-bookings" class="nav-item">
+          <a href="/bookings" class="nav-item">
             <i class="fa-solid fa-suitcase-rolling"></i> My Bookings
           </a>
           <a href="/listings/new" class="nav-item">
             <i class="fa-solid fa-house"></i> Create Listings
           </a>
-          <a href="/reviews" class="nav-item">
-            <i class="fa-regular fa-star"></i> My Reviews
-          </a>
-          <a href="/saved" class="nav-item">
-            <i class="fa-regular fa-bookmark"></i> Saved Places
-          </a>
-          <a href="/settings" class="nav-item">
+          <a href="/profile/edit" class="nav-item">
             <i class="fa-solid fa-gear"></i> Account Settings
-          </a>
-          <a href="/password/change" class="nav-item">
-            <i class="fa-solid fa-lock"></i> Change Password
           </a>
           <a href="/logout" class="nav-item text-danger mt-3">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -158,7 +149,7 @@ Save Changes
           <div class="panel-card">
             <div class="panel-card-head">
               <h4>Recent Bookings</h4>
-              <a href="/flights/my-bookings" class="panel-link">View All</a>
+              <a href="/bookings" class="panel-link">View All</a>
             </div>
 
             <div class="panel-list">
@@ -188,7 +179,7 @@ Save Changes
             </div>
 
             <div class="panel-card-foot">
-              <a href="/flights/my-bookings" class="theme-footer-link">
+                <a href="/bookings" class="theme-footer-link">
                 View All Bookings <i class="fa-solid fa-arrow-right"></i>
               </a>
             </div>
@@ -198,7 +189,7 @@ Save Changes
           <div class="panel-card">
             <div class="panel-card-head">
               <h4>Recent Reviews</h4>
-              <a href="/reviews" class="panel-link">View All</a>
+              <a href="/listings" class="panel-link">Explore Listings</a>
             </div>
 
             <div class="panel-list">
@@ -231,7 +222,7 @@ Save Changes
             </div>
 
             <div class="panel-card-foot">
-              <a href="/reviews" class="theme-footer-link">
+                <a href="/listings" class="theme-footer-link">
                 View All Reviews <i class="fa-solid fa-arrow-right"></i>
               </a>
             </div>
@@ -244,9 +235,7 @@ Save Changes
           <span class="quick-actions-label">Quick Actions</span>
           <div class="action-buttons-group">
             <a href="/profile/edit" class="action-btn-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
-            <a href="/password/change" class="action-btn-link"><i class="fa-solid fa-lock"></i> Change Password</a>
-            <a href="/payments" class="action-btn-link"><i class="fa-regular fa-credit-card"></i> Payment Methods</a>
-            <a href="/notifications" class="action-btn-link"><i class="fa-regular fa-bell"></i> Notification Settings</a>
+            <a href="/bookings" class="action-btn-link"><i class="fa-regular fa-credit-card"></i> Payment History</a>
           </div>
         </div>
 

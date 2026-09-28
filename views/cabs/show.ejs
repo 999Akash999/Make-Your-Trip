@@ -1,140 +1,203 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="cab-details-container my-5">
-  <div class="row g-4">
+<div class="cab-page-container">
+  
+  <!-- Breadcrumb Navigation -->
+  <nav class="cab-breadcrumb-nav">
+    <a href="/cabs" class="nav-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      All Cabs
+    </a>
+    <span class="sep">/</span>
+    <span><%= cab.operatingCity %></span>
+    <span class="sep">/</span>
+    <span class="active"><%= cab.vehicleName %></span>
+  </nav>
+
+  <!-- Section 1: Hero Showcase Card -->
+  <section class="cab-hero-card">
+    <div class="hero-image-pane">
+      <img 
+        src="<%= cab.image.url %>" 
+        alt="<%= cab.vehicleName %>" 
+        class="hero-cab-img"
+      />
+      <div class="hero-tag-overlay">
+        <span class="badge-category"><%= cab.vehicleType %></span>
+        <span class="badge-status"><span class="pulse-dot"></span> Available Now</span>
+      </div>
+    </div>
+    <div class="hero-info-pane">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="city-indicator">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <%= cab.operatingCity %>
+          </span>
+          <span class="reg-pill">REG: <%= cab.registrationNumber %></span>
+        </div>
+        <h1 class="hero-cab-title"><%= cab.vehicleName %></h1>
+      </div>
+      <div class="hero-quick-specs">
+        <div class="quick-spec-item">
+          <span class="q-val"><%= cab.capacity.passengers %></span>
+          <span class="q-label">Passengers</span>
+        </div>
+        <div class="quick-spec-sep"></div>
+        <div class="quick-spec-item">
+          <span class="q-val"><%= cab.capacity.luggage %></span>
+          <span class="q-label">Luggage Bags</span>
+        </div>
+        <div class="quick-spec-sep"></div>
+        <div class="quick-spec-item">
+          <span class="q-val"><%= cab.hasAC ? "AC" : "Non-AC" %></span>
+          <span class="q-label">Air Condition</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Main Grid (Left Details + Right Sticky Booking Box) -->
+  <div class="cab-content-grid">
     
-    <!-- Left Column: Cab Media & Specifications -->
-    <div class="col-lg-8">
-      <!-- Image Card -->
-      <div class="card cab-main-card shadow-sm mb-4">
-        <img 
-          src="<%= cab.image.url %>" 
-          class="card-img-top cab-detail-img" 
-          alt="<%= cab.vehicleName %>"
-        >
-        <div class="card-body p-4">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>
-              <span class="badge badge-type mb-1"><%= cab.vehicleType %></span>
-              <h2 class="cab-title mb-0"><%= cab.vehicleName %></h2>
+    <!-- Left Column: Specs, Driver, Inclusions -->
+    <main class="cab-main-content">
+      
+      <!-- Highlights Grid -->
+      <section class="content-block">
+        <h3 class="block-heading">Vehicle Features</h3>
+        <div class="specs-grid">
+          <div class="spec-tile">
+            <div class="spec-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <span class="city-pill">
-              <i class="bi bi-geo-alt-fill"></i> <%= cab.operatingCity %>
-            </span>
-          </div>
-
-          <p class="text-muted small">Reg No: <%= cab.registrationNumber %></p>
-
-          <hr class="divider">
-
-          <!-- Key Features Grid -->
-          <h5 class="section-subheading">Car Highlights</h5>
-          <div class="row g-3 my-2">
-            <div class="col-6 col-md-3">
-              <div class="spec-box">
-                <i class="bi bi-people-fill spec-icon"></i>
-                <span class="spec-label">Seating</span>
-                <span class="spec-value"><%= cab.capacity.passengers %> Seats</span>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="spec-box">
-                <i class="bi bi-luggage-fill spec-icon"></i>
-                <span class="spec-label">Luggage</span>
-                <span class="spec-value"><%= cab.capacity.luggage %> Bags</span>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="spec-box">
-                <i class="bi bi-snow spec-icon"></i>
-                <span class="spec-label">AC</span>
-                <span class="spec-value"><%= cab.hasAC ? "Equipped" : "Non-AC" %></span>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="spec-box">
-                <i class="bi bi-fuel-pump-fill spec-icon"></i>
-                <span class="spec-label">Fuel</span>
-                <span class="spec-value"><%= cab.fuelType %></span>
-              </div>
+            <div class="spec-meta">
+              <span class="spec-title">Passenger Capacity</span>
+              <span class="spec-detail"><%= cab.capacity.passengers %> Seats Included</span>
             </div>
           </div>
 
-          <hr class="divider">
-
-          <!-- Driver Profile Section -->
-          <h5 class="section-subheading">Chauffeur & Service</h5>
-          <div class="driver-card mt-3">
-            <div class="driver-avatar">
-              <i class="bi bi-person-circle"></i>
+          <div class="spec-tile">
+            <div class="spec-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             </div>
-            <div class="driver-info">
-              <div class="d-flex align-items-center gap-2">
-                <h6 class="mb-0 fw-bold text-dark"><%= cab.driver.name %></h6>
-                <span class="rating-badge">
-                  ★ <%= cab.driver.rating %>
-                </span>
-              </div>
-              <p class="text-muted small mb-0">
-                Completed <%= cab.driver.totalTrips %> trips • Verified Chauffeur
-              </p>
+            <div class="spec-meta">
+              <span class="spec-title">Luggage Capacity</span>
+              <span class="spec-detail"><%= cab.capacity.luggage %> Large Suitcases</span>
             </div>
           </div>
 
-          <hr class="divider">
+          <div class="spec-tile">
+            <div class="spec-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="spec-meta">
+              <span class="spec-title">Climate Control</span>
+              <span class="spec-detail"><%= cab.hasAC ? "Full Air Conditioning" : "Natural Ventilation" %></span>
+            </div>
+          </div>
 
-          <!-- Trip Inclusions / Rules -->
-          <h5 class="section-subheading">Included in Your Fare</h5>
-          <ul class="inclusion-list mt-3">
-            <li><i class="bi bi-check-circle-fill text-success"></i> Professional & clean air-conditioned vehicle</li>
-            <li><i class="bi bi-check-circle-fill text-success"></i> Fuel charges and driver allowance included</li>
-            <li><i class="bi bi-check-circle-fill text-success"></i> Free cancellation up to 6 hours before pickup</li>
-            <li><i class="bi bi-info-circle-fill text-muted"></i> State taxes, toll fees, and parking extra as applicable</li>
-          </ul>
+          <div class="spec-tile">
+            <div class="spec-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18M15 10h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-4M7 7h4M7 11h4"/></svg>
+            </div>
+            <div class="spec-meta">
+              <span class="spec-title">Fuel Type</span>
+              <span class="spec-detail"><%= cab.fuelType %></span>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Driver Information -->
+      <section class="content-block">
+        <h3 class="block-heading">Chauffeur & Operator</h3>
+        <div class="driver-profile-card">
+          <div class="driver-avatar-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="driver-details">
+            <div class="d-flex align-items-center gap-2">
+              <h4 class="driver-name"><%= cab.driver.name %></h4>
+              <span class="driver-rating-badge">★ <%= cab.driver.rating %></span>
+            </div>
+            <p class="driver-subtext">Completed <%= cab.driver.totalTrips %> trips • Background check passed</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inclusions -->
+      <section class="content-block border-0 mb-0">
+        <h3 class="block-heading">Fare Rules & Inclusions</h3>
+        <div class="inclusions-panel">
+          <div class="inc-item">
+            <svg class="inc-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Trained chauffeur with sanitized vehicle interior.</span>
+          </div>
+          <div class="inc-item">
+            <svg class="inc-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Fuel charges and driver allowance covered in base fare.</span>
+          </div>
+          <div class="inc-item">
+            <svg class="inc-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Complimentary cancellation up to 6 hours before departure.</span>
+          </div>
+          <div class="inc-item text-secondary">
+            <svg class="inc-info" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>State permits, toll plaza charges, and airport parking charged at actuals.</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Right Column: Sticky Booking Widget -->
+    <aside class="cab-sidebar">
+      <div class="booking-widget">
+        <div class="pricing-headline">
+          <span class="widget-label">Estimated Rate</span>
+          <div class="fare-display">
+            <span class="fare-currency">₹</span>
+            <span class="fare-amount"><%= cab.pricing.pricePerKm %></span>
+            <span class="fare-unit">/ km</span>
+          </div>
+        </div>
+
+        <div class="fare-card-breakdown">
+          <div class="breakdown-row">
+            <span>Base Fare (First 10 km)</span>
+            <span class="breakdown-val">₹<%= cab.pricing.baseFare %></span>
+          </div>
+          <div class="breakdown-row">
+            <span>Extra Hour Charge</span>
+            <span class="breakdown-val">₹<%= cab.pricing.extraHourCharge %>/hr</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Estimated Taxes</span>
+            <span class="breakdown-val">5% GST</span>
+          </div>
+          <div class="breakdown-divider"></div>
+          <div class="breakdown-row total-highlight">
+            <span>Minimum Payable</span>
+            <span class="breakdown-val">₹<%= cab.pricing.baseFare %></span>
+          </div>
+        </div>
+
+        <a href="/bookings/cabs/new/<%= cab._id %>" class="btn-primary-reserve">
+          Book This Vehicle
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <a href="/cabs" class="btn-secondary-link">
+          Explore Other Cars
+        </a>
+
+        <div class="safety-badge-container">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Verified SafeTravel Operator</span>
         </div>
       </div>
-    </div>
-
-    <!-- Right Column: Booking Action Card -->
-    <div class="col-lg-4">
-      <div class="card booking-action-card shadow-sm p-4 sticky-top" style="top: 2rem;">
-        <span class="text-muted small fw-semibold text-uppercase">Fare Breakdown</span>
-        <div class="d-flex align-items-baseline gap-2 mt-2 mb-3">
-          <span class="fare-large">₹<%= cab.pricing.pricePerKm %></span>
-          <span class="text-muted">/ km</span>
-        </div>
-
-        <div class="fare-breakdown-box p-3 mb-3">
-          <div class="d-flex justify-content-between py-1 small">
-            <span class="text-muted">Base Fare (First 10 km)</span>
-            <span class="fw-semibold">₹<%= cab.pricing.baseFare %></span>
-          </div>
-          <div class="d-flex justify-content-between py-1 small">
-            <span class="text-muted">Extra Hour Charge</span>
-            <span class="fw-semibold">₹<%= cab.pricing.extraHourCharge %>/hr</span>
-          </div>
-          <div class="d-flex justify-content-between py-1 small">
-            <span class="text-muted">Taxes & GST</span>
-            <span class="fw-semibold">5% extra</span>
-          </div>
-        </div>
-
-        <div class="d-grid gap-2">
-          <a href="/bookings/cabs/new/<%= cab._id %>" class="btn btn-book-action">
-            Reserve This Cab
-          </a>
-          <a href="/cabs" class="btn btn-outline-custom">
-            Browse Other Cabs
-          </a>
-        </div>
-
-        <div class="trip-safety-notice mt-4 text-center">
-          <i class="bi bi-shield-check text-primary"></i>
-          <span class="small text-muted ms-1">MakeYourTrip Verified Travel Safety Guarantee</span>
-        </div>
-      </div>
-    </div>
+    </aside>
 
   </div>
 </div>

@@ -1,0 +1,121 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/bikes.css">
+
+<div class="bikes-wrapper">
+  <div class="mb-3">
+    <a href="/bikes" class="text-muted text-decoration-none small">
+      &larr; Back to all bikes
+    </a>
+  </div>
+
+  <div class="row g-4 align-items-start">
+    <!-- Left Column: Media & Bike Details -->
+    <div class="col-lg-8">
+      <div class="card border rounded-4 overflow-hidden shadow-sm">
+        <div class="position-relative">
+          <img src="<%= bike.image.url %>" class="w-100" style="height: 380px; object-fit: cover;" alt="<%= bike.bikeName %>">
+          <span class="bike-type-chip position-absolute m-3 top-0 start-0"><%= bike.bikeType %></span>
+        </div>
+
+        <div class="p-4 p-md-5">
+          <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+            <div>
+              <h2 class="fw-bold text-dark mb-1"><%= bike.bikeName %></h2>
+              <p class="text-muted small mb-0">Model Year: <%= bike.bikeModelYear %> &bull; Reg: <%= bike.registrationNumber %></p>
+            </div>
+            <span class="badge bg-primary-subtle text-primary fs-6 px-3 py-2 rounded-pill text-capitalize">
+              📍 <%= bike.operatingCity %>
+            </span>
+          </div>
+
+          <hr class="my-4">
+
+          <!-- Quick Specs Grid -->
+          <h5 class="fw-bold mb-3">Vehicle Specifications</h5>
+          <div class="row g-3 text-center mb-4">
+            <div class="col-6 col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="small text-muted d-block fw-semibold">ENGINE</span>
+                <span class="fw-bold fs-5 text-dark"><%= bike.engineCC %> CC</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="small text-muted d-block fw-semibold">FUEL TYPE</span>
+                <span class="fw-bold fs-5 text-dark"><%= bike.features.fuelType %></span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="small text-muted d-block fw-semibold">TANK LIMIT</span>
+                <span class="fw-bold fs-5 text-dark"><%= bike.features.tankCapacityLitres %> L</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="small text-muted d-block fw-semibold">DAILY LIMIT</span>
+                <span class="fw-bold fs-5 text-dark"><%= bike.pricing.freeKmPerDay %> KM</span>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="fw-bold mb-2">Available Pickup Hubs in <%= bike.operatingCity %></h5>
+          <ul class="list-group list-group-flush mb-4">
+            <% for(let hub of bike.pickupLocations) { %>
+              <li class="list-group-item px-0 py-2">
+                <strong><%= hub.hubName %>:</strong> <span class="text-muted"><%= hub.address %></span>
+              </li>
+            <% } %>
+          </ul>
+
+          <h5 class="fw-bold mb-2">Rental Inclusions & Rules</h5>
+          <div class="row g-2 small text-muted">
+            <div class="col-md-6">✓ 1 ISI Marked Safety Helmet Included</div>
+            <div class="col-md-6">✓ Extra helmet on demand</div>
+            <div class="col-md-6">✓ Valid Driving License mandatory at pickup</div>
+            <div class="col-md-6">✓ Refundable deposit returned within 24 hours</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Sticky Rent Card -->
+    <div class="col-lg-4">
+      <div class="card p-4 rounded-4 border shadow-sm sticky-top" style="top: 2rem;">
+        <span class="small text-muted fw-bold text-uppercase">Rental Pricing</span>
+        <div class="d-flex align-items-baseline gap-1 mt-1 mb-3">
+          <span class="fs-1 fw-bold text-dark">₹<%= bike.pricing.dailyRent %></span>
+          <span class="text-muted">/ day</span>
+        </div>
+
+        <div class="p-3 bg-light rounded-3 mb-3 small">
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Refundable Security</span>
+            <span class="fw-bold text-dark">₹<%= bike.pricing.securityDeposit %></span>
+          </div>
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Hourly Extension</span>
+            <span class="fw-semibold">₹<%= bike.pricing.hourlyRent %>/hr</span>
+          </div>
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Extra Km Charge</span>
+            <span class="fw-semibold">₹<%= bike.pricing.extraKmCharge %>/km</span>
+          </div>
+        </div>
+
+        <% if (bike.isAvailable) { %>
+          <a href="/bikes/<%= bike._id %>/book" class="btn btn-primary w-100 py-2 fw-bold rounded-3">
+            Book & Pick Dates &rarr;
+          </a>
+        <% } else { %>
+          <button class="btn btn-secondary w-100 py-2 fw-bold rounded-3" disabled>Currently Rented Out</button>
+        <% } %>
+
+        <div class="text-center mt-3 text-muted small">
+          🛡️ SafeRide Verified Fleet
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

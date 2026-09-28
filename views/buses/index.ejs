@@ -1,0 +1,221 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .bus-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+    padding: 5.5rem 1.25rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .bus-search-bar {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    margin-bottom: 2.5rem;
+  }
+  .search-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 180px 180px auto;
+    gap: 1rem;
+    align-items: center;
+  }
+  .input-block label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .input-block input, .input-block select {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0f172a;
+    background: transparent;
+  }
+  .btn-bus-search {
+    background: #4f46e5;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .btn-bus-search:hover { background: #4338ca; }
+
+  /* Bus Listing Cards */
+  .bus-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    display: grid;
+    grid-template-columns: 2.2fr 1.5fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .bus-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
+  }
+  .bus-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0; }
+  .operator-badge {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 0.35rem;
+  }
+  .time-schedule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .time-val { font-size: 1.25rem; font-weight: 800; color: #0f172a; }
+  .city-val { font-size: 0.8rem; color: #64748b; font-weight: 600; }
+  .duration-line {
+    text-align: center;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    position: relative;
+    padding: 0 0.5rem;
+  }
+  .duration-line::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #cbd5e1;
+    z-index: 1;
+  }
+  .duration-line span {
+    position: relative;
+    background: #ffffff;
+    padding: 0 0.4rem;
+    z-index: 2;
+  }
+  .price-action-pane {
+    text-align: right;
+    border-left: 1px dashed #e2e8f0;
+    padding-left: 1.5rem;
+  }
+  .bus-fare { font-size: 1.6rem; font-weight: 800; color: #0f172a; }
+  .btn-select-seat {
+    display: block;
+    background: #4f46e5;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    text-align: center;
+    transition: background 0.2s ease;
+  }
+  .btn-select-seat:hover { background: #4338ca; color: #ffffff; }
+
+  @media (max-width: 900px) {
+    .search-fields { grid-template-columns: 1fr; }
+    .bus-card { grid-template-columns: 1fr; }
+    .price-action-pane { border-left: none; padding-left: 0; text-align: left; }
+  }
+</style>
+
+<div class="bus-page-wrapper">
+  
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="fw-bold mb-1">Bus Booking & Tickets</h2>
+      <p class="text-muted small mb-0">Book AC Sleeper, Semi-Sleeper, and Volvo luxury buses across India</p>
+    </div>
+    <a href="/buses/new" class="btn btn-outline-dark btn-sm rounded-pill fw-semibold">+ Add Bus Route</a>
+  </div>
+
+  <!-- Search Filter Form -->
+  <div class="bus-search-bar">
+    <form action="/buses" method="GET" class="search-fields">
+      <div class="input-block">
+        <label>FROM</label>
+        <input type="text" name="source" placeholder="Source City (e.g. Delhi)" value="<%= searchSource %>">
+      </div>
+      <div class="input-block">
+        <label>TO</label>
+        <input type="text" name="destination" placeholder="Destination City (e.g. Manali)" value="<%= searchDestination %>">
+      </div>
+      <div class="input-block">
+        <label>DATE</label>
+        <input type="date" name="date" value="<%= searchDate %>">
+      </div>
+      <div class="input-block">
+        <label>BUS TYPE</label>
+        <select name="busType">
+          <option value="">All Categories</option>
+          <option value="Sleeper" <%= searchType === 'Sleeper' ? 'selected' : '' %>>Sleeper</option>
+          <option value="Volvo Multi-Axle" <%= searchType === 'Volvo Multi-Axle' ? 'selected' : '' %>>Volvo Multi-Axle</option>
+          <option value="Semi-Sleeper" <%= searchType === 'Semi-Sleeper' ? 'selected' : '' %>>Semi-Sleeper</option>
+          <option value="Seater" <%= searchType === 'Seater' ? 'selected' : '' %>>Seater</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-bus-search">Search Buses</button>
+    </form>
+  </div>
+
+  <!-- Bus Cards -->
+  <div class="bus-list">
+    <% if (buses.length === 0) { %>
+      <div class="text-center py-5 bg-white rounded-4 border">
+        <p class="text-muted mb-0">No buses operating on this route. Please try another destination or date.</p>
+      </div>
+    <% } %>
+
+    <% for (let bus of buses) { %>
+      <div class="bus-card">
+        <div>
+          <h3 class="bus-title"><%= bus.busName %></h3>
+          <span class="operator-badge"><%= bus.operatorName %></span>
+          <span class="badge bg-light text-dark border ms-2"><%= bus.busType %></span>
+          <p class="text-muted small mt-2 mb-0">
+            Reg: <%= bus.busNumber %> &bull; <%= bus.availableSeats %> seats left
+          </p>
+        </div>
+
+        <div class="time-schedule">
+          <div>
+            <div class="time-val"><%= bus.departureTime ? bus.departureTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "20:00" %></div>
+            <div class="city-val text-capitalize"><%= bus.sourceCity %></div>
+          </div>
+          <div class="duration-line flex-grow-1">
+            <span><%= bus.durationHours %> hrs</span>
+          </div>
+          <div>
+            <div class="time-val"><%= bus.arrivalTime ? bus.arrivalTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "08:00" %></div>
+            <div class="city-val text-capitalize"><%= bus.destinationCity %></div>
+          </div>
+        </div>
+
+        <div class="price-action-pane">
+          <div class="text-muted small">Starting from</div>
+          <div class="bus-fare">₹<%= bus.pricing.seaterPrice %></div>
+          <a href="/buses/<%= bus._id %>" class="btn-select-seat">View & Select Seats</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+</div>

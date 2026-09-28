@@ -1,0 +1,66 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-5" style="max-width: 800px; padding-top: 4rem;">
+  <div class="mb-3">
+    <a href="/cabs/<%= cab._id %>" class="text-muted text-decoration-none small">&larr; Back to Cab Details</a>
+  </div>
+
+  <div class="card p-4 p-md-5 rounded-4 border shadow-sm bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h3 class="fw-bold mb-0">Confirm Cab Booking</h3>
+        <p class="text-muted small mb-0"><%= cab.vehicleName %> (<%= cab.vehicleType %>) &bull; <%= cab.operatingCity %></p>
+      </div>
+      <span class="fs-4 fw-bold text-primary">₹<%= cab.pricing.pricePerKm %>/km</span>
+    </div>
+
+    <hr class="my-4">
+
+    <form action="/bookings/cabs" method="POST">
+      <input type="hidden" name="cabId" value="<%= cab._id %>">
+      <h5 class="fw-bold mb-3">Pickup & Drop Details</h5>
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">PICKUP ADDRESS</label>
+          <input type="text" name="pickup" class="form-control" placeholder="Complete pickup location" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">DROP ADDRESS</label>
+          <input type="text" name="drop" class="form-control" placeholder="Drop destination" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">PICKUP DATE & TIME</label>
+          <input type="datetime-local" name="departureTime" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">SERVICE TYPE</label>
+          <select name="tripType" class="form-select">
+            <option value="One-Way">One-Way</option>
+            <option value="Round-Trip">Round-Trip</option>
+            <option value="Airport Transfer">Airport Transfer</option>
+          </select>
+        </div>
+      </div>
+
+      <h5 class="fw-bold mb-3 mt-4">Passenger Contact Info</h5>
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">PASSENGER NAME</label>
+          <input type="text" name="passengerName" class="form-control" value="<%= currUser ? currUser.username : '' %>" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label small fw-bold text-muted">PHONE NUMBER</label>
+          <input type="tel" name="phone" class="form-control" placeholder="10-digit mobile number" required>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <div>
+          <span class="text-muted small d-block">Base Minimum Starting Fare</span>
+          <h4 class="fw-bold text-dark mb-0">₹<%= cab.pricing.baseFare %></h4>
+        </div>
+        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3">Confirm Ride</button>
+      </div>
+    </form>
+  </div>
+</div>

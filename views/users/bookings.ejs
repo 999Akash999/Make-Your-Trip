@@ -1,0 +1,112 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .dashboard-wrapper {
+    max-width: 1100px;
+    margin: 5.5rem auto 4rem;
+    padding: 0 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .booking-entry-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+</style>
+
+<div class="dashboard-wrapper">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold text-dark mb-1">My Bookings & Trips</h2>
+      <p class="text-muted small mb-0">Manage all your confirmed tickets, rentals, and rides</p>
+    </div>
+  </div>
+
+  <% if ((!flightBookings || flightBookings.length === 0) && (!trainBookings || trainBookings.length === 0) && (!busBookings || busBookings.length === 0) && (!bikeBookings || bikeBookings.length === 0) && (!cabBookings || cabBookings.length === 0)) { %>
+    <div class="text-center py-5 bg-white border rounded-4">
+      <h5 class="fw-bold">No Bookings Yet</h5>
+      <p class="text-muted small mb-3">You haven't reserved any flights, trains, buses, or bikes.</p>
+      <a href="/listings" class="btn btn-primary rounded-pill px-4 fw-semibold">Explore Travel Options</a>
+    </div>
+  <% } %>
+
+  <% if (flightBookings && flightBookings.length > 0) { %>
+    <h5 class="fw-bold mt-4 mb-3">✈️ Flight Bookings</h5>
+    <% flightBookings.forEach((booking) => { %>
+      <div class="booking-entry-card d-flex justify-content-between align-items-center">
+        <div><span class="badge bg-info mb-1"><%= booking.status %></span><h5 class="fw-bold mb-0"><%= booking.flight ? booking.flight.airline : "Flight" %></h5>
+          <% if (booking.flight) { %><span class="text-muted small"><%= booking.flight.source %> → <%= booking.flight.destination %></span><% } %>
+        </div><div class="text-end"><strong class="d-block">₹<%= booking.totalAmount %></strong><a class="btn btn-sm btn-outline-primary rounded-pill mt-1" href="/flights/bookings/<%= booking._id %>/ticket">View Ticket</a></div>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <!-- Train Bookings -->
+  <% if (typeof trainBookings !== 'undefined' && trainBookings.length > 0) { %>
+    <h5 class="fw-bold mt-4 mb-3">🚆 Train Tickets</h5>
+    <% for(let t of trainBookings) { %>
+      <div class="booking-entry-card d-flex justify-content-between align-items-center">
+        <div>
+          <span class="badge bg-primary mb-1">PNR: <%= t.pnrNumber %></span>
+          <h5 class="fw-bold mb-0 text-dark"><%= t.journeyDetails.trainNumber %> - <%= t.journeyDetails.trainName %></h5>
+          <span class="text-muted small"><%= t.journeyDetails.fromStation %> &rarr; <%= t.journeyDetails.toStation %> &bull; Class: <%= t.journeyDetails.bookedClass %></span>
+        </div>
+        <div class="text-end">
+          <span class="fw-bold fs-5 text-dark d-block">₹<%= t.totalFare %></span>
+          <a href="/trains/bookings/<%= t._id %>/ticket" class="btn btn-sm btn-outline-primary rounded-pill mt-1">View Ticket</a>
+        </div>
+      </div>
+    <% } %>
+  <% } %>
+
+  <!-- Bus Bookings -->
+  <% if (typeof busBookings !== 'undefined' && busBookings.length > 0) { %>
+    <h5 class="fw-bold mt-4 mb-3">🚌 Bus Tickets</h5>
+    <% for(let b of busBookings) { %>
+      <div class="booking-entry-card d-flex justify-content-between align-items-center">
+        <div>
+          <span class="badge bg-success mb-1">PNR: <%= b.pnrNumber %></span>
+          <h5 class="fw-bold mb-0 text-dark"><%= b.journeyDetails.busName %></h5>
+          <span class="text-muted small text-capitalize"><%= b.journeyDetails.sourceCity %> &rarr; <%= b.journeyDetails.destinationCity %> &bull; <%= b.totalSeatsBooked %> Seats</span>
+        </div>
+        <div class="text-end">
+          <span class="fw-bold fs-5 text-dark d-block">₹<%= b.fareDetails.totalFare %></span>
+          <a href="/buses/bookings/<%= b._id %>/ticket" class="btn btn-sm btn-outline-success rounded-pill mt-1">View Ticket</a>
+        </div>
+      </div>
+    <% } %>
+  <% } %>
+
+  <!-- Bike Rentals -->
+  <% if (typeof bikeBookings !== 'undefined' && bikeBookings.length > 0) { %>
+    <h5 class="fw-bold mt-4 mb-3">🏍️ Bike Rentals</h5>
+    <% for(let bk of bikeBookings) { %>
+      <div class="booking-entry-card d-flex justify-content-between align-items-center">
+        <div>
+          <span class="badge bg-dark mb-1">Booking: <%= bk.bookingCode %></span>
+          <h5 class="fw-bold mb-0 text-dark"><%= bk.rentalDetails.bikeName %></h5>
+          <span class="text-muted small">Hub: <%= bk.rentalDetails.pickupHub %> &bull; <%= bk.rentalDetails.totalDays %> Days</span>
+        </div>
+        <div class="text-end">
+          <span class="fw-bold fs-5 text-dark d-block">₹<%= bk.fareBreakdown.totalAmountPaid %></span>
+          <a href="/bikes/bookings/<%= bk._id %>/receipt" class="btn btn-sm btn-outline-dark rounded-pill mt-1">View Receipt</a>
+        </div>
+      </div>
+    <% } %>
+  <% } %>
+
+  <% if (cabBookings && cabBookings.length > 0) { %>
+    <h5 class="fw-bold mt-4 mb-3">🚕 Cab Rides</h5>
+    <% cabBookings.forEach((booking) => { %>
+      <div class="booking-entry-card d-flex justify-content-between align-items-center">
+        <div><span class="badge bg-warning text-dark mb-1"><%= booking.rideStatus %></span>
+          <h5 class="fw-bold mb-0"><%= booking.cab ? booking.cab.vehicleName : "Cab ride" %></h5>
+          <span class="text-muted small"><%= booking.pickup.address %> → <%= booking.drop.address %></span>
+        </div><strong>₹<%= booking.fareDetails.totalFare %></strong>
+      </div>
+    <% }) %>
+  <% } %>
+</div>

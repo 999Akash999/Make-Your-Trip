@@ -1,0 +1,159 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/transport-booking.css">
+
+<style>
+  .ticket-wrapper {
+    max-width: 800px;
+    margin: 5.5rem auto 4rem;
+    padding: 0 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .e-ticket {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  }
+  .ticket-header {
+    background: #4f46e5;
+    color: #ffffff;
+    padding: 1.5rem 2rem;
+  }
+  .barcode-strip {
+    background: #0f172a;
+    color: #ffffff;
+    font-family: monospace;
+    letter-spacing: 0.4em;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .ticket-body {
+    padding: 2rem;
+  }
+  .info-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+</style>
+
+<div class="ticket-wrapper">
+  
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex gap-2 align-items-center"><a href="/buses" class="text-muted text-decoration-none small">&larr; Back to Bus Directory</a><a href="/bookings" class="btn btn-sm btn-outline-primary rounded-pill">My bookings</a></div>
+    <button onclick="window.print()" class="btn btn-sm btn-outline-dark fw-bold rounded-pill">Print Ticket</button>
+  </div>
+
+  <div class="e-ticket">
+    <!-- Header -->
+    <div class="ticket-header d-flex justify-content-between align-items-center">
+      <div>
+        <h4 class="fw-bold mb-0">E-TICKET CONFIRMATION</h4>
+        <span class="small opacity-75">MakeYourTrip Express Bus Network</span>
+      </div>
+      <div class="text-end">
+        <span class="small opacity-75 text-uppercase">PNR Number</span>
+        <h3 class="fw-bold mb-0"><%= booking.pnrNumber %></h3>
+      </div>
+    </div>
+
+    <div class="barcode-strip">
+      ||| | ||||| || |||| |||| ||| <%= booking.pnrNumber %> ||| | ||
+    </div>
+
+    <!-- Body -->
+    <div class="ticket-body">
+      
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h4 class="fw-bold mb-1"><%= booking.journeyDetails.busName %></h4>
+          <span class="badge bg-light text-dark border">Reg: <%= booking.journeyDetails.busNumber %></span>
+        </div>
+        <div>
+          <span class="badge <%= booking.bookingStatus === 'Cancelled' ? 'bg-danger' : 'bg-success' %> px-3 py-2 fs-6">
+            <%= booking.bookingStatus %>
+          </span>
+        </div>
+      </div>
+
+      <!-- Route Timings -->
+      <div class="row g-3 text-center mb-4">
+        <div class="col-6">
+          <div class="info-pill">
+            <span class="text-muted small text-uppercase">BOARDING TIME</span>
+            <h4 class="fw-bold text-dark mt-1"><%= booking.boardingPoint.time %></h4>
+            <div class="fw-bold text-capitalize text-primary"><%= booking.journeyDetails.sourceCity %></div>
+            <div class="small text-muted"><%= booking.boardingPoint.locationName %></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="info-pill">
+            <span class="text-muted small text-uppercase">DROPPING TIME</span>
+            <h4 class="fw-bold text-dark mt-1"><%= booking.droppingPoint.time %></h4>
+            <div class="fw-bold text-capitalize text-primary"><%= booking.journeyDetails.destinationCity %></div>
+            <div class="small text-muted"><%= booking.droppingPoint.locationName %></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passengers Table -->
+      <h6 class="fw-bold text-muted small text-uppercase mb-2">Booked Passenger(s)</h6>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Passenger Name</th>
+              <th>Seat No.</th>
+              <th>Age</th>
+              <th>Gender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let p of booking.passengers) { %>
+              <tr>
+                <td class="fw-bold"><%= p.name %></td>
+                <td><span class="badge bg-primary"><%= p.seatNumber %></span></td>
+                <td><%= p.age %> yrs</td>
+                <td><%= p.gender %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Payment & Fare Summary -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <h6 class="fw-bold text-muted small text-uppercase mb-1">Contact Details</h6>
+          <p class="small mb-1"><strong>Phone:</strong> <%= booking.contactInfo.phone %></p>
+          <p class="small mb-0"><strong>Email:</strong> <%= booking.contactInfo.email %></p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <span class="text-muted small text-uppercase">Total Paid Amount</span>
+          <h3 class="fw-bold text-dark mb-0">₹<%= booking.fareDetails.totalFare %></h3>
+          <span class="small text-muted">Paid via <%= booking.paymentInfo.method %></span>
+        </div>
+      </div>
+
+      <!-- Cancel Action -->
+      <% if (booking.bookingStatus !== 'Cancelled') { %>
+        <hr class="my-4">
+        <form action="/buses/bookings/<%= booking._id %>/cancel" method="POST" onsubmit="return confirm('Are you sure you want to cancel this booking? An 80% refund will be credited.')">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted small">Need to change your travel plans?</span>
+            <button type="submit" class="btn btn-outline-danger btn-sm fw-bold">Cancel Ticket</button>
+          </div>
+        </form>
+      <% } else { %>
+        <div class="alert alert-danger mt-4 mb-0 small">
+          Ticket cancelled. Refund of ₹<%= booking.cancellation.refundAmount %> has been processed.
+        </div>
+      <% } %>
+
+    </div>
+  </div>
+
+</div>

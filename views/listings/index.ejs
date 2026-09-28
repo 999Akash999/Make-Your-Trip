@@ -12,9 +12,29 @@
         <div class="filter-icon-box"><i class="fa-solid fa-fire"></i></div>
         <span>Trending</span>
       </a>
-      <a href="/listings?category=rooms" class="filter-item ">
+      <a href="/rooms" class="filter-item ">
         <div class="filter-icon-box"><i class="fa-solid fa-bed"></i></div>
         <span>Rooms</span>
+      </a>
+       <a href="/flights" class="filter-item ">
+        <div class="filter-icon-box"><i class="fa-solid fa-plane"></i></div>
+        <span>Flights</span>
+      </a>
+      <a href="/buses" class="filter-item ">
+        <div class="filter-icon-box"><i class="fa-solid fa-bus"></i></div>
+        <span>Bus</span>
+      </a>
+      <a href="/cabs" class="filter-item ">
+        <div class="filter-icon-box"><i class="fa-solid fa-taxi"></i></div>
+        <span>Taxi</span>
+      </a>
+      <a href="/bikes" class="filter-item ">
+        <div class="filter-icon-box"><i class="fa-solid fa-motorcycle"></i></div>
+        <span>Bike</span>
+      </a>
+      <a href="/trains" class="filter-item ">
+        <div class="filter-icon-box"><i class="fa-solid fa-train-tram"></i></div>
+        <span>Train</span>
       </a>
       <a href="/listings?category=cities" class="filter-item ">
         <div class="filter-icon-box"><i class="fa-solid fa-mountain-city"></i></div>
@@ -24,10 +44,7 @@
         <div class="filter-icon-box"><i class="fa-solid fa-mountain"></i></div>
         <span>Mountains</span>
       </a>
-      <a href="/flights" class="filter-item ">
-        <div class="filter-icon-box"><i class="fa-solid fa-plane"></i></div>
-        <span>Flights</span>
-      </a>
+     
       <a href="/listings?category=pools" class="filter-item ">
         <div class="filter-icon-box"><i class="fa-solid fa-person-swimming"></i></div>
         <span>Swimming</span>
@@ -44,27 +61,16 @@
         <div class="filter-icon-box"><i class="fa-solid fa-snowflake"></i></div>
         <span>Arctic</span>
       </a>
-      <a href="/listings?category=bus" class="filter-item ">
-        <div class="filter-icon-box"><i class="fa-solid fa-bus"></i></div>
-        <span>Bus</span>
-      </a>
-      <a href="/cabs" class="filter-item ">
-        <div class="filter-icon-box"><i class="fa-solid fa-taxi"></i></div>
-        <span>Taxi</span>
-      </a>
-      <a href="/listings?category=taxi" class="filter-item ">
-        <div class="filter-icon-box"><i class="fa-solid fa-motorcycle"></i></div>
-        <span>Bike</span>
-      </a>
-      <a href="/listings?category=train" class="filter-item ">
-        <div class="filter-icon-box"><i class="fa-solid fa-train-tram"></i></div>
-        <span>Train</span>
-      </a>
     </div>
   </div>
 
  
   <form action="/flights/search" method="GET" class="flight-search-container">
+    <div class="flight-search-heading">
+      <div class="flight-search-heading-icon"><i class="fa-solid fa-plane-departure"></i></div>
+      <div><h2>Find your next flight</h2><p>Compare routes and book your journey in a few steps.</p></div>
+      <span class="flight-search-heading-note"><i class="fa-solid fa-shield-halved"></i> Easy booking</span>
+    </div>
     <div class="search-inputs-grid">
      
       <div class="input-card">
@@ -83,7 +89,7 @@
       <!-- Departure Field -->
       <div class="input-card">
         <span class="card-floating-label">Departure</span>
-        <input type="text" name="departureDate" class="card-main-input" placeholder="Select Date" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+        <input type="date" name="departureDate" class="card-main-input" aria-label="Departure date">
         <span class="card-sub-label">Travel Day</span>
       </div>
 
@@ -153,13 +159,22 @@
   </form>
 
   
-  <div class="listings-grid">
-    <% for(let listing of allListings) { %>
-      <a href="/listings/<%= listing._id %>" class="listing-item-anchor">
-        <div class="listing-card">
+  <section class="home-rooms-section" id="rooms">
+    <div class="home-rooms-heading">
+      <div><span class="home-rooms-eyebrow">Find your next stay</span><h2>Rooms & stays</h2><p>Handpicked places for your next trip.</p></div>
+      <% if (allListings.length > 4) { %>
+        <a class="rooms-toggle-btn" href="/rooms">View more <i class="fa-solid fa-arrow-right"></i></a>
+      <% } %>
+    </div>
+
+    <% if (allListings.length) { %>
+      <div class="listings-grid rooms-preview-grid">
+        <% for(let listing of allListings.slice(0, 4)) { %>
+          <a href="/listings/<%= listing._id %>" class="listing-item-anchor">
+            <div class="listing-card">
           
           <div class="listing-media-wrap">
-            <img src="<%= listing.image.url %>" class="listing-thumbnail" alt="<%= listing.title %>" loading="lazy"/>
+            <img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80' %>" class="listing-thumbnail" alt="<%= listing.title %>" loading="lazy"/>
             <button class="listing-like-btn" type="button" aria-label="Favorite">
               <i class="fa-solid fa-heart"></i>
             </button>
@@ -179,13 +194,85 @@
               <span class="listing-rate-period">/ night</span>
             </div>
           </div>
-        </div>
-      </a>
+            </div>
+          </a>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="rooms-empty-state"><i class="fa-regular fa-house"></i><h3>No stays listed yet</h3><p>New rooms and stays will show up here.</p></div>
     <% } %>
-  </div>
+  </section>
+
+  <section class="home-transport-section">
+    <div class="home-transport-heading">
+      <div><span class="home-transport-eyebrow">Ride in comfort</span><h2>Popular cabs</h2><p>Choose a cab for your next trip.</p></div>
+      <a href="/cabs">View all cabs <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <% if (cabs.length) { %>
+      <div class="home-transport-grid">
+        <% cabs.forEach(cab => { %>
+          <a class="home-transport-card" href="/cabs/<%= cab._id %>">
+            <img src="<%= cab.image && cab.image.url ? cab.image.url : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80' %>" alt="<%= cab.vehicleName %>" loading="lazy">
+            <div class="home-transport-card-body"><span class="home-transport-tag"><%= cab.vehicleType %></span><h3><%= cab.vehicleName %></h3><p><i class="fa-solid fa-location-dot"></i> <%= cab.operatingCity %> · <%= cab.capacity.passengers %> seats</p><strong>₹<%= Number(cab.pricing.pricePerKm).toLocaleString("en-IN") %><small> / km</small></strong></div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %><p class="home-transport-empty">No cabs are available right now. <a href="/cabs">Browse cabs</a></p><% } %>
+  </section>
+
+  <section class="home-transport-section">
+    <div class="home-transport-heading">
+      <div><span class="home-transport-eyebrow">Explore on two wheels</span><h2>Bike rentals</h2><p>Find a ride for city breaks and weekend escapes.</p></div>
+      <a href="/bikes">View all bikes <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <% if (bikes.length) { %>
+      <div class="home-transport-grid">
+        <% bikes.forEach(bike => { %>
+          <a class="home-transport-card" href="/bikes/<%= bike._id %>">
+            <img src="<%= bike.image && bike.image.url ? bike.image.url : 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80' %>" alt="<%= bike.bikeName %>" loading="lazy">
+            <div class="home-transport-card-body"><span class="home-transport-tag"><%= bike.bikeType %></span><h3><%= bike.bikeName %></h3><p><i class="fa-solid fa-location-dot"></i> <%= bike.operatingCity %> · <%= bike.engineCC %> cc</p><strong>₹<%= Number(bike.pricing.dailyRent).toLocaleString("en-IN") %><small> / day</small></strong></div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %><p class="home-transport-empty">No bikes are available right now. <a href="/bikes">Browse bikes</a></p><% } %>
+  </section>
+
+  <section class="home-transport-section">
+    <div class="home-transport-heading">
+      <div><span class="home-transport-eyebrow">Travel together</span><h2>Bus routes</h2><p>Compare routes, timings and fares.</p></div>
+      <a href="/buses">View all buses <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <% if (buses.length) { %>
+      <div class="home-transport-grid">
+        <% buses.forEach(bus => { %>
+          <a class="home-transport-card" href="/buses/<%= bus._id %>">
+            <img src="<%= bus.image && bus.image.url ? bus.image.url : 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80' %>" alt="<%= bus.busName %>" loading="lazy">
+            <div class="home-transport-card-body"><span class="home-transport-tag"><%= bus.busType %></span><h3><%= bus.busName %></h3><p><i class="fa-solid fa-route"></i> <%= bus.sourceCity %> → <%= bus.destinationCity %></p><strong>₹<%= Number(bus.pricing.seaterPrice).toLocaleString("en-IN") %><small> / seat</small></strong></div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %><p class="home-transport-empty">No bus routes are available right now. <a href="/buses">Browse buses</a></p><% } %>
+  </section>
+
+  <section class="home-transport-section">
+    <div class="home-transport-heading">
+      <div><span class="home-transport-eyebrow">Go further</span><h2>Train journeys</h2><p>Find a train for your next destination.</p></div>
+      <a href="/trains">View all trains <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <% if (trains.length) { %>
+      <div class="home-transport-grid">
+        <% trains.forEach(train => { const startingFare = train.classes.length ? Math.min(...train.classes.map(item => item.fare)) : null; %>
+          <a class="home-transport-card home-train-card" href="/trains/<%= train._id %>">
+            <div class="home-train-art"><i class="fa-solid fa-train"></i><span><%= train.trainNumber %></span></div>
+            <div class="home-transport-card-body"><span class="home-transport-tag"><%= train.trainType %></span><h3><%= train.trainName %></h3><p><i class="fa-solid fa-route"></i> <%= train.sourceStation.name %> → <%= train.destinationStation.name %></p><strong><% if (startingFare !== null) { %>From ₹<%= Number(startingFare).toLocaleString("en-IN") %><% } else { %>View schedule<% } %></strong></div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %><p class="home-transport-empty">No trains are available right now. <a href="/trains">Browse trains</a></p><% } %>
+  </section>
 
   
-  <a href="mailto:gnagwarakash555@gamil.com" class="support-floating-btn" id="helpButton" aria-label="Customer Support">
+  <a href="mailto:gnagwarakash555@gmail.com" class="support-floating-btn" id="helpButton" aria-label="Customer Support">
     <i class="fa-solid fa-headset"></i>
   </a>
 

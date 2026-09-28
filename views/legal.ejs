@@ -1,0 +1,12 @@
+<% layout("/layouts/boilerplate") %>
+<main class="container py-5" style="max-width: 850px; min-height: 55vh">
+  <h1 class="mb-4"><%= title %></h1>
+  <% if (title === "Privacy Policy") { %>
+    <p>We use the account details and booking information you provide to operate Make Your Trip, manage reservations, and respond to support requests.</p>
+    <p>Profile details and reservation records are stored with your account. We do not sell personal information. Contact support through the link in the footer to request help with your account data.</p>
+  <% } else { %>
+    <p>Use Make Your Trip to browse travel listings and transportation services and to manage reservations made through your account.</p>
+    <p>Provide accurate information when booking. Availability, fares, and booking details are shown by the service provider and may change before a reservation is confirmed.</p>
+    <p>Contact support through the link in the footer if you need help with a reservation or your account.</p>
+  <% } %>
+</main>

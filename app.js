@@ -21,7 +21,9 @@ const ExpressError = require("./utils/ExpressError.js");
 const User = require("./models/user.js");
 const Flight = require("./models/flight.js");
 const Cab = require("./models/cab.js");
-
+const Bus = require("./models/bus.js"); 
+const Bike = require("./models/bike.js");
+const Train = require("./models/train.js");
 // Routes
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -29,7 +31,10 @@ const userRouter = require("./routes/user.js");
 const flightRouter = require("./routes/flights.js");
 const cabRoutes = require("./routes/cabs.js");
 const cabBookingRoutes = require("./routes/cabBooking.js");
-//heyS
+const busRouter = require("./routes/buses.js");
+const bikeRoutes = require("./routes/bikes.js");
+
+const trainRoutes = require("./routes/trains.js");
 // Database configuration
 const dbUrl = process.env.ATLASDB_URL;
 const secret = process.env.SECRET;
@@ -261,7 +266,115 @@ async function initCabData() {
   }
 }
 
-// Routes
+// Demo Buses Data
+const sampleDemoBuses = [
+  {
+    busName: "Zingbus Maxx AC Sleeper",
+    busNumber: "DL-01-EQ-9821",
+    operatorName: "Zingbus Electric & Multi-Axle",
+    operatorRating: 4.8,
+    busType: "Sleeper",
+    hasAC: true,
+    sourceCity: "delhi",
+    destinationCity: "manali",
+    departureTime: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    arrivalTime: new Date(Date.now() + 36 * 60 * 60 * 1000),
+    durationHours: 12,
+    boardingPoints: [
+      { locationName: "Kashmere Gate Metro Gate 5", landmark: "Near ISBT", time: "20:00" },
+      { locationName: "Majnu Ka Tilla", landmark: "Petrol Pump", time: "20:45" },
+    ],
+    droppingPoints: [
+      { locationName: "Private Bus Parking Manali", landmark: "Near Mall Road", time: "08:00" },
+    ],
+    totalSeats: 36,
+    bookedSeats: ["L1", "L2", "U5"],
+    pricing: { seaterPrice: 1250, sleeperPrice: 1650, taxPercent: 5 },
+    amenities: { wifi: true, chargingPoint: true, waterBottle: true, blanket: true, liveTracking: true, readingLight: true },
+    image: { url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80", filename: "sample-bus-1" },
+    isActive: true,
+  },
+  {
+    busName: "IntrCity SmartBus Volvo Multi-Axle",
+    busNumber: "KA-01-AK-4412",
+    operatorName: "IntrCity Mobility",
+    operatorRating: 4.9,
+    busType: "Volvo Multi-Axle",
+    hasAC: true,
+    sourceCity: "bangalore",
+    destinationCity: "goa",
+    departureTime: new Date(Date.now() + 28 * 60 * 60 * 1000),
+    arrivalTime: new Date(Date.now() + 40 * 60 * 60 * 1000),
+    durationHours: 12,
+    boardingPoints: [
+      { locationName: "Majestic Anand Rao Circle", landmark: "Opposite SRS Travels", time: "21:30" },
+      { locationName: "Yeshwantpur Govardhan", landmark: "Metro Gate 1", time: "22:15" },
+    ],
+    droppingPoints: [
+      { locationName: "Panjim Kadamba Bus Stand", landmark: "Platform 3", time: "09:30" },
+    ],
+    totalSeats: 40,
+    bookedSeats: ["U1", "U2", "L10"],
+    pricing: { seaterPrice: 1400, sleeperPrice: 1950, taxPercent: 5 },
+    amenities: { wifi: true, chargingPoint: true, waterBottle: true, blanket: true, liveTracking: true, readingLight: true },
+    image: { url: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80", filename: "sample-bus-2" },
+    isActive: true,
+  },
+  {
+    busName: "Shivneri AC Seater Express",
+    busNumber: "MH-12-RN-7700",
+    operatorName: "MSRTC Premium AC",
+    operatorRating: 4.6,
+    busType: "Seater",
+    hasAC: true,
+    sourceCity: "mumbai",
+    destinationCity: "pune",
+    departureTime: new Date(Date.now() + 12 * 60 * 60 * 1000),
+    arrivalTime: new Date(Date.now() + 16 * 60 * 60 * 1000),
+    durationHours: 4,
+    boardingPoints: [
+      { locationName: "Dadar Asiad Terminal", landmark: "TT Circle", time: "07:00" },
+      { locationName: "Vashi Plaza", landmark: "Highway Exit", time: "07:45" },
+    ],
+    droppingPoints: [
+      { locationName: "Pune Station Stand", landmark: "Platform 1", time: "11:00" },
+    ],
+    totalSeats: 45,
+    bookedSeats: ["1", "2", "3", "15"],
+    pricing: { seaterPrice: 520, sleeperPrice: 0, taxPercent: 5 },
+    amenities: { wifi: false, chargingPoint: true, waterBottle: true, blanket: false, liveTracking: true, readingLight: true },
+    image: { url: "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=1200&q=80", filename: "sample-bus-3" },
+    isActive: true,
+  }
+];
+
+// Bus Seeder Function
+async function initBusData() {
+  try {
+    const count = await Bus.countDocuments();
+    if (count === 0) {
+      let hostUser = await User.findOne();
+      if (!hostUser) {
+        hostUser = await User.create({
+          username: "bus_host",
+          email: "bus_host@makeyourtrip.com",
+        });
+      }
+
+      const busesToInsert = sampleDemoBuses.map((bus) => ({
+        ...bus,
+        owner: hostUser._id,
+      }));
+
+      await Bus.insertMany(busesToInsert);
+      console.log("Demo Buses successfully initialized in Database!");
+    }
+  } catch (err) {
+    console.error("Error initializing bus data:", err.message);
+  }
+}
+
+// Primary Redirect & Quick Test Endpoints
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });
@@ -312,14 +425,150 @@ app.get("/seed", async (req, res) => {
   res.send("Flights Seeded Successfully");
 });
 
+// Mounted Application Routes
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);
 app.use("/", userRouter);
 app.use("/flights", flightRouter);
 app.use("/cabs", cabRoutes);
 app.use("/bookings/cabs", cabBookingRoutes);
-
+app.use("/buses", busRouter);
+app.use("/bikes", bikeRoutes);
+app.use("/trains", trainRoutes);
 // 404 Handler
+
+const sampleDemoBikes = [
+  {
+    bikeName: "Royal Enfield Classic 350 Reborn",
+    bikeModelYear: 2024,
+    registrationNumber: "GA-03-AB-4001",
+    bikeType: "Cruiser",
+    engineCC: 349,
+    operatingCity: "goa",
+    pickupLocations: [
+      { hubName: "Airport Hub Dabolim", address: "Opposite Terminal 1" },
+      { hubName: "Calangute Beach Road", address: "Near Tito's Lane" },
+    ],
+    pricing: { dailyRent: 950, hourlyRent: 110, securityDeposit: 1500, freeKmPerDay: 150 },
+    features: { helmetIncluded: true, extraHelmetAvailable: true, fuelType: "Petrol" },
+    image: { url: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80", filename: "bike-1" },
+    isAvailable: true,
+  },
+  {
+    bikeName: "Honda Activa 6G Premium",
+    bikeModelYear: 2024,
+    registrationNumber: "KA-05-MK-9821",
+    bikeType: "Scooter",
+    engineCC: 110,
+    operatingCity: "bangalore",
+    pickupLocations: [
+      { hubName: "Koramangala 5th Block", address: "Near Sony Signal" },
+      { hubName: "Indiranagar 100ft Road", address: "Metro Pillar 42" },
+    ],
+    pricing: { dailyRent: 450, hourlyRent: 50, securityDeposit: 1000, freeKmPerDay: 100 },
+    features: { helmetIncluded: true, extraHelmetAvailable: true, fuelType: "Petrol" },
+    image: { url: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80", filename: "bike-2" },
+    isAvailable: true,
+  },
+  {
+    bikeName: "Royal Enfield Himalayan 450",
+    bikeModelYear: 2024,
+    registrationNumber: "HP-01-TR-3312",
+    bikeType: "Adventure",
+    engineCC: 452,
+    operatingCity: "manali",
+    pickupLocations: [
+      { hubName: "Mall Road Manali", address: "Near Bus Terminal" },
+    ],
+    pricing: { dailyRent: 1600, hourlyRent: 180, securityDeposit: 3000, freeKmPerDay: 200 },
+    features: { helmetIncluded: true, extraHelmetAvailable: true, fuelType: "Petrol" },
+    image: { url: "https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80", filename: "bike-3" },
+    isAvailable: true,
+  },
+];
+
+async function initBikeData() {
+  try {
+    const count = await Bike.countDocuments();
+    if (count === 0) {
+      let hostUser = await User.findOne();
+      if (!hostUser) {
+        hostUser = await User.create({ username: "bike_host", email: "bikes@makeyourtrip.com" });
+      }
+      const bikesToInsert = sampleDemoBikes.map((bike) => ({ ...bike, owner: hostUser._id }));
+      await Bike.insertMany(bikesToInsert);
+      console.log("Demo Bikes initialized in Database!");
+    }
+  } catch (err) {
+    console.error("Error seeding bikes:", err.message);
+  }
+}
+const sampleDemoTrains = [
+  {
+    trainNumber: "22436",
+    trainName: "Vande Bharat Express",
+    trainType: "Vande Bharat",
+    runsOnDays: ["Mon", "Tue", "Wed", "Fri", "Sat", "Sun"],
+    sourceStation: { code: "NDLS", name: "New Delhi", departureTime: "06:00" },
+    destinationStation: { code: "BSB", name: "Varanasi Jn", arrivalTime: "14:00" },
+    durationHours: 8,
+    classes: [
+      { className: "CC", fare: 1750, availableSeats: 54 },
+      { className: "EC", fare: 3300, availableSeats: 18 },
+    ],
+    isActive: true,
+  },
+  {
+    trainNumber: "12952",
+    trainName: "Mumbai Rajdhani Express",
+    trainType: "Rajdhani",
+    runsOnDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    sourceStation: { code: "NDLS", name: "New Delhi", departureTime: "16:55" },
+    destinationStation: { code: "MMCT", name: "Mumbai Central", arrivalTime: "08:35" },
+    durationHours: 15.5,
+    classes: [
+      { className: "3A", fare: 2420, availableSeats: 42 },
+      { className: "2A", fare: 3450, availableSeats: 26 },
+      { className: "1A", fare: 5200, availableSeats: 12 },
+    ],
+    isActive: true,
+  },
+  {
+    trainNumber: "12626",
+    trainName: "Kerala Superfast Express",
+    trainType: "Superfast",
+    runsOnDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    sourceStation: { code: "NDLS", name: "New Delhi", departureTime: "20:10" },
+    destinationStation: { code: "SBC", name: "KSR Bengaluru", arrivalTime: "04:30" },
+    durationHours: 32,
+    classes: [
+      { className: "SL", fare: 810, availableSeats: 85 },
+      { className: "3A", fare: 2130, availableSeats: 30 },
+      { className: "2A", fare: 3120, availableSeats: 14 },
+    ],
+    isActive: true,
+  }
+];
+
+async function initTrainData() {
+  try {
+    const count = await Train.countDocuments();
+    if (count === 0) {
+      await Train.insertMany(sampleDemoTrains);
+      console.log("Demo Trains seeded successfully into Database!");
+    }
+  } catch (err) {
+    console.error("Error seeding trains:", err.message);
+  }
+}
+// Database Connection and Server Startup
+async function main() {
+  mongoose.set("bufferCommands", false);
+  await mongoose.connect(dbUrl, {
+    serverSelectionTimeoutMS: DB_TIMEOUT_MS,
+    connectTimeoutMS: DB_TIMEOUT_MS,
+  });
+}
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
 });
@@ -339,22 +588,15 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("error.ejs", { statusCode, message });
 });
-
-// Database Connection and Server Startup
-async function main() {
-  mongoose.set("bufferCommands", false);
-  await mongoose.connect(dbUrl, {
-    serverSelectionTimeoutMS: DB_TIMEOUT_MS,
-    connectTimeoutMS: DB_TIMEOUT_MS,
-  });
-}
-
 main()
   .then(async () => {
     console.log("connected to DB");
-    // Seed cabs only after DB connection is ready
-    await initCabData();
 
+    // Both seeders execute strictly AFTER the database connection is established
+    await initCabData();
+    await initBusData();
+await initBikeData();
+await initTrainData();
     const port = process.env.PORT || 8080;
     app.listen(port, () => {
       console.log(`server is listening to port ${port}`);

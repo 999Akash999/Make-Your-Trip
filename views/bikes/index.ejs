@@ -1,0 +1,95 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Link external CSS -->
+<link rel="stylesheet" href="/css/bikes.css">
+
+<div class="bikes-wrapper">
+  
+  <!-- Header Bar -->
+  <div class="bike-header-row">
+    <div>
+      <h1 class="bike-page-heading">Self-Drive Bike Rentals</h1>
+      <p class="bike-page-subheading">Rent verified scooters, Royal Enfields, and superbikes at zero hidden charges</p>
+    </div>
+    <a href="/bikes/new" class="btn-add-bike">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      List Your Bike
+    </a>
+  </div>
+
+  <!-- Segmented Search Filter Card -->
+  <div class="bike-search-card">
+    <form action="/bikes" method="GET" class="bike-search-form">
+      <div class="search-input-group">
+        <label>Pick Location</label>
+        <input 
+          type="text" 
+          name="city" 
+          placeholder="e.g. Goa, Manali, Bangalore" 
+          value="<%= searchCity %>"
+        >
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-input-group">
+        <label>Bike Type</label>
+        <select name="bikeType">
+          <option value="">All Bike Types</option>
+          <option value="Cruiser" <%= searchType === 'Cruiser' ? 'selected' : '' %>>Cruiser (Royal Enfield)</option>
+          <option value="Scooter" <%= searchType === 'Scooter' ? 'selected' : '' %>>Scooter (Activa / Ntorq)</option>
+          <option value="Adventure" <%= searchType === 'Adventure' ? 'selected' : '' %>>Adventure (Himalayan)</option>
+          <option value="Sports" <%= searchType === 'Sports' ? 'selected' : '' %>>Sports (KTM / R15)</option>
+          <option value="Electric" <%= searchType === 'Electric' ? 'selected' : '' %>>Electric (Ather / Ola)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-search-bike">
+        Search Bikes
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Listings Grid -->
+  <div class="bike-grid">
+    <% for (let bike of bikes) { %>
+      <article class="bike-card">
+        <div class="bike-thumb-pane">
+          <a href="/bikes/<%= bike._id %>">
+            <img src="<%= bike.image.url %>" alt="<%= bike.bikeName %>" class="bike-card-img" loading="lazy">
+          </a>
+          <span class="bike-type-chip"><%= bike.bikeType %></span>
+        </div>
+
+        <div class="bike-meta">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="bike-city-label text-capitalize">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <%= bike.operatingCity %>
+            </span>
+            <span class="bike-cc-label"><%= bike.engineCC %> CC</span>
+          </div>
+
+          <h3 class="bike-name">
+            <a href="/bikes/<%= bike._id %>"><%= bike.bikeName %></a>
+          </h3>
+
+          <p class="bike-subtext">Complimentary Helmet • Free Cancellation</p>
+
+          <div class="bike-price-row">
+            <div class="price-box">
+              <span class="price-val">₹<%= bike.pricing.dailyRent %></span>
+              <span class="price-unit">/ day</span>
+            </div>
+            <a href="/bikes/<%= bike._id %>" class="btn-rent-pill">
+              Rent Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    <% } %>
+  </div>
+
+</div>

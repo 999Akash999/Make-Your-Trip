@@ -1,0 +1,82 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/bikes.css">
+
+<div class="bikes-wrapper">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <a href="/bikes" class="text-muted text-decoration-none small">&larr; Back to Bikes</a>
+    <button onclick="window.print()" class="btn btn-sm btn-outline-dark fw-bold rounded-pill">Print Invoice</button>
+  </div>
+
+  <div class="card border rounded-4 overflow-hidden shadow-sm mx-auto" style="max-width: 800px;">
+    <!-- Receipt Header -->
+    <div class="bg-dark text-white p-4 d-flex justify-content-between align-items-center">
+      <div>
+        <h4 class="fw-bold mb-0">BIKE RENTAL RECEIPT</h4>
+        <span class="small opacity-75">MakeYourTrip Mobility</span>
+      </div>
+      <div class="text-end">
+        <span class="small text-uppercase opacity-75">Booking Code</span>
+        <h4 class="fw-bold mb-0 text-warning"><%= booking.bookingCode %></h4>
+      </div>
+    </div>
+
+    <!-- Receipt Details -->
+    <div class="p-4 p-md-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 class="fw-bold mb-0 text-dark"><%= booking.rentalDetails.bikeName %></h3>
+          <span class="badge bg-light text-dark border">REG: <%= booking.rentalDetails.registrationNumber %></span>
+        </div>
+        <span class="badge bg-success-subtle text-success fs-6 px-3 py-2">
+          <%= booking.status %>
+        </span>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-6">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted text-uppercase fw-bold">Pickup Hub</span>
+            <div class="fw-bold text-dark mt-1"><%= booking.rentalDetails.pickupHub %></div>
+            <div class="small text-muted text-capitalize"><%= booking.rentalDetails.city %></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted text-uppercase fw-bold">Duration</span>
+            <div class="fw-bold text-dark mt-1"><%= booking.rentalDetails.totalDays %> Days Rental</div>
+            <div class="small text-muted"><%= new Date(booking.rentalDetails.startDate).toLocaleDateString() %> to <%= new Date(booking.rentalDetails.endDate).toLocaleDateString() %></div>
+          </div>
+        </div>
+      </div>
+
+      <h6 class="fw-bold text-muted small text-uppercase mb-2">Driver Verification</h6>
+      <div class="p-3 border rounded-3 mb-4 small bg-light">
+        <div class="row">
+          <div class="col-md-6"><strong>Rider:</strong> <%= booking.driverInfo.fullName %></div>
+          <div class="col-md-6"><strong>DL No:</strong> <%= booking.driverInfo.drivingLicenseNumber %></div>
+          <div class="col-md-6 mt-1"><strong>Phone:</strong> <%= booking.driverInfo.contactNumber %></div>
+          <div class="col-md-6 mt-1"><strong>Email:</strong> <%= booking.driverInfo.email %></div>
+        </div>
+      </div>
+
+      <h6 class="fw-bold text-muted small text-uppercase mb-2">Payment Breakdown</h6>
+      <div class="d-flex justify-content-between py-1 small">
+        <span class="text-muted">Rental Charges</span>
+        <span class="fw-semibold">₹<%= booking.fareBreakdown.rentAmount %></span>
+      </div>
+      <div class="d-flex justify-content-between py-1 small">
+        <span class="text-muted">Security Deposit (Refundable)</span>
+        <span class="fw-semibold">₹<%= booking.fareBreakdown.securityDeposit %></span>
+      </div>
+      <div class="d-flex justify-content-between py-1 small">
+        <span class="text-muted">GST & Fees</span>
+        <span class="fw-semibold">₹<%= booking.fareBreakdown.taxAmount %></span>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-dark">Total Amount Paid</span>
+        <h4 class="fw-bold text-dark mb-0">₹<%= booking.fareBreakdown.totalAmountPaid %></h4>
+      </div>
+    </div>
+  </div>
+</div>

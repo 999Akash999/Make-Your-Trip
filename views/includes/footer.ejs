@@ -1,27 +1,54 @@
-<footer class="footer">
-    <div class="f-info">
-        
-        <div class="f-info-social">
-            <div class="f-edit"><a href="https://www.threads.net/@akash_gangwar_999"></a><i class="fa-brands fa-facebook-f fa-lg"></i></a></div>
-            <div class="f-edit"><a href="https://www.instagram.com/akash_gangwar_999/?__pwa=1"><i class="fa-brands fa-instagram fa-lg"></i></a></div>
-            
-           <div class="f-edit"><a href="https://www.linkedin.com/in/akash-gangwar-28646a327/"> <i class="fa-brands fa-linkedin-in fa-lg"></i></a></div>
-           <div class="f-edit"> <a href="https://x.com/Akash_gangawar"><i class="fa-brands fa-twitter fa-lg"></i></a></div>
-            
-        </div>
-        <div class="f-info-brand">&copy;Make your trip</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy Policy</a>
-            <h1></h1>
-<i class="fa-solid fa-minus fa-rotate-90"></i>
-            <a href="/terms"> Terms & Conditions</a>
-        </div>
+<footer class="site-footer">
+  <div class="site-footer-main">
+    <div class="site-footer-brand-column">
+      <a class="site-footer-brand" href="/listings">
+        <span class="site-footer-brand-icon"><i class="fa-solid fa-location-dot"></i></span>
+        <span>Make Your Trip</span>
+      </a>
+      <p class="site-footer-about">Make every journey easier. Find a place to stay, choose how to travel, and plan your next trip in one place.</p>
+      <div class="site-footer-socials" aria-label="Social media links">
+        <a href="https://www.threads.net/@akash_gangwar_999" target="_blank" rel="noopener noreferrer" aria-label="Threads"><i class="fa-brands fa-threads"></i></a>
+        <a href="https://www.instagram.com/akash_gangwar_999/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/akash-gangwar-28646a327/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://x.com/Akash_gangawar" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
     </div>
-    <div class="footer-wave">
-  <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-    <path fill="#EDE9FE"
-      d="M0,224L48,208C96,192,192,160,288,170.7C384,181,480,235,576,234.7C672,235,768,181,864,170.7C960,160,1056,192,1152,208C1248,224,1344,224,1392,224L1440,224L1440,320L0,320Z">
-    </path>
-  </svg>
-</div>
+
+    <div class="site-footer-links-column">
+      <h2>Explore</h2>
+      <a href="/rooms">Rooms & stays</a>
+      <a href="/flights">Flights</a>
+      <a href="/trains">Trains</a>
+      <a href="/buses">Buses</a>
+      <a href="/cabs">Cabs</a>
+      <a href="/bikes">Bike rentals</a>
+    </div>
+
+    <div class="site-footer-links-column">
+      <h2>Your account</h2>
+      <% if (currUser) { %>
+        <a href="/profile">My profile</a>
+        <a href="/bookings">My bookings</a>
+        <a href="/listings/new">List a place</a>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/signup">Create an account</a>
+      <% } %>
+      <a href="mailto:gnagwarakash555@gmail.com">Contact support</a>
+    </div>
+
+    <div class="site-footer-links-column">
+      <h2>Information</h2>
+      <a href="/terms">Terms & conditions</a>
+      <a href="/privacy">Privacy policy</a>
+      <a href="mailto:gnagwarakash555@gmail.com">Help & support</a>
+    </div>
+  </div>
+
+  <div class="site-footer-bottom">
+    <span>© <%= new Date().getFullYear() %> Make Your Trip. All rights reserved.</span>
+    <a class="developer-button" href="https://www.linkedin.com/in/akash-gangwar-28646a327/" target="_blank" rel="noopener noreferrer">
+      <i class="fa-solid fa-code"></i><span>Developer</span><strong>Akash</strong><i class="fa-solid fa-arrow-up-right-from-square developer-external-icon"></i>
+    </a>
+  </div>
 </footer>

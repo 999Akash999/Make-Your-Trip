@@ -1,0 +1,98 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/train.css">
+<link rel="stylesheet" href="/css/transport-booking.css">
+
+<div class="trains-wrapper">
+  <div class="mb-3">
+    <a href="/trains/<%= train._id %>" class="text-muted text-decoration-none small">&larr; Back to train details</a>
+  </div>
+
+  <h2 class="fw-bold mb-4">Passenger Reservation - <%= train.trainName %> (<%= train.trainNumber %>)</h2>
+
+  <form action="/trains/<%= train._id %>/book" method="POST">
+    <input type="hidden" name="classType" value="<%= selectedClass.className %>">
+
+    <div class="row g-4">
+      <!-- Left Column: Form -->
+      <div class="col-lg-8">
+        <div class="card p-4 rounded-4 border bg-white shadow-sm mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0">Passenger Details</h5>
+            <span class="badge bg-primary fs-6">Class: <%= selectedClass.className %></span>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-muted text-uppercase">Journey Date</label>
+            <input type="date" name="journeyDate" id="journeyDateInput" class="form-control" required>
+          </div>
+
+          <div class="border rounded-3 p-3 bg-light mb-3">
+            <h6 class="fw-bold small text-muted mb-2">PASSENGER 1</h6>
+            <div class="row g-2">
+              <div class="col-md-5">
+                <input type="text" name="passengers[0][name]" class="form-control form-control-sm" placeholder="Full Name" required>
+              </div>
+              <div class="col-md-2">
+                <input type="number" name="passengers[0][age]" class="form-control form-control-sm" placeholder="Age" min="1" max="110" required>
+              </div>
+              <div class="col-md-2">
+                <select name="passengers[0][gender]" class="form-select form-select-sm" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Transgender">Other</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select name="passengers[0][berthPreference]" class="form-select form-select-sm">
+                  <option value="No Preference">No Preference</option>
+                  <option value="Lower">Lower</option>
+                  <option value="Middle">Middle</option>
+                  <option value="Upper">Upper</option>
+                  <option value="Side Lower">Side Lower</option>
+                  <option value="Side Upper">Side Upper</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="fw-bold small text-muted text-uppercase mt-3 mb-2">Contact Information</h6>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <input type="email" name="contactInfo[email]" class="form-control form-control-sm" placeholder="Email Address" required>
+            </div>
+            <div class="col-md-6">
+              <input type="tel" name="contactInfo[phone]" class="form-control form-control-sm" placeholder="10-digit Mobile Number" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Fare Card -->
+      <div class="col-lg-4">
+        <div class="card p-4 rounded-4 border bg-white shadow-sm sticky-top" style="top: 2rem;">
+          <h5 class="fw-bold mb-3">Fare Summary</h5>
+          <div class="d-flex justify-content-between py-1 small">
+            <span class="text-muted">Base Fare (1 Passenger)</span>
+            <span class="fw-semibold">₹<%= selectedClass.fare %></span>
+          </div>
+          <div class="d-flex justify-content-between py-1 small">
+            <span class="text-muted">Reservation & Superfast Charge</span>
+            <span class="fw-semibold">Included</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fw-bold">Total Amount</span>
+            <h3 class="fw-bold text-dark mb-0">₹<%= selectedClass.fare %></h3>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-3">Pay & Book Ticket</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Set default date to today
+  document.getElementById("journeyDateInput").value = new Date().toISOString().split("T")[0];
+  document.getElementById("journeyDateInput").min = new Date().toISOString().split("T")[0];
+</script>

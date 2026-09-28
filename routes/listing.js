@@ -12,6 +12,8 @@ const upload = multer({
 });
 //Index Route
 router.get("/",wrapAsync(listingcontroller.index));
+router.get("/search", wrapAsync(listingcontroller.index));
+router.get("/rooms", wrapAsync(listingcontroller.rooms));
 
 //New Route
 router.get("/new", isLoggedIn,listingcontroller.renderNewForm);

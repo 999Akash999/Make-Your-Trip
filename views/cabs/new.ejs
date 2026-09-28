@@ -1,0 +1,11 @@
+<% layout("/layouts/boilerplate") %>
+<main class="container py-4" style="max-width: 760px"><h1 class="mb-4">List a cab</h1>
+  <form action="/cabs" method="POST" class="card card-body gap-3">
+    <input class="form-control" name="cab[vehicleName]" placeholder="Vehicle name" required>
+    <div class="row g-3"><div class="col"><select class="form-select" name="cab[vehicleType]"><% ["Sedan","Hatchback","SUV","Luxury"].forEach(type => { %><option><%= type %></option><% }) %></select></div><div class="col"><input class="form-control" name="cab[registrationNumber]" placeholder="Registration number" required></div></div>
+    <h5>Driver</h5><div class="row g-3"><div class="col"><input class="form-control" name="cab[driver][name]" placeholder="Driver name" required></div><div class="col"><input class="form-control" name="cab[driver][phone]" placeholder="Driver phone" required></div></div>
+    <div class="row g-3"><div class="col"><input class="form-control" name="cab[operatingCity]" placeholder="Operating city" required></div><div class="col"><input class="form-control" name="cab[capacity][passengers]" type="number" min="1" max="8" value="4" required></div></div>
+    <div class="row g-3"><div class="col"><input class="form-control" name="cab[pricing][baseFare]" type="number" placeholder="Base fare" required></div><div class="col"><input class="form-control" name="cab[pricing][pricePerKm]" type="number" placeholder="Price per km" required></div></div>
+    <button class="btn btn-primary">Create cab listing</button>
+  </form>
+</main>

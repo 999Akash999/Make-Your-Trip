@@ -1,0 +1,93 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/train.css">
+<link rel="stylesheet" href="/css/transport-booking.css">
+
+<div class="trains-wrapper">
+  <div class="mb-3 d-flex justify-content-between align-items-center" style="max-width: 850px; margin: 0 auto 1.5rem;">
+    <div class="d-flex gap-2 align-items-center"><a href="/trains" class="text-muted text-decoration-none small">&larr; Back to Trains</a><a href="/bookings" class="btn btn-sm btn-outline-primary rounded-pill">My bookings</a></div>
+    <button onclick="window.print()" class="btn btn-sm btn-outline-dark fw-bold rounded-pill">Print Ticket</button>
+  </div>
+
+  <div class="card border rounded-4 overflow-hidden shadow-sm mx-auto" style="max-width: 850px;">
+    <!-- Indian Railways Banner -->
+    <div class="p-4 d-flex justify-content-between align-items-center" style="background-color: #1e3a8a; color: #ffffff;">
+      <div>
+        <h4 class="fw-bold mb-0">ELECTRONIC RESERVATION SLIP (ERS)</h4>
+        <span class="small opacity-75">Indian Railways / MakeYourTrip Partner Network</span>
+      </div>
+      <div class="text-end">
+        <span class="small text-uppercase opacity-75">PNR Number</span>
+        <h3 class="fw-bold mb-0 font-monospace text-warning"><%= booking.pnrNumber %></h3>
+      </div>
+    </div>
+
+    <div class="p-4 p-md-5 bg-white">
+      <!-- Train Info -->
+      <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+        <div>
+          <h4 class="fw-bold mb-0 text-dark"><%= booking.journeyDetails.trainNumber %> - <%= booking.journeyDetails.trainName %></h4>
+          <span class="text-muted small">Class: <strong><%= booking.journeyDetails.bookedClass %></strong> &bull; Quota: <%= booking.journeyDetails.quota %></span>
+        </div>
+        <span class="badge bg-success-subtle text-success fs-6 px-3 py-2">
+          <%= booking.bookingStatus %>
+        </span>
+      </div>
+
+      <!-- Route -->
+      <div class="row g-3 text-center mb-4">
+        <div class="col-6">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted fw-bold text-uppercase">Boarding From</span>
+            <div class="fw-bold fs-5 text-dark mt-1"><%= booking.journeyDetails.fromStation %></div>
+            <div class="small text-muted"><%= new Date(booking.journeyDetails.journeyDate).toDateString() %></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted fw-bold text-uppercase">Destination</span>
+            <div class="fw-bold fs-5 text-dark mt-1"><%= booking.journeyDetails.toStation %></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passengers Table -->
+      <h6 class="fw-bold text-muted small text-uppercase mb-2">Passenger Details</h6>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered mb-0">
+          <thead class="table-light small">
+            <tr>
+              <th>Passenger Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Status</th>
+              <th>Coach / Berth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let p of booking.passengers) { %>
+              <tr>
+                <td class="fw-bold"><%= p.name %></td>
+                <td><%= p.age %> yrs</td>
+                <td><%= p.gender %></td>
+                <td class="text-success fw-bold">CNF</td>
+                <td><span class="badge bg-primary"><%= p.allocatedCoach %> / <%= p.allocatedBerth %> (<%= p.berthPreference %>)</span></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Fare -->
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <div class="small text-muted">
+          Contact: <%= booking.contactInfo.phone %> | <%= booking.contactInfo.email %>
+        </div>
+        <div class="text-end">
+          <span class="small text-muted text-uppercase d-block">Total Ticket Fare</span>
+          <h3 class="fw-bold text-dark mb-0">₹<%= booking.totalFare %></h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

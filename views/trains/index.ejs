@@ -1,0 +1,89 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/train.css">
+
+<div class="trains-wrapper">
+  
+  <div class="train-header-row">
+    <div>
+      <h1 class="train-title-main">Indian Railways Train Booking</h1>
+      <p class="text-muted small mb-0">Book confirmed train tickets with instant PNR confirmation</p>
+    </div>
+  </div>
+
+  <!-- Search Filter -->
+  <div class="train-search-card">
+    <form action="/trains" method="GET" class="train-search-form">
+      <div class="t-input-group">
+        <label>FROM STATION</label>
+        <input type="text" name="from" placeholder="e.g. New Delhi (NDLS)" value="<%= searchFrom %>">
+      </div>
+      <div class="t-input-group">
+        <label>TO STATION</label>
+        <input type="text" name="to" placeholder="e.g. Mumbai (MMCT)" value="<%= searchTo %>">
+      </div>
+      <div class="t-input-group">
+        <label>JOURNEY DATE</label>
+        <input type="date" name="date" value="<%= searchDate %>">
+      </div>
+      <button type="submit" class="btn-search-train">Find Trains</button>
+    </form>
+  </div>
+
+  <!-- Train Search Results -->
+  <div class="train-results-list">
+    <% if (trains.length === 0) { %>
+      <div class="p-5 text-center bg-white rounded-4 border">
+        <h5 class="fw-bold">No Trains Found</h5>
+        <p class="text-muted small mb-0">Try searching for major stations like New Delhi, Mumbai, or Varanasi.</p>
+      </div>
+    <% } %>
+
+    <% for (let train of trains) { %>
+      <div class="train-result-card">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <span class="train-number-pill"><%= train.trainNumber %></span>
+            <span class="train-name-tag"><%= train.trainName %></span>
+            <span class="badge bg-light text-dark border small ms-1"><%= train.trainType %></span>
+          </div>
+          <div class="small text-muted">
+            Runs: <strong class="text-dark"><%= train.runsOnDays ? train.runsOnDays.join(" ") : "All Days" %></strong>
+          </div>
+        </div>
+
+        <!-- Schedule Row -->
+        <div class="schedule-flex">
+          <div>
+            <div class="time-lg"><%= train.sourceStation.departureTime %></div>
+            <div class="station-sub"><%= train.sourceStation.name %> (<%= train.sourceStation.code %>)</div>
+          </div>
+
+          <div class="duration-indicator">
+            <span><%= train.durationHours %> hrs</span>
+            <div class="duration-line"></div>
+            <a href="/trains/<%= train._id %>" class="small text-primary text-decoration-none fw-semibold">View Stops</a>
+          </div>
+
+          <div class="text-end">
+            <div class="time-lg"><%= train.destinationStation.arrivalTime %></div>
+            <div class="station-sub"><%= train.destinationStation.name %> (<%= train.destinationStation.code %>)</div>
+          </div>
+        </div>
+
+        <!-- Class Cards (IRCTC style) -->
+        <div class="class-deck">
+          <% for (let c of train.classes) { %>
+            <a href="/trains/<%= train._id %>/book?classType=<%= c.className %>" class="class-box">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="class-name"><%= c.className %></span>
+                <span class="seat-status-green">AVL <%= c.availableSeats %></span>
+              </div>
+              <div class="class-fare">₹<%= c.fare %></div>
+            </a>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+</div>

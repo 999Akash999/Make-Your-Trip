@@ -50,27 +50,19 @@
             Sign up
           </a>
 
-          <a class="nav-link p-0 ms-lg-2" href="/login">
-            <button type="button" class="btn-nav-login">
-              Log in
-            </button>
-          </a>
+          <a class="btn-nav-login nav-login-link" href="/login">Log in</a>
         <% } %>
 
         <% if (currUser) { %>
           <a href="/profile" class="nav-link profile-link-wrap" title="My Profile">
             <img
-              src="<%= currUser.image && currUser.image.url ? currUser.image.url : '/images/default-avatar.png' %>"
+              src="<%= currUser.image && currUser.image.url ? currUser.image.url : '/images/labubu-404.png' %>"
               alt="<%= currUser.username %>"
               class="nav-avatar-img"
             >
           </a>
 
-          <a class="nav-link p-0 ms-lg-2" href="/logout">
-            <button type="button" class="btn-nav-logout">
-              Log out
-            </button>
-          </a>
+          <a class="btn-nav-logout nav-logout-link" href="/logout">Log out</a>
         <% } %>
 
       </div>

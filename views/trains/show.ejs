@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/train.css">
+
+<div class="trains-wrapper">
+  <div class="mb-3">
+    <a href="/trains" class="text-muted text-decoration-none small">&larr; Back to all trains</a>
+  </div>
+
+  <div class="card p-4 p-md-5 rounded-4 border bg-white shadow-sm mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+      <div>
+        <span class="train-number-pill me-2"><%= train.trainNumber %></span>
+        <span class="badge bg-light text-dark border"><%= train.trainType %></span>
+        <h2 class="fw-bold text-dark mt-2 mb-1"><%= train.trainName %></h2>
+        <p class="text-muted small">Operating Days: <%= train.runsOnDays ? train.runsOnDays.join(", ") : "All Days" %></p>
+      </div>
+      <div class="text-end">
+        <span class="text-muted small text-uppercase">Journey Duration</span>
+        <h3 class="fw-bold text-primary mb-0"><%= train.durationHours %> Hrs</h3>
+      </div>
+    </div>
+
+    <!-- Stations banner -->
+    <div class="schedule-flex my-3">
+      <div>
+        <span class="text-muted small">ORIGIN</span>
+        <div class="time-lg"><%= train.sourceStation.departureTime %></div>
+        <div class="station-sub"><%= train.sourceStation.name %> (<%= train.sourceStation.code %>)</div>
+      </div>
+      <div class="duration-indicator">
+        <span>Direct Route</span>
+        <div class="duration-line"></div>
+      </div>
+      <div class="text-end">
+        <span class="text-muted small">DESTINATION</span>
+        <div class="time-lg"><%= train.destinationStation.arrivalTime %></div>
+        <div class="station-sub"><%= train.destinationStation.name %> (<%= train.destinationStation.code %>)</div>
+      </div>
+    </div>
+
+    <h5 class="fw-bold mt-4 mb-3">Select Class to Book</h5>
+    <div class="class-deck mb-4">
+      <% for (let c of train.classes) { %>
+        <a href="/trains/<%= train._id %>/book?classType=<%= c.className %>" class="class-box p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="class-name fs-5"><%= c.className %></span>
+            <span class="seat-status-green">Available: <%= c.availableSeats %></span>
+          </div>
+          <div class="class-fare fs-4">₹<%= c.fare %></div>
+          <span class="btn btn-sm btn-primary mt-2 rounded-3 fw-bold">Book Now</span>
+        </a>
+      <% } %>
+    </div>
+  </div>
+</div>

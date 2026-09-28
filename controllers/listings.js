@@ -1,6 +1,10 @@
 const Listing=require("../models/listing");
 const ExpressError = require("../utils/ExpressError.js");
 const cloudinary = require("../cloudConfig.js");
+const Cab = require("../models/cab");
+const Bike = require("../models/bike");
+const Bus = require("../models/bus");
+const Train = require("../models/train");
 const UPLOAD_TIMEOUT_MS = 120_000;
 
 const uploadToCloudinary = (file) => {
@@ -31,8 +35,27 @@ const uploadToCloudinary = (file) => {
 };
 
 module.exports.index=async (req, res) => {
+  const { q } = req.query;
+  const filter = q?.trim() ? {
+    $or: [
+      { title: { $regex: q.trim(), $options: "i" } },
+      { location: { $regex: q.trim(), $options: "i" } },
+      { country: { $regex: q.trim(), $options: "i" } },
+    ],
+  } : {};
+  const [allListings, cabs, bikes, buses, trains] = await Promise.all([
+    Listing.find(filter),
+    Cab.find({ isAvailable: true }).limit(4),
+    Bike.find({ isAvailable: true }).limit(4),
+    Bus.find({ isActive: true }).sort({ departureTime: 1 }).limit(4),
+    Train.find({ isActive: true }).limit(4),
+  ]);
+  res.render("listings/index.ejs", { allListings, cabs, bikes, buses, trains });
+};
+
+module.exports.rooms = async (req, res) => {
   const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
+  res.render("listings/rooms", { allListings });
 };
 module.exports.renderNewForm=(req, res) => {
   

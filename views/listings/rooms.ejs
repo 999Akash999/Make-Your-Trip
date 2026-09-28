@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+
+<main class="homepage-container rooms-page">
+  <nav class="rooms-breadcrumb" aria-label="Breadcrumb">
+    <a href="/listings"><i class="fa-solid fa-house"></i> Home</a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <span>Rooms & stays</span>
+  </nav>
+
+  <header class="rooms-page-heading">
+    <div>
+      <span class="home-rooms-eyebrow">Find your next stay</span>
+      <h1>Rooms & stays</h1>
+      <p>Explore <%= allListings.length %> <%= allListings.length === 1 ? "place" : "places" %> for your next trip.</p>
+    </div>
+    <a href="/listings/new" class="rooms-host-link"><i class="fa-solid fa-plus"></i> List your place</a>
+  </header>
+
+  <% if (allListings.length) { %>
+    <div class="listings-grid rooms-all-grid">
+      <% allListings.forEach(listing => { %>
+        <a href="/listings/<%= listing._id %>" class="listing-item-anchor">
+          <article class="listing-card">
+            <div class="listing-media-wrap">
+              <img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80' %>" class="listing-thumbnail" alt="<%= listing.title %>" loading="lazy">
+              <span class="rooms-card-heart"><i class="fa-solid fa-heart"></i></span>
+            </div>
+            <div class="listing-meta-wrap">
+              <h2 class="listing-name"><%= listing.title %></h2>
+              <p class="listing-location"><i class="fa-solid fa-location-dot"></i><span><%= listing.location %>, <%= listing.country %></span></p>
+              <div class="listing-rate-row"><span class="listing-rate-amount">₹<%= Number(listing.price).toLocaleString("en-IN") %></span><span class="listing-rate-period">/ night</span></div>
+            </div>
+          </article>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="rooms-empty-state"><i class="fa-regular fa-house"></i><h3>No stays listed yet</h3><p>New rooms and stays will show up here.</p><a href="/listings/new" class="rooms-host-link mt-3"><i class="fa-solid fa-plus"></i> List the first place</a></div>
+  <% } %>
+</main>

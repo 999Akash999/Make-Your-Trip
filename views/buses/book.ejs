@@ -1,0 +1,241 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/transport-booking.css">
+
+<style>
+  .book-layout-wrapper {
+    max-width: 1100px;
+    margin: 5.5rem auto 4rem;
+    padding: 0 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .seat-deck-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  }
+  .driver-wheel {
+    text-align: right;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #64748b;
+  }
+  .seat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .seat-btn {
+    border: 2px solid #cbd5e1;
+    background: #f8fafc;
+    color: #1e293b;
+    border-radius: 10px;
+    padding: 0.75rem 0.25rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+  .seat-btn:hover:not(.booked) {
+    border-color: #4f46e5;
+    background: #eef2ff;
+  }
+  .seat-btn.selected {
+    background: #4f46e5 !important;
+    border-color: #4f46e5 !important;
+    color: #ffffff !important;
+  }
+  .seat-btn.booked {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  .seat-legend {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+  .legend-dot { width: 14px; height: 14px; border-radius: 4px; display: inline-block; vertical-align: middle; }
+</style>
+
+<div class="book-layout-wrapper">
+  <div class="mb-3">
+    <a href="/buses/<%= bus._id %>" class="text-muted text-decoration-none small">&larr; Back to bus overview</a>
+  </div>
+
+  <h2 class="fw-bold mb-4">Select Seats - <%= bus.busName %></h2>
+
+  <form action="/buses/<%= bus._id %>/book" method="POST" id="bookingForm">
+    <div class="row g-4">
+      
+      <!-- Seat Selection Layout -->
+      <div class="col-lg-5">
+        <div class="seat-deck-card">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-uppercase fw-bold small text-muted">Lower / Main Deck</span>
+            <span class="driver-wheel" title="Steering Wheel">🛞</span>
+          </div>
+
+          <div class="seat-grid">
+            <% 
+              const dummySeats = ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14", "L15", "L16"]; 
+              dummySeats.forEach(seatNum => {
+                const isBooked = bus.bookedSeats && bus.bookedSeats.includes(seatNum);
+            %>
+              <div 
+                class="seat-btn <%= isBooked ? 'booked' : '' %>" 
+                data-seat="<%= seatNum %>"
+                onclick="toggleSeat(this, '<%= seatNum %>')"
+              >
+                <%= seatNum %>
+              </div>
+            <% }); %>
+          </div>
+
+          <div class="seat-legend">
+            <div><span class="legend-dot" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> Available</div>
+            <div><span class="legend-dot" style="background:#4f46e5;"></span> Selected</div>
+            <div><span class="legend-dot" style="background:#e2e8f0;"></span> Occupied</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passenger & Pickup Details -->
+      <div class="col-lg-7">
+        <div class="card p-4 rounded-4 border">
+          <h5 class="fw-bold mb-3">Passenger & Boarding Information</h5>
+
+          <!-- Boarding & Dropping Points -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-muted">SELECT BOARDING POINT</label>
+              <select name="boardingPointId" class="form-select" required>
+                <% for (let point of bus.boardingPoints) { %>
+                  <option value="<%= point._id %>"><%= point.time %> - <%= point.locationName %></option>
+                <% } %>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-muted">SELECT DROPPING POINT</label>
+              <select name="droppingPointId" class="form-select" required>
+                <% for (let point of bus.droppingPoints) { %>
+                  <option value="<%= point._id %>"><%= point.time %> - <%= point.locationName %></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Passenger Container -->
+          <div id="passengersList" class="mb-3">
+            <div class="border rounded-3 p-3 mb-2 bg-light passenger-entry" id="pass-0">
+              <span class="badge bg-secondary mb-2 seat-badge-display">Select a seat from left</span>
+              <input type="hidden" name="passengers[0][seatNumber]" class="seat-input-field" required>
+              <div class="row g-2">
+                <div class="col-6">
+                  <input type="text" name="passengers[0][name]" class="form-control form-control-sm" placeholder="Full Name" required>
+                </div>
+                <div class="col-3">
+                  <input type="number" name="passengers[0][age]" class="form-control form-control-sm" placeholder="Age" min="1" max="110" required>
+                </div>
+                <div class="col-3">
+                  <select name="passengers[0][gender]" class="form-select form-control-sm" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <h6 class="fw-bold text-muted small text-uppercase mt-2">Send Ticket Details To</h6>
+          <div class="row g-2 mb-4">
+            <div class="col-6">
+              <input type="email" name="contactInfo[email]" class="form-control form-control-sm" placeholder="Email Address" required>
+            </div>
+            <div class="col-6">
+              <input type="tel" name="contactInfo[phone]" class="form-control form-control-sm" placeholder="10-digit Mobile Number" required>
+            </div>
+          </div>
+
+          <!-- Total & Pay -->
+          <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+            <div>
+              <span class="text-muted small">Total Fare:</span>
+              <h4 class="fw-bold mb-0 text-dark" id="displayFare">₹0</h4>
+            </div>
+            <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3">Confirm & Pay</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<script>
+  const basePrice = <%= bus.pricing.seaterPrice %>;
+  let selectedSeats = [];
+
+  function toggleSeat(btn, seatNum) {
+    if (btn.classList.contains("booked")) return;
+
+    if (btn.classList.contains("selected")) {
+      btn.classList.remove("selected");
+      selectedSeats = selectedSeats.filter(s => s !== seatNum);
+    } else {
+      btn.classList.add("selected");
+      selectedSeats.push(seatNum);
+    }
+    updatePassengerInputs();
+  }
+
+  function updatePassengerInputs() {
+    const container = document.getElementById("passengersList");
+    container.innerHTML = "";
+
+    if (selectedSeats.length === 0) {
+      container.innerHTML = `<div class="p-3 text-center text-muted small bg-light rounded-3">Please click on any seat in the deck to begin.</div>`;
+      document.getElementById("displayFare").innerText = "₹0";
+      return;
+    }
+
+    selectedSeats.forEach((seat, idx) => {
+      container.innerHTML += `
+        <div class="border rounded-3 p-3 mb-2 bg-light">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="badge bg-primary">Seat: ${seat}</span>
+          </div>
+          <input type="hidden" name="passengers[${idx}][seatNumber]" value="${seat}">
+          <div class="row g-2">
+            <div class="col-6">
+              <input type="text" name="passengers[${idx}][name]" class="form-control form-control-sm" placeholder="Passenger Name" required>
+            </div>
+            <div class="col-3">
+              <input type="number" name="passengers[${idx}][age]" class="form-control form-control-sm" placeholder="Age" min="1" max="110" required>
+            </div>
+            <div class="col-3">
+              <select name="passengers[${idx}][gender]" class="form-select form-control-sm">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    const total = selectedSeats.length * basePrice;
+    document.getElementById("displayFare").innerText = "₹" + Math.round(total * 1.05); // 5% tax
+  }
+
+  updatePassengerInputs();
+</script>
